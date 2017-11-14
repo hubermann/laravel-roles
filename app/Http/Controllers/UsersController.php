@@ -15,10 +15,8 @@ class UsersController extends Controller
 		return View('backend/users/edit', [ 'users' => User::all() ]);	
 	}
 
-		public function updateUsers(Request $request)
+	public function updateUsers(Request $request)
 	{
-		#dd(request()->all());
-		#var_dump($request['email']); die();
 		$user = User::where( 'email', $request['email'] )->first();
 		$user->roles()->detach();
 		if($request['role_superadmin'])
