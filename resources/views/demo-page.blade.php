@@ -7,7 +7,9 @@
 <body>
 	
 
-
-	Soy  la pagina demo
+<form action="algun/sitio">
+	<input type="text" name="algo">
+	<input type="submit" value="Enviar">
+</form>
 </body>
 </html>

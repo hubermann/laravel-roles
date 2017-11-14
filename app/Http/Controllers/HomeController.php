@@ -32,7 +32,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function demo()
+    public function formulario()
     {
         return view('demo-page');
     }
