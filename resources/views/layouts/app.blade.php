@@ -72,6 +72,16 @@
         </nav>
 
         @yield('content')
+
+        <div class="row">
+  @if(Session::has('message'))
+  Hay mensaje
+  <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+  @endif
+
+</div>
+
+
     </div>
 
     <!-- Scripts -->

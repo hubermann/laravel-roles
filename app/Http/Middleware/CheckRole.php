@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Session;
 
 class CheckRole
 {
@@ -17,7 +18,8 @@ class CheckRole
     {
         if($request->user() === null)
         {
-            return response('Insufficient permissions', 401);
+            Session::flash('message', 'This is a message!');
+            return redirect('login'); //response('Insufficient permissions', 401);
         }
         //traigo de las rutas las acciones permitidas para esa ruta
         $actions = $request->route()->getAction();
@@ -27,7 +29,8 @@ class CheckRole
         {
             return $next($request);
         }
-        return response('Insufficient permissions', 401);
+        Session::flash('message', 'This is a message!');
+        return redirect('login'); //response('Insufficient permissions', 401);
         
     }
 }

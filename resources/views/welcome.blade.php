@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Laravel <small>(with roles)</small>
                 </div>
 
                 <div class="links">

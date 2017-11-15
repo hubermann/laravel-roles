@@ -11,43 +11,63 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/admin/users/edit', [
-	'uses' 				=> 'UsersController@editUsers',
-	'as' 					=> 'backend.users.edit',
+Auth::routes();
+
+Route::group(['prefix' => 'backend'], function(){
+	//Root
+	Route::get('/', [
+	'uses' 				=> 'BackendController@index',
+	'as' 					=> 'backend.root',
 	'middleware' 	=> 'roles',
 	'roles'				=>['Superadmin']
 	]);
-
-Route::post('/admin/users/update', [
-	'uses' 				=> 'UsersController@updateUsers',
-	'as' 					=> 'backend.users.update',
-	'middleware' 	=> 'roles',
-	'roles'				=>['Superadmin']
-	]);
-
-Route::get('/admin/users', [
+	//Users
+	Route::get('/users', [
 	'uses' 				=> 'UsersController@viewUsers',
 	'as' 					=> 'backend.users.view',
 	'middleware' 	=> 'roles',
 	'roles'				=>['Superadmin','Frontend']
 	]);
-
-Route::get('/admin/publica', [
-	'uses' 				=> 'UsersController@publica',
-	'as' 					=> 'backend.users',
+	Route::get('/users/edit', [
+	'uses' 				=> 'UsersController@editUsers',
+	'as' 					=> 'backend.users.edit',
 	'middleware' 	=> 'roles',
-	'roles'				=>['Frontend']
+	'roles'				=>['Superadmin']
+	]);
+	Route::post('/users/update', [
+	'uses' 				=> 'UsersController@updateUsers',
+	'as' 					=> 'backend.users.update',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	//Notes
+	Route::get('/notes', [
+	'uses' 				=> 'NotesController@index',
+	'as' 					=> 'backend.notes',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::get('/notes/new', [
+	'uses' 				=> 'NotesController@newNote',
+	'as' 					=> 'backend.notes.new',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::post('/notes', [
+	'uses' 				=> 'NotesController@create',
+	'as' 					=> 'backend.notes.create',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
 	]);
 
-#Route::get('/admin/users', 'UsersController@index')->name('users');
-#Route::get('/admin/users/assign', 'UsersController@index')->name('admin.assign');
+});
 
-Auth::routes();
+
+
+Route::get('/', function () { return view('welcome'); });
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/formulario', 'HomeController@formulario')->name('formulario');
 

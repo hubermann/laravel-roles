@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use Session;
+
 class UsersController extends Controller
 {
     //
@@ -27,7 +28,7 @@ class UsersController extends Controller
 		{
 			$user->roles()->attach(Role::where('name', 'Frontend')->first());
 		}
-		Session::flash('message', 'This is a message!'); 
+		Session::flash('message', 'User updated!'); 
 		return redirect()->back();
 	}
 
