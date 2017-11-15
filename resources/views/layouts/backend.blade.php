@@ -1,321 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
-
-    <!-- CSRF Token -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Backend') }}</title>
+	<link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
+	<title>10en8 - Admin Dashboard </title>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/backend.css') }}" rel="stylesheet">
-  </head>
+	<link href="{{ asset('pixeladmin-lite/html/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">
+	<link href="{{ asset('pixeladmin-lite/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('pixeladmin-lite/plugins/bower_components/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
+	<link href="{{ asset('pixeladmin-lite/plugins/bower_components/morrisjs/morris.css') }}" rel="stylesheet">
+	<link href="{{ asset('pixeladmin-lite/html/css/animate.css') }}" rel="stylesheet">
+	<link href="{{ asset('pixeladmin-lite/html/css/style.css') }}" rel="stylesheet">
+	<link href="{{ asset('pixeladmin-lite/html/css/colors/megna-dark.css') }}" rel="stylesheet">
+	
 
-  <body>
-    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-      <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">Dashboard</a>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Settings</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Help</a>
-          </li>
-        </ul>
+<body>
+	<!-- Preloader -->
+	<!-- <div class="preloader">
+		<div class="cssload-speeding-wheel"></div>
+	</div> -->
+	<div id="wrapper">
+		<!-- Navigation -->
+		<nav class="navbar navbar-default navbar-static-top m-b-0">
+			<div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></a>
+				<div class="top-left-part">
+				<a class="logo" href="{{ route('backend.root') }}"><b><img src="{{ asset('pixeladmin-lite//plugins/images/pixeladmin-logo.png') }}" alt="home" />
+				</b><span class="hidden-xs"><img src="{{ asset('pixeladmin-lite/plugins/images/pixeladmin-text.png') }}" alt="home" /></span></a></div>
+				<ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
+					<li class="in">
+						<form role="search" class="app-search hidden-xs">
+							<input type="text" placeholder="Search..." class="form-control"> <a href="" class="active"><i class="fa fa-search"></i></a>
+						</form>
+					</li>
+				</ul>
+				<ul class="nav navbar-top-links navbar-right pull-right">
 
-        <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        
-        <div class="right">
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+					<!-- Authentication Links -->
+					@guest
+					<div style="float: right">
+					  <ul class="nav">
+					      <li><a href="{{ route('login') }}">Login</a></li>
+					      <li><a href="{{ route('register') }}">Register</a></li>
+					  @else
+					      <li class="dropdown">
+					          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+					              {{ Auth::user()->name }} <span class="caret"></span>
+					          </a>
+					         
+					          
+					            <ul class="dropdown-menu text-center">
+					                <li>
+					                    <a href="{{ route('logout') }}"
+					                        onclick="event.preventDefault();
+					                                 document.getElementById('logout-form').submit();">
+					                        Logout
+					                    </a>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+					                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+					                        {{ csrf_field() }}
+					                    </form>
+					                </li>
+					            </ul>
+					          
+					      </li>
+					    </ul>
+					</div>
+					@endguest
 
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+					
+				</ul>
+			</div>
+			<!-- /.navbar-header -->
+			<!-- /.navbar-top-links -->
+			<!-- /.navbar-static-side -->
+		</nav>
+		<!-- Left navbar-header -->
+		<div class="navbar-default sidebar" role="navigation">
+			<div class="sidebar-nav navbar-collapse slimscrollsidebar">
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-        </div>
+				<ul class="nav" id="side-menu">
+					<li style="padding: 10px 0 0;">
+						<a href="{{ route('backend.root') }}" ><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i><span class="hide-menu">Backend</span></a>
+					</li>
+					<li>
+						<a href="{{ route('backend.users.edit') }}" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i><span class="hide-menu">Users</span></a>
+					</li>
+					
+					<li>
+						<a href="{{ route('backend.notes') }}" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i><span class="hide-menu">Notes</span></a>
+					</li>
+					
+				</ul>
+				<div class="center p-20">
 
-      </div>
-    </nav>
+				</div>
+			</div>
+		</div>
+		<!-- Left navbar-header end -->
+		<!-- Page Content -->
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<br>
+				</div>
+			
+				<!-- row-->
+				<div class="row">
 
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
-          <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url('notes/new') }}">Notes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Analytics</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Export</a>
-            </li>
-          </ul>
+					<div class="col-md-12">
 
-          <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Nav item</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Nav item again</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">One more nav</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Another nav item</a>
-            </li>
-          </ul>
-
-          <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Nav item again</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">One more nav</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Another nav item</a>
-            </li>
-          </ul>
-        </nav>
-
-        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            
-            <div class="row">
-              @if(Session::has('message'))
-              Hay mensaje
-              <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-              @endif
-
-            </div>
-
-            @yield('content')
-
-
-          <h1>Dashboard</h1>
-
-          <section class="row text-center placeholders">
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <div class="text-muted">Something else</div>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-          </section>
-
-          <h2>Section title</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>Mauris</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>arcu</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </main>
-      </div>
-    </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script> -->
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->\
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+						@if(Session::has('error'))
+			        <div class="alert alert-danger">
+			            <a class="close" data-dismiss="alert">×</a>
+			             {!!Session::get('error')!!}
+			        </div>
+				    @endif
+				    @if(Session::has('warning'))
+			        <div class="alert alert-warning">
+			            <a class="close" data-dismiss="alert">×</a>
+			             {!!Session::get('error')!!}
+			        </div>
+				    @endif
+				    @if(Session::has('success'))
+			        <div class="alert alert-success">
+			            <a class="close" data-dismiss="alert">×</a>
+			             {!!Session::get('success')!!}
+			        </div>
+				    @endif
 
 
-  </body>
+						@if (count($errors) > 0)
+						    <div class="alert alert-danger">
+						        <ul>
+						            @foreach ($errors->all() as $error)
+						                <li>{{ $error }}</li>
+						            @endforeach
+						        </ul>
+						    </div>
+						@endif
+
+
+
+						@yield('content')
+					</div>
+				</div>
+				<!-- /.row -->
+
+
+			</div>
+			<!-- /.container-fluid -->
+			<footer class="footer text-center"> 2017 &copy; </footer>
+		</div>
+		<!-- /#page-wrapper -->
+	</div>
+	<!-- /#wrapper -->
+
+	<!-- jQuery -->
+	<script src="{{ asset('pixeladmin-lite/plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
+	
+	<!-- Bootstrap Core JavaScript -->
+	<script src="{{ asset('pixeladmin-lite/html/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+	
+	<!-- Menu Plugin JavaScript -->
+	<script src="{{ asset('pixeladmin-lite/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js') }}"></script>
+
+	<!--slimscroll JavaScript -->
+	<script src="{{ asset('pixeladmin-lite/html/js/jquery.slimscroll.js') }}"></script>
+	
+	<!--Wave Effects -->
+	<script src="{{ asset('pixeladmin-lite/html/js/waves.js') }}"></script>
+
+	<!--Counter js -->
+	<script src="{{ asset('pixeladmin-lite/plugins/bower_components/waypoints/lib/jquery.waypoints.js') }}"></script>
+	<script src="{{ asset('pixeladmin-lite/plugins/bower_components/counterup/jquery.counterup.min.js') }}"></script>
+
+	<!--Morris JavaScript -->
+	<script src="{{ asset('pixeladmin-lite/plugins/bower_components/raphael/raphael-min.js') }}"></script>
+	<script src="{{ asset('pixeladmin-lite/plugins/bower_components/morrisjs/morris.js') }}"></script>
+
+	<!-- Custom Theme JavaScript -->
+	<script src="{{ asset('pixeladmin-lite/html/js/custom.min.js') }}"></script>
+
+	<script src="{{ asset('pixeladmin-lite/html/js/dashboard1.js') }}"></script>
+
+	<script src="{{ asset('pixeladmin-lite/plugins/bower_components/toast-master/js/jquery.toast.js') }}"></script>
+
+
+
+<script type="text/javascript">
+	$('.delete').on("click", function (e) {
+		e.preventDefault();
+		var choice = confirm($(this).attr('data-confirm'));
+		if (choice) {window.location.href = $(this).attr('href'}
+	});
+</script>
+
+
+
+</body>
+
 </html>
-

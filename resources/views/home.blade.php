@@ -2,9 +2,6 @@
 
 @section('content')
 
-
-
-
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -17,14 +14,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-<div class="row">
-  @if(Session::has('message'))
-  Hay mensaje
-  <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-  @endif
-
-</div>
 
                     You are logged in (HOME)!
                 </div>

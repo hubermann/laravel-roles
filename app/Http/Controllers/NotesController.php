@@ -6,16 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Session;
 use App\Note;
 
 class NotesController extends Controller
 {
     
-		public function index()
-		{
-			$notes = Note::all();
-			return View('backend.notes.all', ['notes' => $notes]);
-		}
+	public function index()
+	{
+		$notes = Note::all();
+		return View('backend.notes.all', ['notes' => $notes]);
+	}
+    
     public function newNote()
     {
     	return View('backend.notes.new');
@@ -32,12 +34,12 @@ class NotesController extends Controller
 
 	    if ($validator->fails())
 	    {
-	        return redirect('/backend/notes/new')->withErrors($validator);
+	        return redirect('/backend/notes/new')->withErrors($validator)->withInput();
 	    }
 
-	    			$note               		= New Note();
-            $note->title         = Input::get('title');
-            $note->body       		= Input::get('body');
+	    	$note           = New Note();
+            $note->title    = Input::get('title');
+            $note->body     = Input::get('body');
 
             $note->save();
 
