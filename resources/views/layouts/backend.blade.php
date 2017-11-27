@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
-	<title>10en8 - Admin Dashboard </title>
+	<title>Admin Dashboard </title>
 
 	<link href="{{ asset('pixeladmin-lite/html/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">
 	<link href="{{ asset('pixeladmin-lite/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css') }}" rel="stylesheet">
@@ -103,7 +103,15 @@
 					</li>
 					
 					<li>
-						<a href="{{ route('backend.notes') }}" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i><span class="hide-menu">Notes</span></a>
+						<a href="{{ route('backend.categories') }}" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i><span class="hide-menu">Categorias</span></a>
+					</li>
+
+					<li>
+						<a href="{{ route('backend.subcategories') }}" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i><span class="hide-menu">Subcategorias</span></a>
+					</li>
+
+					<li>
+						<a href="{{ route('backend.products') }}" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i><span class="hide-menu">Productos</span></a>
 					</li>
 					
 				</ul>
@@ -211,6 +219,57 @@
 	});
 </script>
 
+
+
+<!-- ajax for forms -->
+<script>
+	 $('#category_id').on('change', function(e){
+        console.log(e);
+        var category_id = e.target.value;
+
+        $.get('{{ url('backend') }}/ajax/subcategories?category_id=' + category_id, function(data) {
+            console.log(data);
+            $('#subcategory_id').empty();
+            $.each(data, function(index,subCatObj){
+                $('#subcategory_id').append('<option value="'+subCatObj.id+'">'+subCatObj.name+'</option>');
+            });
+        });
+    });
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    var maxField = 10; //Input fields increment limitation
+    var addButton = $('.add_button'); //Add button selector
+    var wrapper = $('.field_wrapper'); //Input field wrapper
+    var x = 1; //Initial field counter is 1
+    var fieldHTML = '<tr><td class="td"><input type="text" class="form-control" name="prod_propiedad[]" value="" placeholder="Propiedad" /></td><td class="td"><input type="text" class="form-control" name="prod_valor[]" value="" placeholder="Valor"/></td></tr>'; //New input field html 
+    
+    $(addButton).click(function(){ //Once add button is clicked
+        if(x < maxField){ //Check maximum number of input fields
+            x++; //Increment field counter
+            $(wrapper).append(fieldHTML); // Add field html
+        }
+    });
+    $(wrapper).on('click', '.remove_button', function(e){ //Once remove button is clicked
+        e.preventDefault();
+        $(this).parent('div').remove(); //Remove field html
+         //getElementById("wrap"+$(this).val())
+        x--; //Decrement field counter
+    });
+});
+</script>
+
+<script type="text/javascript">
+	$('.delete').on("click", function (e) {
+		e.preventDefault();
+		var choice = confirm($(this).attr('data-confirm'));
+		if (choice) {
+			window.location.href = $(this).attr('href');
+		}
+	});
+
+</script>
 
 
 </body>

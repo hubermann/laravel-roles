@@ -60,6 +60,85 @@ Route::group(['prefix' => 'backend'], function(){
 	'middleware' 	=> 'roles',
 	'roles'				=>['Superadmin']
 	]);
+	//Categories
+	Route::get('/categories', [
+	'uses' 				=> 'CategoriesController@index',
+	'as' 					=> 'backend.categories',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::get('/categories/new', [
+	'uses' 				=> 'CategoriesController@newcategory',
+	'as' 					=> 'backend.categories.new',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::post('/categories', [
+	'uses' 				=> 'CategoriesController@create',
+	'as' 					=> 'backend.categories.create',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::get('/categories/destroy/{id}', [
+	'uses' 				=> 'CategoriesController@destroy',
+	'as' 					=> 'backend.categories.destroy',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+
+	//SubCategories
+	Route::get('/subcategories', [
+	'uses' 				=> 'SubcategoriesController@index',
+	'as' 					=> 'backend.subcategories',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::get('/subcategories/new', [
+	'uses' 				=> 'SubcategoriesController@newsubcategory',
+	'as' 					=> 'backend.subcategories.new',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::post('/subcategories', [
+	'uses' 				=> 'SubcategoriesController@create',
+	'as' 					=> 'backend.subcategories.create',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+
+		//Products
+	Route::get('/products', [
+	'uses' 				=> 'ProductsController@index',
+	'as' 					=> 'backend.products',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::get('/products/new', [
+	'uses' 				=> 'ProductsController@newProduct',
+	'as' 					=> 'backend.products.new',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::post('/products', [
+	'uses' 				=> 'ProductsController@create',
+	'as' 					=> 'backend.products.create',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::get('/products/destroy/{id}', [
+	'uses' 				=> 'ProductsController@destroy',
+	'as' 					=> 'backend.products.destroy',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+
+	//AJAX
+	Route::get('/ajax/subcategories', [
+	'uses' 				=> 'SubcategoriesController@ajax',
+	'as' 					=> 'backend.subcategories.ajax',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
 
 });
 
@@ -69,5 +148,7 @@ Route::get('/', function () { return view('welcome'); });
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/formulario', 'HomeController@formulario')->name('formulario');
+Route::get('pruebatemplate', 'HomeController@pruebatemplate')->name('pruebatemplate');
+
+
 

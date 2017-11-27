@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        #$this->middleware('auth');
     }
 
     /**
@@ -23,18 +23,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('layouts.page-grid-filter-left-sidebar-1');//return view('home');
     }
 
 
     /**
-     * Show the application demo page.
+     * Show the application dtempalte.
      *
      * @return \Illuminate\Http\Response
      */
-    public function formulario()
+    public function pruebatemplate()
     {
-        return view('demo-page');
+        return view('layouts.page-grid-filter-left-sidebar-1');
     }
     
 }
