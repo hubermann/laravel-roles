@@ -269,6 +269,13 @@ $(document).ready(function(){
 		}
 	});
 
+
+	function delete_dinamic(id)
+	{
+		$('#dinamic'+id).remove();
+	}
+
+
 </script>
 
 

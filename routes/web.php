@@ -79,6 +79,18 @@ Route::group(['prefix' => 'backend'], function(){
 	'middleware' 	=> 'roles',
 	'roles'				=>['Superadmin']
 	]);
+	Route::get('/categories/edit/{id}', [
+	'uses' 				=> 'CategoriesController@edit',
+	'as' 					=> 'backend.categories.edit',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::post('/categories/update', [
+	'uses' 				=> 'CategoriesController@update',
+	'as' 					=> 'backend.categories.update',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
 	Route::get('/categories/destroy/{id}', [
 	'uses' 				=> 'CategoriesController@destroy',
 	'as' 					=> 'backend.categories.destroy',
@@ -105,6 +117,24 @@ Route::group(['prefix' => 'backend'], function(){
 	'middleware' 	=> 'roles',
 	'roles'				=>['Superadmin']
 	]);
+	Route::get('/subcategories/edit/{id}', [
+	'uses' 				=> 'SubcategoriesController@edit',
+	'as' 					=> 'backend.subcategories.edit',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::post('/subcategories/update', [
+	'uses' 				=> 'SubcategoriesController@update',
+	'as' 					=> 'backend.subcategories.update',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::get('/subcategories/destroy/{id}', [
+	'uses' 				=> 'SubcategoriesController@destroy',
+	'as' 					=> 'backend.subcategories.destroy',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
 
 		//Products
 	Route::get('/products', [
@@ -128,6 +158,24 @@ Route::group(['prefix' => 'backend'], function(){
 	Route::get('/products/destroy/{id}', [
 	'uses' 				=> 'ProductsController@destroy',
 	'as' 					=> 'backend.products.destroy',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::get('/products/edit/{id}', [
+	'uses' 				=> 'ProductsController@edit',
+	'as' 					=> 'backend.products.edit',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::post('/products/update', [
+	'uses' 				=> 'ProductsController@update',
+	'as' 					=> 'backend.products.update',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::get('/products/destroy/{id}', [
+	'uses' 				=> 'ProductsController@destroy',
+	'as' 					=> 'backend.products.update',
 	'middleware' 	=> 'roles',
 	'roles'				=>['Superadmin']
 	]);

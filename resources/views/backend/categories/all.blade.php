@@ -35,9 +35,8 @@
 										<td>{{ $category->name }}</td>
 										<td>
 											<div class="btn-group pull-right">
-											<a class="btn btn-small" href="'.base_url('control/notas/editar/'.$row->id.'').'"><i class="fa fa-edit"></i></a>
-											<a class="btn btn-small" href="'.base_url('control/notas/imagenes/'.$row->id.'').'"><i class="fa fa-camera-retro"></i></a>
-											<a href="{ route('backend.categories.destroy', ['id' => $category->id]) }}" class="delete btn btn-small" data-confirm="Confirma eliminar ésta categoria? - Todas las Subcategorias y sus productos dependientes tambien serán eliminados de manera definitiva."><i class="fa fa-trash-o"></i></a>
+											<a class="btn btn-small" href="{{ route('backend.categories.edit', ['id' => $category->id])}}"><i class="fa fa-edit"></i></a>
+											<a href="{{ route('backend.categories.destroy', ['id' => $category->id])}}" class="delete btn btn-small" data-confirm="Confirma eliminar ésta categoria? - Todas las Subcategorias y sus productos dependientes tambien serán eliminados de manera definitiva."><i class="fa fa-trash-o"></i></a>
 											</div>
 										</td>
 									</tr>

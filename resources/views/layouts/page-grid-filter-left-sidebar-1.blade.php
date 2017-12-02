@@ -245,10 +245,11 @@
                        data-dropdown-animation-in="fadeIn"
                        data-dropdown-animation-out="fadeOut">
                       Account
-
-@if (Auth::user()->hasRole('Superadmin'))
-    <a href="{{ route('backend.root') }}">Administrador</a>
-@endif
+                    @if( Auth::user() )
+                      @if (Auth::user()->hasRole('Superadmin'))
+                          <a href="{{ route('backend.root') }}">Administrador</a>
+                      @endif
+                    @endif
               
                     </a>
                     <ul id="account-dropdown-2" class="list-unstyled u-shadow-v29 g-pos-abs g-bg-white g-width-160 g-pb-5 g-mt-19 g-z-index-2"

@@ -9,19 +9,27 @@ use Illuminate\Support\Facades\Redirect;
 use Session;
 use App\Category;
 use App\Subcategory;
+use App\Product;
 
 class SubcategoriesController extends Controller
 {
   public function index()
 	{
-		$subcategories = Subcategory::all();
-		return View('backend.subcategories.all', ['subcategories' => $subcategories]);
+		$categories = Category::all();
+		return View('backend.subcategories.all', ['categories' => $categories]);
 	}
     
   public function newsubcategory()
   {
     $categories = Category::all();
   	return View('backend.subcategories.new', ['categories' => $categories]);
+  }
+
+  public function edit($id)
+  {
+    $categories = Category::all();
+    $subcategory = Subcategory::findOrFail($id);
+    return View('backend.subcategories.edit', ['categories' => $categories, 'subcategory' => $subcategory ]);
   }
 
   public function create()
@@ -44,6 +52,43 @@ class SubcategoriesController extends Controller
       $subcategory->save();
 
       return Redirect::to('/backend/subcategories')->withInput()->with('success', 'subcategory added');
+  }
+
+  public function update()
+  {
+    $rules = [
+      //'name' => 'required|unique:subcategories|max:255',
+    ];
+
+    $validator = Validator::make(Input::all(), $rules);
+
+    if ($validator->fails())
+    {
+        return redirect('/backend/subcategories/edit/'.Input::get('id'))->withErrors($validator)->withInput();
+    }
+
+      $subcategory                   = Subcategory::findOrFail(Input::get('id'));
+      $subcategory->category_id      = Input::get('category_id');
+      $subcategory->name             = Input::get('name');
+      
+      $subcategory->save();
+
+      return Redirect::to('/backend/subcategories')->withInput()->with('success', 'Subcategoria actualizada');
+  }
+
+  public function destroy($id)
+  {
+    $subcategory           = Subcategory::findOrfail($id);
+    $products = Product::where('subcategory_id', $id);
+   
+    foreach ($products as $product) {
+      # code...
+      echo  ">>>>".$product->title;
+    }
+
+    #$subcategory->delete();
+    #return Redirect::to('/backend/subcategories')->with('success', 'Subcategoria eliminada.');
+
   }
 
   public function ajax()

@@ -37,7 +37,7 @@
 										<td>{{ $product->description }}</td>
 										<td>
 											<div class="btn-group pull-right">
-											<a class="btn btn-small" href="'.base_url('control/products/editar/'.$row->id.'').'"><i class="fa fa-edit"></i></a>
+											<a class="btn btn-small" href="{{ route('backend.products.edit', ['id' => $product->id])}}"><i class="fa fa-edit"></i></a>
 											<a class="btn btn-small" data-toggle="modal" data-target="#modalProducto{{$product->id}}" ><i class="fa fa-camera-retro"></i></a>
 											<a href="{ route('backend.products.destroy', ['id' => $product->id]) }}" class="delete btn btn-small" data-confirm="Are you sure to delete this item?"><i class="fa fa-trash-o"></i></a>	
 											</div>
