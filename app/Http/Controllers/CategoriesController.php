@@ -76,9 +76,23 @@ class CategoriesController extends Controller
   
   public function destroy($id)
   {
-    $category           = Category::findOrfail($id);
-    $category->delete();
-    return Redirect::to('/backend/categories')->with('success', 'Categoria eliminada.');
+
+
+    $category       = Category::findOrfail($id);
+    $subcategories  = $category->subcategories;
+    
+    foreach ($subcategories as $subcategory) {
+      # code...
+      echo "<p><strong>SUB: ".$subcategory->name."</strong></p>";
+
+      $productos = $subcategory->products;
+
+      foreach ($productos as $producto) {
+        echo "<p>PROD:".$producto->title.'</p>';
+      }
+    }
+    #$category->delete();
+    #return Redirect::to('/backend/categories')->with('success', 'Categoria eliminada.');
 
   }
 }

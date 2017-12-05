@@ -179,6 +179,18 @@ Route::group(['prefix' => 'backend'], function(){
 	'middleware' 	=> 'roles',
 	'roles'				=>['Superadmin']
 	]);
+	Route::get('/products/images/{id}', [
+	'uses' 				=> 'ProductsController@images',
+	'as' 					=> 'backend.products.images',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::post('/products/upload_image', [
+	'uses' 				=> 'ProductsController@fileUpload',
+	'as' 					=> 'backend.products.upload_image',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
 
 	//AJAX
 	Route::get('/ajax/subcategories', [

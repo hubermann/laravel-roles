@@ -6,16 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Pagination\Paginator;
 use Session;
 use App\Category;
 use App\Subcategory;
 use App\Product;
+use App\ImagesProduct;
 
 class ProductsController extends Controller
 {
     public function index()
 	{
-		$products = Product::all();
+		$products = Product::paginate(2);
 		return View('backend.products.all', ['products' => $products]);
 	}
     
@@ -118,4 +120,32 @@ class ProductsController extends Controller
     	return Redirect::to('/backend/products')->with('success', 'Producto eliminado ');
  
     }
+
+    //images
+
+    public function images($id){
+      $product = Product::findOrfail($id);
+      $images =  $product->images;
+      return View('backend.products.images', ['product' => $product, 'images' => $images]);
+    }
+
+    public function fileUpload(Request $request) {
+    $this->validate($request, [
+        'input_img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    if ($request->hasFile('input_img')) {
+        $image = $request->file('input_img');
+        $name = time().'-'.str_random(10).'-'.$image->getClientOriginalExtension();
+        $destinationPath = public_path('/images-products');
+        $image->move($destinationPath, $name);
+
+        $image = new ImagesProduct();
+        $image->product_id = Input::get('id');
+        $image->filename = $name;
+        $image->save();
+
+        return back()->with('success','Image Upload successfully');
+    }
+}
 }
