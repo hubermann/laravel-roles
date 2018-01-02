@@ -55,13 +55,39 @@
 				</div>
 
 				<div class="form-group">
-					<label for="title">Title</label>
+					<label for="title">Titulo</label>
 					<input type="text" name="title" class="form-control" value="{{ old('title') }}">
 					@if ($errors->has('title'))
               <span class="help-block">
                   <strong>{{ $errors->first('title') }}</strong>
               </span>
           @endif
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="title">Cantidad en stock</label>
+							<input type="text" name="qty" class="form-control" value="{{ old('qty') }}">
+							@if ($errors->has('qty'))
+		              <span class="help-block">
+		                  <strong>{{ $errors->first('qty') }}</strong>
+		              </span>
+		          @endif
+						</div>
+					</div>
+				<div class="col-md-6">
+						<div class="form-group">
+							<label for="title">Precio</label>
+							<input type="text" name="price" class="form-control" value="{{ old('price') }}">
+							@if ($errors->has('price'))
+		              <span class="help-block">
+		                  <strong>{{ $errors->first('price') }}</strong>
+		              </span>
+		          @endif
+						</div>
+					</div>
+
 				</div>
 
 				<div class="row">
@@ -90,7 +116,7 @@
 
 				<div class="form-group">
 					<label for="title">Description</label>
-					<textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+					<textarea name="description" id="description" cols="30" rows="10" class="form-control">{{ old('description') }}</textarea>
 					@if ($errors->has('description'))
               <span class="help-block">
                   <strong>{{ $errors->first('description') }}</strong>
@@ -99,7 +125,7 @@
 				</div>
 
 				<div class="form-group">
-					<button class="btn btn-primary" type="submit">Create</button>
+					<button class="btn btn-primary" type="submit">Crear</button>
 				</div>
 
 				</fieldset>

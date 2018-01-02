@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Redirect;
 use Session;
 use App\Category;
 use App\Subcategory;
+use App\Product;
+
 
 class CategoriesController extends Controller
 {
@@ -76,23 +78,33 @@ class CategoriesController extends Controller
   
   public function destroy($id)
   {
-
-
     $category       = Category::findOrfail($id);
     $subcategories  = $category->subcategories;
     
     foreach ($subcategories as $subcategory) {
-      # code...
-      echo "<p><strong>SUB: ".$subcategory->name."</strong></p>";
 
       $productos = $subcategory->products;
-
       foreach ($productos as $producto) {
-        echo "<p>PROD:".$producto->title.'</p>';
+
+        //Elimino imagenes
+        $imagenes = $producto->images;
+        foreach ($imagenes as $image) {
+
+          if(!empty($image->filename)){
+            echo $image->filename;
+            @unlink('images-products/'.$image->filename);
+          }
+
+        }
+        //elimino producto
+        $producto->delete();
       }
+      //Elimino SubCategoria
+      $subcategory->delete();
     }
-    #$category->delete();
-    #return Redirect::to('/backend/categories')->with('success', 'Categoria eliminada.');
+    //Elimino Categoria
+    $category->delete();
+    return Redirect::to('/backend/categories')->with('success', 'Categoria eliminada.');
 
   }
 }

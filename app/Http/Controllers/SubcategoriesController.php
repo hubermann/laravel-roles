@@ -79,15 +79,30 @@ class SubcategoriesController extends Controller
   public function destroy($id)
   {
     $subcategory           = Subcategory::findOrfail($id);
-    $products = Product::where('subcategory_id', $id);
+
    
-    foreach ($products as $product) {
-      # code...
-      echo  ">>>>".$product->title;
+    $productos = $subcategory->products()->get();
+
+    foreach ($productos as $producto) {
+
+      echo "<p>'.$producto->title.'";
+
+      //Elimino imagenes
+      $imagenes = $producto->images;
+      foreach ($imagenes as $image) {
+
+        if(!empty($image->filename)){
+          echo $image->filename;
+          @unlink('images-products/'.$image->filename);
+        }
+
+      }
+      //elimino producto
+      $producto->delete();
     }
 
-    #$subcategory->delete();
-    #return Redirect::to('/backend/subcategories')->with('success', 'Subcategoria eliminada.');
+    $subcategory->delete();
+    return Redirect::to('/backend/subcategories')->with('success', 'Subcategoria eliminada.');
 
   }
 

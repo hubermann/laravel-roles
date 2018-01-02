@@ -13,7 +13,8 @@
 	<div class="col-sm-12">
 		<div class="white-box">
 			<h3 class="box-title">Agregar una imagen</h3>
-
+			<p>Producto: {{ $product->title }}</p>
+			<hr>
 				<form action="{{ route('backend.products.upload_image') }}" method="post" enctype="multipart/form-data">
 				{{ csrf_field() }}
 				<fieldset>
@@ -21,7 +22,7 @@
 				<input type="hidden" name="id" id="id" value="{{$product->id}}">
 
 				<div class="form-group">
-					<label for="title">File</label>
+					<label for="title">Seleccione una imagen para asociar al producto:</label>
 						<input type="file" name="input_img" id="input_img">
 					
 				
@@ -34,7 +35,7 @@
 
 
 				<div class="form-group">
-					<button class="btn btn-primary" type="submit">Create</button>
+					<button class="btn btn-primary" type="submit">Asociar imagen</button>
 				</div>
 
 				</fieldset>

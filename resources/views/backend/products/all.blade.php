@@ -40,7 +40,7 @@
 											<a class="btn btn-small" href="{{ route('backend.products.edit', ['id' => $product->id])}}"><i class="fa fa-edit"></i></a>
 											<a class="btn btn-small" data-toggle="modal" data-target="#modalProducto{{$product->id}}" ><i class="fa fa-eye"></i></a>
 											<a class="btn btn-small" href="{{ route('backend.products.images', ['id' => $product->id])}}" ><i class="fa fa-camera-retro"></i></a>
-											<a href="{ route('backend.products.destroy', ['id' => $product->id]) }}" class="delete btn btn-small" data-confirm="Are you sure to delete this item?"><i class="fa fa-trash-o"></i></a>	
+											<a href="{{ route('backend.products.destroy', ['id' => $product->id]) }}" class="delete btn btn-small" data-confirm="Comfirma eliminar definitivamente este producto?"><i class="fa fa-trash-o"></i></a>	
 											</div>
 										</td>
 									</tr>
@@ -55,6 +55,7 @@
 									      </div>
 														
 														<div class="modal-body">
+														<p>Cantidad en stock: <strong>{{ $product->qty }}</strong></p>
 														<p>{{ $product->description }}</p>
 															@foreach(json_decode($product->dinamic_fields, true) as $key => $value)
 															<div class="row">

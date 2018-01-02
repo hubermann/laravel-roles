@@ -17,7 +17,7 @@ class ProductsController extends Controller
 {
     public function index()
 	{
-		$products = Product::paginate(2);
+		$products = Product::paginate(20);
 		return View('backend.products.all', ['products' => $products]);
 	}
     
@@ -63,6 +63,8 @@ class ProductsController extends Controller
 
     	$Product           = New Product();
       $Product->title    = Input::get('title');
+      $Product->qty      = Input::get('qty');
+      $Product->price      = Input::get('price');
       $Product->category_id    = Input::get('category_id');
       $Product->subcategory_id   = Input::get('subcategory_id');
       $Product->description     = Input::get('description');
@@ -102,6 +104,8 @@ class ProductsController extends Controller
 
       $Product           = Product::findOrfail(Input::get('id'));
       $Product->title    = Input::get('title');
+      $Product->qty      = Input::get('qty');
+      $Product->price      = Input::get('price');
       $Product->category_id    = Input::get('category_id');
       $Product->subcategory_id   = Input::get('subcategory_id');
       $Product->description     = Input::get('description');
@@ -116,7 +120,19 @@ class ProductsController extends Controller
 
     public function destroy($id)
     {
-      $Product           = Product::findOrfail($id);
+      $producto          = Product::findOrfail($id);
+      //Elimino imagenes
+      $imagenes = $producto->images;
+      foreach ($imagenes as $image) {
+
+        if(!empty($image->filename)){
+          echo $image->filename;
+          @unlink('images-products/'.$image->filename);
+        }
+
+      }
+      //elimino producto
+      $producto->delete();
     	return Redirect::to('/backend/products')->with('success', 'Producto eliminado ');
  
     }

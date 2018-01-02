@@ -11,10 +11,10 @@ class Subcategory extends Model
   	return $this->belongsTo('Category');
   }
 
-	public function products() 
-	{
-		#return $this->hasManyThrough('App\Product', 'App\Subcategory','id','subcategory_id','id');
-		return $this->hasMany('App\Product');
+	public function products() {
+		return $this->hasMany(Product::class, 'subcategory_id');
 	}
+
+
 
 }

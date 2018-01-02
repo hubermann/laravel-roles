@@ -175,7 +175,7 @@ Route::group(['prefix' => 'backend'], function(){
 	]);
 	Route::get('/products/destroy/{id}', [
 	'uses' 				=> 'ProductsController@destroy',
-	'as' 					=> 'backend.products.update',
+	'as' 					=> 'backend.products.destroy',
 	'middleware' 	=> 'roles',
 	'roles'				=>['Superadmin']
 	]);
@@ -204,9 +204,11 @@ Route::group(['prefix' => 'backend'], function(){
 
 
 
-Route::get('/', function () { return view('welcome'); });
+#Route::get('/', function () { return view('home'); });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/products', 'HomeController@products_list')->name('products_list');
 
 Route::get('pruebatemplate', 'HomeController@pruebatemplate')->name('pruebatemplate');
 
