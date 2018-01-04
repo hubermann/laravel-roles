@@ -191,6 +191,12 @@ Route::group(['prefix' => 'backend'], function(){
 	'middleware' 	=> 'roles',
 	'roles'				=>['Superadmin']
 	]);
+	Route::get('/images/destroy/{id}', [
+	'uses' 				=> 'ImagesProductsController@destroy',
+	'as' 					=> 'backend.images.destroy',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
 
 	//AJAX
 	Route::get('/ajax/subcategories', [
@@ -208,7 +214,11 @@ Route::group(['prefix' => 'backend'], function(){
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/products', 'HomeController@products_list')->name('products_list');
+Route::get('/products', 'HomeController@products_list')->name('frontend.products');
+Route::get('/product/{id}', 'HomeController@product_detail')->name('frontend.product_detail');
+Route::get('/category/{id}', 'HomeController@by_category')->name('frontend.by_category');
+Route::get('/subcategory/{id}', 'HomeController@by_subcategory')->name('frontend.by_subcategory');
+
 
 Route::get('pruebatemplate', 'HomeController@pruebatemplate')->name('pruebatemplate');
 

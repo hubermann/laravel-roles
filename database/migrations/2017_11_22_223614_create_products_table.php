@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('sizes')->nullable();
             $table->string('price')->nullable();
             $table->string('material')->nullable();
+            $table->tinyInteger('outstanding')->default('0');
             $table->string('color')->nullable();
             $table->integer('category_id');
             $table->integer('qty');

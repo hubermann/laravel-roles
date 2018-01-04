@@ -96,10 +96,11 @@
                           {{$product->title}}
                         </a>
                       </h4>
-                      <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13 mb-2" href="{{ route('frontend.by_category', ['id' => $product->category_id]) }}">{{ $product->get_category_name($product->category_id) }}</a> / <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13 mb-2" href="{{ route('frontend.by_subcategory', ['id' => $product->subcategory_id]) }}"> {{$product->get_subcategory_name($product->subcategory_id) }}</a>
+                      <p class="g-color-gray-dark-v5">
+                        <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13 mb-2" href="{{ route('frontend.by_category', ['id' => $product->category_id]) }}">{{ $product->get_category_name($product->category_id) }}</a> / <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13 mb-2" href="{{ route('frontend.by_subcategory', ['id' => $product->subcategory_id]) }}"> {{$product->get_subcategory_name($product->subcategory_id) }}</a>
+                      </p>
                       <div class="mb-4">
                         <span class="g-color-black g-font-size-20 mr-2">${{ number_format($product->price, 2) }}</span>
-
                       </div>
                       <p>{{ str_limit($product->description, 140) }}</p>
                     </div>

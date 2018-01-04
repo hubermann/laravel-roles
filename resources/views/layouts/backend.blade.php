@@ -99,7 +99,7 @@
 						<a href="{{ route('backend.root') }}" ><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i><span class="hide-menu">Backend</span></a>
 					</li>
 					<li>
-						<a href="{{ route('backend.users.edit') }}" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i><span class="hide-menu">Users</span></a>
+						<a href="{{ route('backend.users.view') }}" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i><span class="hide-menu">Users</span></a>
 					</li>
 					
 					<li>

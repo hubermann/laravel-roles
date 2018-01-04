@@ -48,12 +48,18 @@
 
 		 <!-- @#include('frontend_common.products_list') -->
 
-			@include('frontend_common.call_to_action')
+      
+      @include('frontend_common.call_to_action')
 
 			@include('frontend_common.footer')
 
 
+actulaizacion masiva
 
+expirt
+
+
+se rompe
       <a class="js-go-to u-go-to-v2" href="#"
          data-type="fixed"
          data-position='{

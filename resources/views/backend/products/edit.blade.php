@@ -74,6 +74,23 @@
           @endif
 				</div>
 
+
+				<div class="form-group">
+					<label for="title">Destacado?</label>
+					<select name="outstanding">
+						<option value="0" @if ($product->outstanding == 0)
+									selected
+								@endif
+								>Sin destacar</option>
+						<option value="1"
+						@if ($product->outstanding == 1)
+									selected
+								@endif
+								>Destacado</option>
+					</select>
+					
+				</div>
+
 				
 				<div class="row">
 					

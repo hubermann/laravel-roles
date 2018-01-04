@@ -59,7 +59,8 @@
 					    <div class="thumbnail">
 					        <img src="{{'/images-products/'.$image->filename}}" alt="image" style="width:100%">
 					        <div class="caption">
-					          <p><span class="btn btn-small btn-danger">Remover</span></p>
+					        <a href="{{ route('backend.images.destroy', ['id' => $image->id]) }}" class="delete btn btn-small btn btn-danger" data-confirm="Comfirma eliminar definitivamente ésta imagen?">Remover  <i class="fa fa-trash-o"></i></a>
+					         
 					        </div>
 					    </div>
 					  </div>

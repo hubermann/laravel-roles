@@ -16,6 +16,7 @@ class UsersController extends Controller
 		return View('backend/users/edit', [ 'users' => User::all() ]);	
 	}
 
+
 	public function updateUsers(Request $request)
 	{
 		$user = User::where( 'email', $request['email'] )->first();

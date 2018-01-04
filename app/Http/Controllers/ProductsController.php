@@ -68,6 +68,7 @@ class ProductsController extends Controller
       $Product->category_id    = Input::get('category_id');
       $Product->subcategory_id   = Input::get('subcategory_id');
       $Product->description     = Input::get('description');
+      $Product->outstanding     = Input::get('outstanding');
       $Product->dinamic_fields     = json_encode($dinamic);
 
       $Product->save();
@@ -109,6 +110,7 @@ class ProductsController extends Controller
       $Product->category_id    = Input::get('category_id');
       $Product->subcategory_id   = Input::get('subcategory_id');
       $Product->description     = Input::get('description');
+      $Product->outstanding    = Input::get('outstanding');
       $Product->dinamic_fields     = json_encode($dinamic);
 
       $Product->save();
@@ -126,7 +128,6 @@ class ProductsController extends Controller
       foreach ($imagenes as $image) {
 
         if(!empty($image->filename)){
-          echo $image->filename;
           @unlink('images-products/'.$image->filename);
         }
 

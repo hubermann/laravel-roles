@@ -92,7 +92,7 @@
           <!-- Product Info -->
           <div class="d-flex flex-column">
             <h4 class="h6 g-color-black mb-1">
-              <a class="u-link-v5 g-color-black g-color-primary--hover" href="#">
+              <a class="u-link-v5 g-color-black g-color-primary--hover" href="{{ route('frontend.product_detail', ['id' => $product->id]) }}">
                 {{$product->title}} 
               </a>
             </h4>
