@@ -218,7 +218,8 @@ Route::get('/products', 'HomeController@products_list')->name('frontend.products
 Route::get('/product/{id}', 'HomeController@product_detail')->name('frontend.product_detail');
 Route::get('/category/{id}', 'HomeController@by_category')->name('frontend.by_category');
 Route::get('/subcategory/{id}', 'HomeController@by_subcategory')->name('frontend.by_subcategory');
-
+Route::get('/cart', 'HomeController@cart')->name('frontend.cart');
+Route::post('/cart', 'HomeController@cart');
 
 Route::get('pruebatemplate', 'HomeController@pruebatemplate')->name('pruebatemplate');
 

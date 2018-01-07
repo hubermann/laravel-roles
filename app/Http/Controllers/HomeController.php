@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Category;
 use App\Subcategory;
 use App\Product;
 use App\ImagesProduct;
+use Cart;
 
 class HomeController extends Controller
 {
@@ -85,6 +86,42 @@ class HomeController extends Controller
         $data['products'] = Product::where('subcategory_id', $id)->paginate(3);
         $data['outstandings'] = Product::where('outstanding', 1)->get();
         return view('frontend_common.products_by_subcategory', $data);
+    }
+
+    public function cart() {
+        //update/ add new item to cart
+        if (Request::isMethod('post')) {
+            $product_id = Request::get('product_id');
+            $product = Product::find($product_id);
+            Cart::add(array('id' => $product_id, 'name' => $product->title, 'qty' => 1, 'price' => $product->price));
+        }
+
+        //increment the quantity
+        if (Request::get('product_id') && (Request::get('increment')) == 1) {
+            $rowId = Cart::search(function($key, $value) { return $key->id == Request::get('product_id'); });
+            $new_quantity = $rowId->first()->qty + 1;
+            Cart::update($rowId->first()->rowId, ['qty' => $new_quantity]);
+            return \App::make('redirect')->back();
+        }
+
+        //decrease the quantity
+        if (Request::get('product_id') && (Request::get('decrease')) == 1) {
+            $rowId = Cart::search(function($key, $value) { return $key->id == Request::get('product_id'); });
+            $new_quantity = $rowId->first()->qty - 1;
+            Cart::update($rowId->first()->rowId, ['qty' => $new_quantity]);
+            return \App::make('redirect')->back();
+        }
+
+        //Remove item
+        if (Request::get('product_id') && (Request::get('delete')) == 1) {
+            $rowId = Cart::search(function($key, $value) { return $key->id == Request::get('product_id'); });
+            Cart::remove($rowId->first()->rowId);
+            return \App::make('redirect')->back();
+        }
+
+        $cart = Cart::content();
+
+        return view('frontend_common.cart', array('cart' => $cart, 'title' => 'Welcome', 'description' => '', 'page' => 'home'));
     }
     
 }

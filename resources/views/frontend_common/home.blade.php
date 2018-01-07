@@ -69,6 +69,12 @@
   <div class="row g-mx-minus-10 g-mb-50">
     
 
+
+    <style>
+    .border-none{border: none;}
+    .background-none{background: none;}
+    </style>
+
 @if($products->count())
 
   @foreach($products as $product)
@@ -106,9 +112,13 @@
             <span class="g-color-black g-line-height-1">${{ number_format($product->price, 2) }}</span>
             <ul class="list-inline g-color-gray-light-v2 g-font-size-14 g-line-height-1">
               <li class="list-inline-item align-middle g-brd-right g-brd-gray-light-v3 g-pr-10 g-mr-6">
-                <a class="g-color-gray-dark-v5 g-color-primary--hover g-text-underline--none--hover" href="#" title="" data-toggle="tooltip" data-placement="top" data-original-title="Add to Cart">
-                  <i class="icon-finance-100 u-line-icon-pro"></i>
-                </a>
+                <form method="POST" action="{{url('cart')}}">
+                <input type="hidden" name="product_id" value="{{$product->id}}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="g-color-gray-dark-v5 g-color-primary--hover border-none background-none g-text-underline--none--hover" href="#" title="" data-toggle="tooltip" data-placement="top" data-original-title="Add to Cart">
+                    <i class="icon-finance-100 u-line-icon-pro"></i>
+                  </button>
+                </form>
               </li>
               <li class="list-inline-item align-middle">
                 <a class="g-color-gray-dark-v5 g-color-primary--hover g-text-underline--none--hover" href="#" title="" data-toggle="tooltip" data-placement="top" data-original-title="Add to Wishlist">
@@ -133,6 +143,58 @@
     <a class="btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" href="{{ route('frontend.products') }}">All Products</a>
   </div>
 </section>
+
+
+
+<section>
+  <table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+      <?php foreach(Cart::content() as $row) :?>
+
+          <tr>
+              <td>
+                  <p><strong><?php echo $row->name; ?></strong></p>
+                  <p><?php echo ($row->options->has('size') ? $row->options->size : ''); ?></p>
+              </td>
+              <td><input type="text" value="<?php echo $row->qty; ?>"></td>
+              <td>$<?php echo $row->price; ?></td>
+              <td>$<?php echo $row->total; ?></td>
+          </tr>
+
+      <?php endforeach;?>
+
+    </tbody>
+    
+    <tfoot>
+      <tr>
+        <td colspan="2">&nbsp;</td>
+        <td>Subtotal</td>
+        <td><?php echo Cart::subtotal(); ?></td>
+      </tr>
+      <tr>
+        <td colspan="2">&nbsp;</td>
+        <td>Tax</td>
+        <td><?php echo Cart::tax(); ?></td>
+      </tr>
+      <tr>
+        <td colspan="2">&nbsp;</td>
+        <td>Total</td>
+        <td><?php echo Cart::total(); ?></td>
+      </tr>
+    </tfoot>
+</table>
+</section>
+
 
 
 @endsection

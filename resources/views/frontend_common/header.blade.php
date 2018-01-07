@@ -235,7 +235,7 @@
 
               <div class="g-pa-20">
                 <div class="text-center g-mb-15">
-                  <a class="text-uppercase g-color-primary g-color-main--hover g-font-weight-400 g-font-size-13 g-text-underline--none--hover" href="page-checkout-1.html">
+                  <a class="text-uppercase g-color-primary g-color-main--hover g-font-weight-400 g-font-size-13 g-text-underline--none--hover" href="{{url('cart')}}">
                     View Cart
                     <i class="ml-2 icon-finance-100 u-line-icon-pro"></i>
                   </a>
