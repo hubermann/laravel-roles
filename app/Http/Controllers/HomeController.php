@@ -29,7 +29,6 @@ class HomeController extends Controller
     public function index()
     {
         $data['categories'] = Category::all();
-        #$data['products'] = Product::paginate(20);
         $data['outstandings'] = Product::where('outstanding', 1)->get();
         $data['products'] = Product::where('outstanding', 0)->take(9)->get();
 
@@ -44,6 +43,7 @@ class HomeController extends Controller
      */
     public function product_detail($id)
     {   
+        $data['categories'] = Category::all();
         $data['product'] = Product::findOrfail($id);
         $data['outstandings'] = Product::where('outstanding', 1)->get();
         return view('frontend_common.product_detail', $data);
@@ -61,6 +61,21 @@ class HomeController extends Controller
         $data['outstandings'] = Product::where('outstanding', 1)->get();
         return view('frontend_common.products_list', $data);
     }
+
+    /**
+     * Show the application dtempalte.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function outstandings()
+    {
+        $data['categories'] = Category::all();
+        $data['products'] = Product::where('outstanding', 1)->paginate(10);
+
+        return view('frontend_common.products_outstandings', $data);
+    }
+
+
 
     /**
      * Show the application dtempalte.
@@ -89,6 +104,8 @@ class HomeController extends Controller
     }
 
     public function cart() {
+
+        $categories = Category::all();
         //update/ add new item to cart
         if (Request::isMethod('post')) {
             $product_id = Request::get('product_id');
@@ -121,7 +138,7 @@ class HomeController extends Controller
 
         $cart = Cart::content();
 
-        return view('frontend_common.cart', array('cart' => $cart, 'title' => 'Welcome', 'description' => '', 'page' => 'home'));
+        return view('frontend_common.cart', array('cart' => $cart, 'title' => 'Welcome', 'description' => '', 'page' => 'home', 'categories' => $categories));
     }
     
 }

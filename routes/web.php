@@ -217,6 +217,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/products', 'HomeController@products_list')->name('frontend.products');
 Route::get('/product/{id}', 'HomeController@product_detail')->name('frontend.product_detail');
 Route::get('/category/{id}', 'HomeController@by_category')->name('frontend.by_category');
+Route::get('/outstandings', 'HomeController@outstandings')->name('frontend.outstandings');
 Route::get('/subcategory/{id}', 'HomeController@by_subcategory')->name('frontend.by_subcategory');
 Route::get('/cart', 'HomeController@cart')->name('frontend.cart');
 Route::post('/cart', 'HomeController@cart');

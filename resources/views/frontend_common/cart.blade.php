@@ -27,7 +27,16 @@
                     @foreach($cart as $item)
                     <tr>
                         <td class="cart_product">
-                            <a href=""><img src="images/cart/one.png" alt=""></a>
+                            <a href="">
+
+                            @if ( count($item->images))
+                        <img class="img-fluid" src="{{'/images-products/'.$item->images[0]->filename }}" alt="Image Description">
+                    @else
+                        <img class="img-fluid" src="{{ URL::to('/') }}/images/no-image-available.jpg" alt="Image Description">
+                    @endif
+
+
+                    </a>
                         </td>
                         <td class="cart_description">
                             <h4><a href="">{{$item->name}}</a></h4>

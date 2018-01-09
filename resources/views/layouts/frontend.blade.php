@@ -30,6 +30,8 @@
     <link rel="stylesheet" href="{{ asset('template/assets/vendor/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/vendor/hamburgers/hamburgers.min.css') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/vendor/hs-megamenu/src/hs.megamenu.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/assets/vendor/slick-carousel/slick/slick.css') }}">
+
     <link rel="stylesheet" href="{{ asset('template/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css') }}">
 
     <!-- CSS Unify Theme -->
@@ -37,6 +39,7 @@
 
     <!-- CSS Customization -->
     <link rel="stylesheet" href="{{ asset('template/assets/css/custom.css') }}">
+
   </head>
 
   <body>
@@ -53,13 +56,6 @@
 
 			@include('frontend_common.footer')
 
-
-actulaizacion masiva
-
-expirt
-
-
-se rompe
       <a class="js-go-to u-go-to-v2" href="#"
          data-type="fixed"
          data-position='{

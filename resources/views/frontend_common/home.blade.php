@@ -46,6 +46,7 @@
 
           <a class="d-inline-block g-brd-bottom g-brd-white g-color-white g-font-weight-500 g-font-size-12 text-uppercase g-text-underline--none--hover g-mb-30" href="{{ route('frontend.product_detail', ['id' => $outstanding->id]) }}">Ver más</a>
         </div>
+
       </article>
       <!-- End Blog Background Overlay Blocks -->
     </div>
@@ -142,57 +143,6 @@
   <div class="text-center">
     <a class="btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" href="{{ route('frontend.products') }}">All Products</a>
   </div>
-</section>
-
-
-
-<section>
-  <table>
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Qty</th>
-            <th>Price</th>
-            <th>Subtotal</th>
-        </tr>
-    </thead>
-
-    <tbody>
-
-      <?php foreach(Cart::content() as $row) :?>
-
-          <tr>
-              <td>
-                  <p><strong><?php echo $row->name; ?></strong></p>
-                  <p><?php echo ($row->options->has('size') ? $row->options->size : ''); ?></p>
-              </td>
-              <td><input type="text" value="<?php echo $row->qty; ?>"></td>
-              <td>$<?php echo $row->price; ?></td>
-              <td>$<?php echo $row->total; ?></td>
-          </tr>
-
-      <?php endforeach;?>
-
-    </tbody>
-    
-    <tfoot>
-      <tr>
-        <td colspan="2">&nbsp;</td>
-        <td>Subtotal</td>
-        <td><?php echo Cart::subtotal(); ?></td>
-      </tr>
-      <tr>
-        <td colspan="2">&nbsp;</td>
-        <td>Tax</td>
-        <td><?php echo Cart::tax(); ?></td>
-      </tr>
-      <tr>
-        <td colspan="2">&nbsp;</td>
-        <td>Total</td>
-        <td><?php echo Cart::total(); ?></td>
-      </tr>
-    </tfoot>
-</table>
 </section>
 
 
