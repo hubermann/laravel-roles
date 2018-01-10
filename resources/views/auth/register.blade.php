@@ -174,7 +174,7 @@
         </div>
 
         <div class="mb-5">
-          <button class="btn btn-block u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" type="submit">Ingresar</button>
+          <button class="btn btn-block u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" type="submit">Crear cuenta</button>
         </div>
 
         <div class="d-flex justify-content-center text-center g-mb-30">
@@ -184,8 +184,8 @@
         </div>
 
         <div class="text-center">
-          <p class="g-color-gray-dark-v5 mb-0">No tiene cuenta?
-            <a class="g-font-weight-600" href="page-signup-1.html">Crear mi cuenta</a></p>
+          <p class="g-color-gray-dark-v5 mb-0">Tiene cuenta? 
+            <a class="g-font-weight-600" href="{{ route('login')}}"> Ingresar</a></p>
         </div>
 
         

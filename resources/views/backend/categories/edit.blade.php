@@ -24,6 +24,23 @@
 				</div>
 
 				<div class="form-group">
+					<label for="title">Destacada?</label>
+					<select name="outstanding">
+						<option value="0" @if ($category->outstanding == 0)
+									selected
+								@endif
+								>Sin destacar</option>
+						<option value="1"
+						@if ($category->outstanding == 1)
+									selected
+								@endif
+								>Destacada</option>
+					</select>
+				</div>
+
+
+
+				<div class="form-group">
 					<button class="btn btn-primary" type="submit">Crear</button>
 				</div>
 

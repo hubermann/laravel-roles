@@ -37,7 +37,7 @@ class CategoriesController extends Controller
   {
     
     $rules = [
-      'name' => 'required|unique:categories|max:255',
+      'name' => 'required|max:255',
     ];
 
     $validator = Validator::make(Input::all(), $rules);
@@ -49,6 +49,7 @@ class CategoriesController extends Controller
 
       $category           = Category::findOrFail(Input::get('id'));
       $category->name     = Input::get('name');
+      $category->outstanding     = Input::get('outstanding');
 
       $category->save();
 
@@ -70,6 +71,7 @@ class CategoriesController extends Controller
 
     	$category           = New category();
       $category->name    	= Input::get('name');
+      $category->outstanding     = Input::get('outstanding');
 
       $category->save();
 

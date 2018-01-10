@@ -5,25 +5,25 @@
 <section>
   
 
-  <!-- Breadcrumbs -->
-      <section class="g-brd-bottom g-brd-gray-light-v4 g-py-30">
-        <div class="container">
-          <ul class="u-list-inline">
-            <li class="list-inline-item g-mr-5">
-              <a class="u-link-v5 g-color-text" href="{{ URL::to('/') }}">Home</a>
-              <i class="g-color-gray-light-v2 g-ml-5 fa fa-angle-right"></i>
-            </li>
-            <li class="list-inline-item g-mr-5">
-              <a class="u-link-v5 g-color-text" href="{{ URL::to('/products') }}">Products</a>
-              <i class="g-color-gray-light-v2 g-ml-5 fa fa-angle-right"></i>
-            </li>
-            <li class="list-inline-item g-color-primary">
-              <span>{{ $product->title}}</span>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <!-- End Breadcrumbs -->
+<!-- Breadcrumbs -->
+<section class="g-brd-bottom g-brd-gray-light-v4 g-py-30">
+  <div class="container">
+    <ul class="u-list-inline">
+      <li class="list-inline-item g-mr-5">
+        <a class="u-link-v5 g-color-text" href="{{ URL::to('/') }}">Home</a>
+        <i class="g-color-gray-light-v2 g-ml-5 fa fa-angle-right"></i>
+      </li>
+      <li class="list-inline-item g-mr-5">
+        <a class="u-link-v5 g-color-text" href="{{ URL::to('/products') }}">Products</a>
+        <i class="g-color-gray-light-v2 g-ml-5 fa fa-angle-right"></i>
+      </li>
+      <li class="list-inline-item g-color-primary">
+        <span>{{ $product->title}}</span>
+      </li>
+    </ul>
+  </div>
+</section>
+<!-- End Breadcrumbs -->
 
       <!-- Product Description -->
       <div class="container g-py-50">
@@ -98,7 +98,6 @@
 
               <!-- Accordion -->
               
-
 
               <!-- Buttons -->
               <div class="row g-mx-minus-5 g-mb-20">

@@ -85,6 +85,7 @@ class HomeController extends Controller
     public function by_category($id)
     {
         $data['categories'] = Category::all();
+        $data['category'] = Category::find($id);
         $data['products'] = Product::where('category_id', $id)->paginate(3);
         $data['outstandings'] = Product::where('outstanding', 1)->get();
         return view('frontend_common.products_by_category', $data);
@@ -98,6 +99,9 @@ class HomeController extends Controller
     public function by_subcategory($id)
     {
         $data['categories'] = Category::all();
+        $subcategory = Subcategory::find($id);
+        $data['category'] = Category::find($subcategory->category_id);
+        $data['subcategory'] = $subcategory; 
         $data['products'] = Product::where('subcategory_id', $id)->paginate(3);
         $data['outstandings'] = Product::where('outstanding', 1)->get();
         return view('frontend_common.products_by_subcategory', $data);
@@ -139,6 +143,57 @@ class HomeController extends Controller
         $cart = Cart::content();
 
         return view('frontend_common.cart', array('cart' => $cart, 'title' => 'Welcome', 'description' => '', 'page' => 'home', 'categories' => $categories));
+    }
+
+    public function contact()
+    {
+        $data['categories'] = Category::all();
+        $data['outstandings'] = Product::where('outstanding', 1)->get();
+        $data['products'] = Product::where('outstanding', 0)->take(9)->get();
+
+        return view('frontend_common.contact', $data );//return view('home');
+    }
+
+    public function process_contact(Request $request)
+    {
+
+        $this->validate($request, [ 
+            'name' => 'required', 
+            'email' => 'required|email', 
+            'message' => 'required' 
+        ]);
+
+        ContactUS::create($request->all()); 
+   
+        Mail::send('email',
+           array(
+               'name' => $request->get('name'),
+               'email' => $request->get('email'),
+               'user_message' => $request->get('message')
+           ), function($message)
+           {
+               $message->from('hubermann@gmail.com');
+               $message->to('hubermann@gmail.com', 'Admin')->subject('Website Feedback');
+           });
+ 
+        return back()->with('success', 'Thanks for contacting us!'); 
+   
+    }
+
+
+    public static function get_product_images($id)
+    {
+        return ImagesProduct::where('product_id', $id)->get();   
+    }
+
+    public static function get_categories_outstandings()
+    {
+        return Category::where('outstanding', 1)->get();   
+    }
+
+    public static function get_categories()
+    {
+        return Category::All();   
     }
     
 }

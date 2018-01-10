@@ -2,6 +2,34 @@
 
 @section('content')
 
+
+<!-- Breadcrumbs -->
+<section class="g-brd-bottom g-brd-gray-light-v4 g-py-30">
+  <div class="container">
+    <ul class="u-list-inline">
+      <li class="list-inline-item g-mr-5">
+        <a class="u-link-v5 g-color-text" href="{{ URL::to('/') }}">Home</a>
+        <i class="g-color-gray-light-v2 g-ml-5 fa fa-angle-right"></i>
+      </li>
+      <li class="list-inline-item g-mr-5">
+        <a class="u-link-v5 g-color-text" href="{{ URL::to('/products') }}">Productos</a>
+        <i class="g-color-gray-light-v2 g-ml-5 fa fa-angle-right"></i>
+      </li>
+      <li class="list-inline-item g-mr-5">
+        <a class="u-link-v5 g-color-text" href="{{ route('frontend.by_category', ['id' => $category->id]) }}">{{ $category->name }}</a>
+        <i class="g-color-gray-light-v2 g-ml-5 fa fa-angle-right"></i>
+      </li>
+      <li class="list-inline-item g-color-primary">
+        <span>{{ $subcategory->name}}</span>
+      </li>
+    </ul>
+  </div>
+</section>
+<!-- End Breadcrumbs -->
+
+
+
+
       <!-- Products -->
       <div class="container">
         <div class="row">
@@ -75,7 +103,11 @@
 
      
               @unless($products->count())
-                  <li>No products.</li>
+                  <div class="text-center">
+                  <br>
+                  <h2 class="g-mb-30">No hay productos</h2>
+                  <p>Esta categoria no tiene productos aún.</p>
+                  </div>
               @else
                 @foreach($products as $product)         
               <!-- Products -->

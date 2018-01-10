@@ -10,8 +10,8 @@
           <div class="row">
             
 
-          @if(!empty($categories))
-            @foreach($categories->chunk(3) as $categories)
+           @if( count( App\Http\Controllers\HomeController::get_categories() ))
+            @foreach( App\Http\Controllers\HomeController::get_categories()->chunk(3) as $categories)
             <div class="col-4 g-mb-20">
               <ul class="list-unstyled g-font-size-13 mb-0">
                 @foreach($categories as $category)

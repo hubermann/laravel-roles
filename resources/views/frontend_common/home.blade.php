@@ -112,7 +112,7 @@
           <footer class="d-flex justify-content-between g-font-size-16">
             <span class="g-color-black g-line-height-1">${{ number_format($product->price, 2) }}</span>
             <ul class="list-inline g-color-gray-light-v2 g-font-size-14 g-line-height-1">
-              <li class="list-inline-item align-middle g-brd-right g-brd-gray-light-v3 g-pr-10 g-mr-6">
+              <li class="list-inline-item align-middle g-brd-gray-light-v3 g-pr-10 g-mr-6">
                 <form method="POST" action="{{url('cart')}}">
                 <input type="hidden" name="product_id" value="{{$product->id}}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -121,11 +121,7 @@
                   </button>
                 </form>
               </li>
-              <li class="list-inline-item align-middle">
-                <a class="g-color-gray-dark-v5 g-color-primary--hover g-text-underline--none--hover" href="#" title="" data-toggle="tooltip" data-placement="top" data-original-title="Add to Wishlist">
-                  <i class="icon-medical-022 u-line-icon-pro"></i>
-                </a>
-              </li>
+              
             </ul>
           </footer>
           <!-- End Article Footer -->

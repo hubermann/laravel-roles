@@ -26,6 +26,15 @@
           @endif
 				</div>
 
+
+				<div class="form-group">
+					<label for="title">Destacada? (aparece en menu principal)</label>
+					<select name="outstanding">
+						<option value="0">Sin destacar</option>
+						<option value="1">Destacada</option>
+					</select>
+				</div>
+
 				<div class="form-group">
 					<button class="btn btn-primary" type="submit">Crear</button>
 				</div>

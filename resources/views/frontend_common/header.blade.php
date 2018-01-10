@@ -131,7 +131,7 @@
                  data-dropdown-hide-on-scroll="false"
                  data-dropdown-animation-in="fadeIn"
                  data-dropdown-animation-out="fadeOut">
-                <span class="u-badge-v1--sm g-color-white g-bg-primary g-font-size-11 g-line-height-1_4 g-rounded-50x g-pa-4" style="top: 7px !important; right: 3px !important;">4</span>
+                <span class="u-badge-v1--sm g-color-white g-bg-primary g-font-size-11 g-line-height-1_4 g-rounded-50x g-pa-4" style="top: 7px !important; right: 3px !important;"><?php echo Cart::count(); ?></span>
                 <i class="icon-hotel-restaurant-105 u-line-icon-pro"></i>
               </a>
             </div>
@@ -152,7 +152,13 @@
                     <div class="row no-gutters g-pb-5">
                       <div class="col-4 pr-3">
                         <a class="u-basket__product-img" href="#">
-                          <img class="img-fluid" src="../assets/img-temp/150x150/img1.jpg" alt="Image Description">
+                        <?php $images_product = App\Http\Controllers\HomeController::get_product_images($row->id);  ?>
+                            @if ( count($images_product))
+                              <img class="img-fluid" src="{{'/images-products/'.$images_product[0]->filename }}" alt="{{$row->title}}">
+                            @else
+                              <img class="img-fluid" src="{{ URL::to('/') }}/images/no-image-available.jpg" alt="{{$row->title}}">
+                            @endif
+                          
                         </a>
                       </div>
 
@@ -160,7 +166,7 @@
                         <h6 class="g-font-weight-400 g-font-size-default">
                           <a class="g-color-black g-color-primary--hover g-text-underline--none--hover" href="#"><?php echo $row->name; ?></a>
                         </h6>
-                        <small class="g-color-primary g-font-size-12"><?php echo $row->qty; ?> x $<?php echo $row->price; ?> - ${{ number_format($row->subtotal, 2) }}</small>
+                        <small class="g-color-primary g-font-size-12"><?php echo $row->qty; ?> x ${{ number_format($row->price, 2) }}  =  ${{ number_format($row->subtotal, 2) }}</small>
                       </div>
                     </div>
                     <a class="u-basket__product-remove" href="{{url("cart?product_id=$row->id&delete=1")}}" onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
@@ -272,8 +278,15 @@
 
             
 
-            
+            @if( count( App\Http\Controllers\HomeController::get_categories_outstandings() ))
 
+              @foreach( App\Http\Controllers\HomeController::get_categories_outstandings() as $outstanding_category )
+              <li class="nav-item g-ml-10--lg">
+                <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.by_category', ['id' => $outstanding_category->id ])}}">{{ $outstanding_category->name }}</a>
+              </li>
+              @endforeach
+
+            @endif
            
 
          
@@ -282,7 +295,11 @@
             <li class="nav-item g-ml-10--lg">
               <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.outstandings')}}">Destacados</a>
             </li>
+            <li class="nav-item g-ml-10--lg">
+              <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.contact')}}">Contacto</a>
+            </li>
           </ul>
+
         </div>
         <!-- End Navigation -->
       </div>

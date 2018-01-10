@@ -220,6 +220,7 @@ Route::get('/category/{id}', 'HomeController@by_category')->name('frontend.by_ca
 Route::get('/outstandings', 'HomeController@outstandings')->name('frontend.outstandings');
 Route::get('/subcategory/{id}', 'HomeController@by_subcategory')->name('frontend.by_subcategory');
 Route::get('/cart', 'HomeController@cart')->name('frontend.cart');
+Route::get('/contact', 'HomeController@contact')->name('frontend.contact');
 Route::post('/cart', 'HomeController@cart');
 
 Route::get('pruebatemplate', 'HomeController@pruebatemplate')->name('pruebatemplate');

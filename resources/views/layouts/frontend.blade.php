@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- Title -->
-    <title>E-commerce Grid Filter Left Sidebar Page 1 | Unify - Responsive Website Template</title>
+    <title> Protecno </title>
 
     <!-- Required Meta Tags Always Come First -->
     <meta charset="utf-8">
