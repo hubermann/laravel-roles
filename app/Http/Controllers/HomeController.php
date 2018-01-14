@@ -8,6 +8,8 @@ use App\Subcategory;
 use App\Product;
 use App\ImagesProduct;
 use Cart;
+use Auth;
+use MP;
 
 class HomeController extends Controller
 {
@@ -115,6 +117,7 @@ class HomeController extends Controller
             $product_id = Request::get('product_id');
             $product = Product::find($product_id);
             Cart::add(array('id' => $product_id, 'name' => $product->title, 'qty' => 1, 'price' => $product->price));
+            return \App::make('redirect')->back()->with('success', 'Product added to cart.');;
         }
 
         //increment the quantity
@@ -194,6 +197,100 @@ class HomeController extends Controller
     public static function get_categories()
     {
         return Category::All();   
+    }
+
+
+    public function checkout()
+    {
+        if( Auth::user() ){ echo "CheckOut"; }else{ return redirect('login')->with('warning', 'Please login.');}
+        if( Cart::total() != 0.00 ){ echo "okay todo";  var_dump( Cart::total() ); }else{ return redirect('/')->with('warning', 'No hay productos en su orden.');}
+
+
+        $items = [];
+        foreach(Cart::content() as $row)
+        {
+            #var_dump($row);
+            #exit();
+            array_push($items, ["id" => $row->id, "title" => $row->name, "quantity" => $row->qty, "currency_id" => "ARS", "unit_price" => $row->price ]);
+        }
+        //  $preference_data = array (
+        //     "items" => array (
+        //         array (
+        //             "title" => "Test2",
+        //             "quantity" => 1,
+        //             "currency_id" => "BRL",
+        //             "unit_price" => 10.41
+        //         )
+        //     )
+        // );
+
+        $preference_data = [
+            "items" => $items, 
+            "payer" => [ 
+                "name" => Auth::user()->name,
+                "surname" => "",
+                "email" => Auth::user()->email
+            ],
+            "back_urls" => [],
+            ];
+
+
+         dd($preference_data);
+
+        // try {
+        //     $preference = MP::create_preference($preference_data);
+        //     return redirect()->to($preference['response']['init_point']);
+        // } catch (Exception $e){
+        //     dd($e->getMessage());
+        // }
+
+
+
+//https://www.mercadopago.com.ar/developers/es/solutions/payments/basic-checkout/receive-payments/additional-info/
+
+
+
+// BIEN armado
+// https://github.com/mercadopago/sdk-php/blob/master/examples/checkout-buttons/basic-preference/button_full.php
+
+// lo de la vista es para hacer el boton de checkout.
+
+
+
+
+// Aplicación: 1463908 - MercadoPago application (mp-app-1463908)   Renovar credenciales
+// Checkout personalizado
+
+// Checkout básico
+
+// Modo Sandbox
+
+// Public key: TEST-80707703-e072-459f-b5a2-992726548ee2
+// Access token: TEST-1523568522842496-010920-d89e0f19b091bf4fac843dee32cbbb07__LB_LC__-1463908
+// Modo Producción
+
+// Tus credenciales de producción aún no están habilitadas, homologate primero para poder usarlas.
+// ¿Qué necesito para ir a producción? Quiero ir a producción
+// Public key: APP_USR-bf77922b-6230-4af7-9659-343a2d04b81a
+// Access token: APP_USR-1523568522842496-010920-7701973615ade0071f31a932623d799d__LA_LC__-1463908
+
+
+
+// checkout basico:
+// CLIENT_ID: 1523568522842496
+// CLIENT_SECRET: rPxUtAvrc2CDh8a1FXvgEwSoPOwpPxg2
+
+
+
+
+        //$data['preference'] = MP::create_preference($preference_data);
+
+        //return view('frontend_common.checkout_view', $data );
+#$mp = new MP('1523568522842496', 'rPxUtAvrc2CDh8a1FXvgEwSoPOwpPxg2');
+
+
+
+
     }
     
 }

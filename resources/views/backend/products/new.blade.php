@@ -65,7 +65,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div class="form-group">
 							<label for="title">Cantidad en stock</label>
 							<input type="text" name="qty" class="form-control" value="{{ old('qty') }}">
@@ -76,7 +76,19 @@
 		          @endif
 						</div>
 					</div>
-				<div class="col-md-6">
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="title">Producto destacado?</label>
+							<select name="outstanding">
+								<option value="0" >Sin destacar</option>
+								<option value="1">Destacado</option>
+							</select>
+						</div>
+					</div>
+
+
+				<div class="col-md-4">
 						<div class="form-group">
 							<label for="title">Precio</label>
 							<input type="text" name="price" class="form-control" value="{{ old('price') }}">

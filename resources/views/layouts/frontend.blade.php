@@ -47,11 +47,34 @@
 
   		@include('frontend_common.header')
 
+      <div class="container">
+        <section id="notifications" style="margin:1.6em;">
+          <div class="col-md-12">
+              @if(Session::has('error'))
+                <div class="alert alert-danger">
+                    <a class="close" data-dismiss="alert">×</a>
+                     {!!Session::get('error')!!}
+                </div>
+              @endif
+              @if(Session::has('warning'))
+                <div class="alert alert-warning">
+                    <a class="close" data-dismiss="alert">×</a>
+                     {!!Session::get('warning')!!}
+                </div>
+              @endif
+              @if(Session::has('success'))
+                <div class="alert alert-success">
+                    <a class="close" data-dismiss="alert">×</a>
+                     {!!Session::get('success')!!}
+                </div>
+              @endif
+
+          </div>
+        </section>
+      </div>
+
       @yield('content')
 
-		 <!-- @#include('frontend_common.products_list') -->
-
-      
       @include('frontend_common.call_to_action')
 
 			@include('frontend_common.footer')

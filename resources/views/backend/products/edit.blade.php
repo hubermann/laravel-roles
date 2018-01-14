@@ -75,26 +75,12 @@
 				</div>
 
 
-				<div class="form-group">
-					<label for="title">Destacado?</label>
-					<select name="outstanding">
-						<option value="0" @if ($product->outstanding == 0)
-									selected
-								@endif
-								>Sin destacar</option>
-						<option value="1"
-						@if ($product->outstanding == 1)
-									selected
-								@endif
-								>Destacado</option>
-					</select>
-					
-				</div>
+				
 
 				
 				<div class="row">
 					
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div class="form-group">
 							<label for="title">Cantidad en Stock</label>
 							<input type="text" name="qty" class="form-control" value="{{$product->qty}}">
@@ -106,7 +92,24 @@
 						</div>
 					</div>
 
-					<div class="col-md-6">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="title">Destacado?</label>
+						<select name="outstanding">
+							<option value="0" @if ($product->outstanding == 0)
+										selected
+									@endif
+									>Sin destacar</option>
+							<option value="1"
+							@if ($product->outstanding == 1)
+										selected
+									@endif
+									>Destacado</option>
+						</select>
+					</div>
+				</div>
+
+					<div class="col-md-4">
 						<div class="form-group">
 							<label for="title">Price</label>
 							<input type="text" name="price" class="form-control" value="{{$product->price}}">

@@ -61,9 +61,11 @@ class ProductsController extends Controller
 	    	}
 	    }
 
+      if(Input::get('qty') == NULL){ $qty = 0; }else{ $qty = Input::get('qty');}
+
     	$Product           = New Product();
       $Product->title    = Input::get('title');
-      $Product->qty      = Input::get('qty');
+      $Product->qty      = $qty;
       $Product->price      = Input::get('price');
       $Product->category_id    = Input::get('category_id');
       $Product->subcategory_id   = Input::get('subcategory_id');

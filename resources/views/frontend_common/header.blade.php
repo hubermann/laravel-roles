@@ -138,13 +138,14 @@
 
             <div id="basket-bar" class="u-basket__bar u-dropdown--css-animation u-dropdown--hidden g-text-transform-none g-bg-white g-brd-around g-brd-gray-light-v4"
                  aria-labelledby="basket-bar-invoker">
+              <?php if( count(Cart::content()) ) {?>
               <div class="g-brd-bottom g-brd-gray-light-v4 g-pa-15 g-mb-10">
                 <span class="d-block h6 text-center text-uppercase mb-0">Shopping Cart</span>
               </div>
               <div class="js-scrollbar g-height-200">
 
 
-
+                
                   <?php foreach(Cart::content() as $row) :?>
 
                   <!-- Product -->
@@ -174,6 +175,8 @@
                   <!-- End Product -->
 
                   <?php endforeach;?>
+
+                  
                 
               </div>
 
@@ -195,11 +198,20 @@
                     <i class="ml-2 icon-finance-100 u-line-icon-pro"></i>
                   </a>
                 </div>
-                <a class="btn btn-block u-btn-black g-brd-primary--hover g-bg-primary--hover g-font-size-12 text-uppercase rounded g-py-10" href="page-checkout-1.html">Proceed to Checkout</a>
+                <a class="btn btn-block u-btn-black g-brd-primary--hover g-bg-primary--hover g-font-size-12 text-uppercase rounded g-py-10" href="{{url('checkout')}}">Proceed to Checkout</a>
               </div>
+              <?php }else{ ?>
+                <div class="text-center g-mb-15">
+                  <h6> <br>No hay productos aún en su orden.</h6>
+                  <a class="btn btn-block u-btn-black g-brd-primary--hover g-bg-primary--hover g-font-size-12 text-uppercase rounded g-py-10" href="{{url('products')}}">Comenzar a comprar</a>
+                </div>
+              <?php } ?>
             </div>
+
           </div>
           <!-- End Basket -->
+
+
 
 
 
@@ -285,7 +297,6 @@
                 <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.by_category', ['id' => $outstanding_category->id ])}}">{{ $outstanding_category->name }}</a>
               </li>
               @endforeach
-
             @endif
            
 
@@ -307,3 +318,5 @@
   </div>
 </header>
 <!-- End Header -->
+
+

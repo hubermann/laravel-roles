@@ -62,7 +62,6 @@
 
                       <tbody>
 
-
                         @foreach($cart as $item)
 
                         <!-- Item-->
@@ -162,7 +161,7 @@
                   <!-- End Summary -->
 
                   <!-- <button class="btn btn-block u-btn-outline-black g-brd-gray-light-v1 g-bg-black--hover g-font-size-13 text-uppercase g-py-15 mb-4" type="button">Update Shopping Cart</button> -->
-                  <button class="btn btn-block u-btn-primary g-font-size-13 text-uppercase g-py-15 mb-4" type="button" data-next-step="#step2">Proceed to Checkout</button>
+                  <a href="{{ url('checkout') }}" class="btn btn-block u-btn-primary g-font-size-13 text-uppercase g-py-15 mb-4" data-next-step="#step2">Proceed to Checkout</a>
 
                   
 
@@ -190,9 +189,6 @@
             <!-- End Shopping Cart -->
 
 
-
-
-
           </div>
 
       </div>
@@ -210,7 +206,7 @@
           <h2 class="g-mb-30">Your Cart is Currently Empty</h2>
           <p>Before proceed to checkout you must add some products to your shopping cart.<br>You will find a lot of interesting products on our "Shop" page.</p>
         </div>
-        <a class="btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" href="#">Start Shopping</a>
+        <a class="btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" href="{{ url('products') }}">Start Shopping</a>
         </div>
 
 

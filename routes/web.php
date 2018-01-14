@@ -222,6 +222,7 @@ Route::get('/subcategory/{id}', 'HomeController@by_subcategory')->name('frontend
 Route::get('/cart', 'HomeController@cart')->name('frontend.cart');
 Route::get('/contact', 'HomeController@contact')->name('frontend.contact');
 Route::post('/cart', 'HomeController@cart');
+Route::get('/checkout', 'HomeController@checkout')->name('frontend.checkout');
 
 Route::get('pruebatemplate', 'HomeController@pruebatemplate')->name('pruebatemplate');
 
