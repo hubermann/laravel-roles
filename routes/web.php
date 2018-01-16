@@ -224,7 +224,10 @@ Route::get('/contact', 'HomeController@contact')->name('frontend.contact');
 Route::post('/cart', 'HomeController@cart');
 Route::get('/checkout', 'HomeController@checkout')->name('frontend.checkout');
 
-Route::get('pruebatemplate', 'HomeController@pruebatemplate')->name('pruebatemplate');
+Route::post('/new_order', 'HomeController@process_new_order')->name('frontend.new_order');
 
+Route::get('/payment_success/{operationid}', 'HomeController@payment_success')->name('payment_success');
+
+Route::get('/payment_error/{operationid}', 'HomeController@payment_error')->name('payment_error');
 
 

@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->text('dinamic_fields');
             $table->string('weight')->nullable();
             $table->string('sizes')->nullable();
-            $table->string('price')->nullable();
+            $table->decimal('price', 10, 2);
             $table->string('material')->nullable();
             $table->tinyInteger('outstanding')->default('0');
             $table->string('color')->nullable();

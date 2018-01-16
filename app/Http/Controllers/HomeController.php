@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use App\Category;
 use App\Subcategory;
 use App\Product;
+use App\Order;
 use App\ImagesProduct;
 use Cart;
 use Auth;
@@ -199,18 +202,199 @@ class HomeController extends Controller
         return Category::All();   
     }
 
-
     public function checkout()
     {
+        if( !Auth::user() ){ return redirect('login')->with('warning', 'Please login.');}
+        if( Cart::total() == 0.00 ){ return redirect('/')->with('warning', 'No hay productos en su orden.');}
+
+
+        return view('frontend_common.new_order');
+    }
+
+
+    public function process_new_order()
+    {
+        $rules = [
+            'name' => 'required|max:80',
+            'surname' => 'required|max:80',
+            'area_code' => 'required|max:50',
+            'telephone' => 'required|max:20',
+            'street_name' => 'required|max:20',
+            'street_number' => 'required|max:20',
+            'city' => 'required|max:20',
+            'zip_code' => 'required|max:20',  
+        ];
+
+    $validator = Validator::make(Input::all(), $rules);
+
+    if ($validator->fails())
+    {
+        return redirect('/checkout')->withErrors($validator)->withInput();
+    }
+
+            $order                      = New Order();
+            $order->name                = Input::get('name');
+            $order->surname             = Input::get('surname');
+            $order->area_code           = Input::get('area_code');
+            $order->telephone           = Input::get('telephone');
+            $order->street_name         = Input::get('street_name');    
+            $order->street_number       = Input::get('street_number');   
+            $order->city                = Input::get('city');       
+            $order->zip_code            = Input::get('zip_code');
+            $order->user_id             = Auth::user()->id;
+            $order->email               = Auth::user()->email;
+            $order->order_description   = "descripcion de la compra";
+            $order->amount              =  120;
+
+            $items = [];
+            foreach(Cart::content() as $row)
+            {
+                array_push($items, ["id" => $row->id, "title" => $row->name, "quantity" => $row->qty, "currency_id" => "ARS", "unit_price" => $row->price ]);
+            }
+
+            $order->save();
+
+        //común a todas los métodos
+        $http_header = array(
+            'Authorization'=>'TODOPAGO 36f1447d7fc64213b5f3fa6411cf0b07',
+            'user_agent' => 'PHPSoapClient'
+            );
+         
+        //creo instancia de la clase TodoPago
+        $connector = new Sdk($http_header, "test");
+        $operationid = $order->id ; //rand(1,10000000); 
+         
+        //opciones para el método sendAuthorizeRequest
+        $optionsSAR_comercio = array (
+            'Security'=>'36f1447d7fc64213b5f3fa6411cf0b07',
+            'EncodingMethod'=>'XML',
+            'Merchant'=>55492,
+            'URL_OK'=>"http://localhost:8000/payment_success/$operationid",
+            'URL_ERROR'=>"http://localhost:8000/payment_error/$operationid"
+        );
+
+        $optionsSAR_operacion = array (
+            'MERCHANT'=> "2658",
+            'OPERATIONID'=>"50",
+            'CURRENCYCODE'=> 032,
+            'AMOUNT'=>"54",
+
+            //Datos ejemplos CS
+            'CSBTCITY'=> "Villa General Belgrano",
+            'CSSTCITY'=> "Villa General Belgrano",
+            
+            'CSBTCOUNTRY'=> "AR",
+            'CSSTCOUNTRY'=> "AR",
+            
+            'CSBTEMAIL'=> "todopago@hotmail.com",
+            'CSSTEMAIL'=> "todopago@hotmail.com",
+            
+            'CSBTFIRSTNAME'=> "Juan",
+            'CSSTFIRSTNAME'=> "LAURA",      
+            
+            'CSBTLASTNAME'=> "Perez",
+            'CSSTLASTNAME'=> "GONZALEZ",
+            
+            'CSBTPHONENUMBER'=> "541160913988",     
+            'CSSTPHONENUMBER'=> "541160913988",     
+            
+            'CSBTPOSTALCODE'=> " 1010",
+            'CSSTPOSTALCODE'=> " 1010",
+            
+            'CSBTSTATE'=> "B",
+            'CSSTSTATE'=> "B",
+            
+            'CSBTSTREET1'=> "Cerrito 740",
+            'CSSTSTREET1'=> "Cerrito 740",
+            
+            'CSBTCUSTOMERID'=> "453458",
+            'CSBTIPADDRESS'=> "192.0.0.4",       
+            'CSPTCURRENCY'=> "ARS",
+            'CSPTGRANDTOTALAMOUNT'=> "125.38",
+            'CSMDD7'=> "",     
+            'CSMDD8'=> "Y",       
+            'CSMDD9'=> "",       
+            'CSMDD10'=> "",      
+            'CSMDD11'=> "",
+            'CSMDD12'=> "",     
+            'CSMDD13'=> "",
+            'CSMDD14'=> "",
+            'CSMDD15'=> "",        
+            'CSMDD16'=> "",
+            'CSITPRODUCTCODE'=> "electronic_good#chocho",
+            'CSITPRODUCTDESCRIPTION'=> "NOTEBOOK L845 SP4304LA DF TOSHIBA#chocho",     
+            'CSITPRODUCTNAME'=> "NOTEBOOK L845 SP4304LA DF TOSHIBA#chocho",  
+            'CSITPRODUCTSKU'=> "LEVJNSL36GN#chocho",
+            'CSITTOTALAMOUNT'=> "1254.40#10.00",
+            'CSITQUANTITY'=> "1#1",
+            'CSITUNITPRICE'=> "1254.40#15.00",
+            );
+
+
+
+            
+        //opciones para el método getAuthorizeAnswer
+        // $optionsGAA = array(    
+        //     'Security' => '8A891C0676A25FBF052D1C2FFBC82DEE', 
+        //     'Merchant' => "41702",
+        //     'RequestKey' => '83765ffb-39c8-2cce-b0bf-a9b50f405ee3',
+        //     'AnswerKey' => '9c2ddf78-1088-b3ac-ae5a-ddd45976f77d'
+        //     );
+            
+        //opciones para el método getAllPaymentMethods
+        // $optionsGAMP = array("MERCHANT"=>35);
+            
+        // //opciones para el método getStatus 
+        // $optionsGS = array('MERCHANT'=>'35', 'OPERATIONID'=>'02');
+        // $date1 = date("Y-m-d", time()-60*60*24*30);
+        // $date2 = date("Y-m-d", time());
+        // $optionsRDT = array('MERCHANT'=>2658, "STARTDATE" => $date1, "ENDDATE" => $date2, "PAGENUMBER" => 1);
+        // $devol = array(
+        //     "Security" => "108fc2b7c8a640f2bdd3ed505817ffde",
+        //     "Merchant" => "2669",
+        //     "RequestKey" => "0d801e1c-e6b1-672c-b717-5ddbe5ab97d6",
+        //     "AMOUNT" => 1.00
+        // );
+        // $anul = array(
+        //     "Security" => "108fc2b7c8a640f2bdd3ed505817ffde",
+        //     "Merchant" => "2669",
+        //     "RequestKey" => "0d801e1c-e6b1-672c-b717-5ddbe5ab97d6",
+        // );
+
+        //ejecuto los métodos
+        $rta = $connector->sendAuthorizeRequest($optionsSAR_comercio, $optionsSAR_operacion);
+        // $rta2 = $connector->getAuthorizeAnswer($optionsGAA);
+        // $rta3 = $connector->getStatus($optionsGS);
+        // $rta4 = $connector->getAllPaymentMethods($optionsGAMP);
+        // $rta5 = $connector->getByRangeDateTime($optionsRDT);
+        // $rta6 = $connector->returnRequest($devol);
+        // $rta7 = $connector->voidRequest($anul);
+
+
+    }
+
+
+    public function payment_success($id_order)
+    {
+        echo $id_order;
+    }
+
+    public function payment_error($id_order)
+    {
+        echo $id_order;
+    }
+
+
+    public function checkout__()
+    {
         if( Auth::user() ){ echo "CheckOut"; }else{ return redirect('login')->with('warning', 'Please login.');}
-        if( Cart::total() != 0.00 ){ echo "okay todo";  var_dump( Cart::total() ); }else{ return redirect('/')->with('warning', 'No hay productos en su orden.');}
+        if( Cart::total() == 0.00 ){ return redirect('/')->with('warning', 'No hay productos en su orden.');}
 
 
         $items = [];
         foreach(Cart::content() as $row)
         {
-            #var_dump($row);
-            #exit();
+
             array_push($items, ["id" => $row->id, "title" => $row->name, "quantity" => $row->qty, "currency_id" => "ARS", "unit_price" => $row->price ]);
         }
         //  $preference_data = array (
