@@ -9,6 +9,7 @@ use App\Category;
 use App\Subcategory;
 use App\Product;
 use App\Order;
+use App\Slider;
 use App\ImagesProduct;
 use Cart;
 use Auth;
@@ -34,6 +35,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $data['sliders'] = Slider::all();
         $data['categories'] = Category::all();
         $data['outstandings'] = Product::where('outstanding', 1)->get();
         $data['products'] = Product::where('outstanding', 0)->take(9)->get();
@@ -254,6 +256,7 @@ class HomeController extends Controller
                 array_push($items, ["id" => $row->id, "title" => $row->name, "quantity" => $row->qty, "currency_id" => "ARS", "unit_price" => $row->price ]);
             }
             $order->save();
+
 
 
         //Aca hay qeu integrar TODOPAGO
