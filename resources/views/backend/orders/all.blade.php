@@ -64,12 +64,20 @@
 										</td>
 									</tr>
 								@endforeach
+
+								<tr>
+								
+								</tr>
 							</tbody>
 
 					@endunless
 				
 
 				</table> 
+
+				<div class="row">
+							{{ $orders->links() }}
+							</div>
 			</div>
 
 				<div class="table-responsive">
