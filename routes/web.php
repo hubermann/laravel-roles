@@ -226,8 +226,6 @@ Route::get('/checkout', 'HomeController@checkout')->name('frontend.checkout');
 
 Route::post('/new_order', 'HomeController@process_new_order')->name('frontend.new_order');
 
-Route::get('/payment_success/{operationid}', 'HomeController@payment_success')->name('payment_success');
+Route::get('/todo_pago/payment_success', 'HomeController@todo_pago_payment_success')->name('todo_pago_payment_success');
 
-Route::get('/payment_error/{operationid}', 'HomeController@payment_error')->name('payment_error');
-
-
+Route::get('/todo_pago/payment_error', 'HomeController@todo_pago_payment_error')->name('todo_pago_payment_error');

@@ -13,7 +13,7 @@ use App\ImagesProduct;
 use Cart;
 use Auth;
 use MP;
-use \Todopago;
+use App\TodoPagoWrap;
 
 class HomeController extends Controller
 {
@@ -48,7 +48,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function product_detail($id)
-    {   
+    {
         $data['categories'] = Category::all();
         $data['product'] = Product::findOrfail($id);
         $data['outstandings'] = Product::where('outstanding', 1)->get();
@@ -107,7 +107,7 @@ class HomeController extends Controller
         $data['categories'] = Category::all();
         $subcategory = Subcategory::find($id);
         $data['category'] = Category::find($subcategory->category_id);
-        $data['subcategory'] = $subcategory; 
+        $data['subcategory'] = $subcategory;
         $data['products'] = Product::where('subcategory_id', $id)->paginate(3);
         $data['outstandings'] = Product::where('outstanding', 1)->get();
         return view('frontend_common.products_by_subcategory', $data);
@@ -164,14 +164,14 @@ class HomeController extends Controller
     public function process_contact(Request $request)
     {
 
-        $this->validate($request, [ 
-            'name' => 'required', 
-            'email' => 'required|email', 
-            'message' => 'required' 
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'message' => 'required'
         ]);
 
-        ContactUS::create($request->all()); 
-   
+        ContactUS::create($request->all());
+
         Mail::send('email',
            array(
                'name' => $request->get('name'),
@@ -182,25 +182,25 @@ class HomeController extends Controller
                $message->from('hubermann@gmail.com');
                $message->to('hubermann@gmail.com', 'Admin')->subject('Website Feedback');
            });
- 
-        return back()->with('success', 'Thanks for contacting us!'); 
-   
+
+        return back()->with('success', 'Thanks for contacting us!');
+
     }
 
 
     public static function get_product_images($id)
     {
-        return ImagesProduct::where('product_id', $id)->get();   
+        return ImagesProduct::where('product_id', $id)->get();
     }
 
     public static function get_categories_outstandings()
     {
-        return Category::where('outstanding', 1)->get();   
+        return Category::where('outstanding', 1)->get();
     }
 
     public static function get_categories()
     {
-        return Category::All();   
+        return Category::All();
     }
 
     public function checkout()
@@ -209,7 +209,7 @@ class HomeController extends Controller
         if( Cart::total() == 0.00 ){ return redirect('/')->with('warning', 'No hay productos en su orden.');}
 
 
-        return view('frontend_common.new_order');
+        return view('frontend_common.new_order')->with('states',TodoPagoWrap::get_all_state_code());
     }
 
 
@@ -223,7 +223,7 @@ class HomeController extends Controller
             'street_name' => 'required|max:20',
             'street_number' => 'required|max:20',
             'city' => 'required|max:20',
-            'zip_code' => 'required|max:20',  
+            'zip_code' => 'required|max:20',
         ];
 
     $validator = Validator::make(Input::all(), $rules);
@@ -238,9 +238,10 @@ class HomeController extends Controller
             $order->surname             = Input::get('surname');
             $order->area_code           = Input::get('area_code');
             $order->telephone           = Input::get('telephone');
-            $order->street_name         = Input::get('street_name');    
-            $order->street_number       = Input::get('street_number');   
-            $order->city                = Input::get('city');       
+            $order->street_name         = Input::get('street_name');
+            $order->street_number       = Input::get('street_number');
+            $order->city                = Input::get('city');
+            $order->state               = Input::get('state');
             $order->zip_code            = Input::get('zip_code');
             $order->user_id             = Auth::user()->id;
             $order->email               = Auth::user()->email;
@@ -252,30 +253,83 @@ class HomeController extends Controller
             {
                 array_push($items, ["id" => $row->id, "title" => $row->name, "quantity" => $row->qty, "currency_id" => "ARS", "unit_price" => $row->price ]);
             }
-
             $order->save();
 
-        
+
         //Aca hay qeu integrar TODOPAGO
 
         //enviar el id de orden y luego actuualizarla dependiendo del resultado.
 
         //El user debe poder ver sus ordenes y si es el estado es sin-pagar debe tener la posibilidad de pagar
+        $request = Request::instance();
 
+        $TP = new TodoPagoWrap;
+
+        $TP->client_user_id    = Auth::user()->id;
+        $TP->client_email      = Auth::user()->email;
+        $TP->client_name       = Input::get('name');
+        $TP->client_surname    = Input::get('surname');
+        $TP->client_telephone  = Input::get('area_code').Input::get('telephone');
+        $TP->client_ip         = $request->getClientIp();
+
+        $TP->receiving_name      = Input::get('name');
+        $TP->receiving_surname   = Input::get('surname');
+        $TP->receiving_email     = Auth::user()->email;
+        $TP->receiving_telephone = Input::get('area_code').Input::get('telephone');
+
+        $TP->shipment_city     = Input::get('city');
+        $TP->shipment_state    = Input::get('state');
+        $TP->shipment_address  = [
+          'street_name'   => Input::get('street_name'),
+          'street_number' => Input::get('street_number'),
+        ];
+        $TP->shipment_zip_code = Input::get('zip_code');
+
+        $TP->billing_city      = Input::get('city');
+        $TP->billing_state     = Input::get('state');;
+        $TP->billing_address   = [
+          'street_name'   => Input::get('street_name'),
+          'street_number' => Input::get('street_number'),
+        ];
+        $TP->billing_zip_code  = Input::get('zip_code');
+
+        $TP->items             = $items;
+        $TP->id_order          = $order->id;
+
+
+        if ($TP->checkout())
+        { // si pudimos hacer el ticket redirigimos
+          return Redirect::to($TP->url_form_pago);
+        } else
+        { // como no pudimos crear el tiket debemos mostrar un mensaje, por ejemplo para sugerir reintentar
+
+        }
     }
 
 
-    public function payment_success($id_order)
+    public function todo_pago_payment_success(Request $request)
     {
-        echo $id_order;
+        $params   = $request::all();
+        $id_order = strip_tags($params['operationid']);
+
+        $TP             = new TodoPagoWrap;
+        $TP->answer_key = strip_tags($params['Answer']);
+
+        if ($TP->payment_success()) //comprobamos el estado del pago
+        { // aca tenemos que hacer el procesamiento correspondiente a una orden pagada
+          echo 'operacion exitosa';
+        } else
+        { // si llegamos aca es por que no se pudo comprobar el pago
+          return redirect('/todo_pago/payment_error?operationid='.$id_order);
+        }
     }
 
-    public function payment_error($id_order)
+    public function todo_pago_payment_error(Request $request)
     {
-        echo $id_order;
+        echo 'El pago no se pudo concretar';
     }
 
 
-    
-    
+
+
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b1c4b1ad0503e355b262e389f2fe09b",
+    "content-hash": "e9dd1a9a8200b714d9b66b8f5db0767d",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2233,6 +2233,38 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2017-11-27T11:13:29+00:00"
+        },
+        {
+            "name": "todopago/php-sdk",
+            "version": "V1.10.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TodoPago/SDK-PHP.git",
+                "reference": "5b65dc4aadb7137973be1091d14b57a590c18ccd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TodoPago/SDK-PHP/zipball/5b65dc4aadb7137973be1091d14b57a590c18ccd",
+                "reference": "5b65dc4aadb7137973be1091d14b57a590c18ccd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "php-mock/php-mock-phpunit": "^1.1",
+                "phpunit/phpunit": "^5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TodoPago\\": "TodoPago/lib",
+                    "TodoPago\\Test\\": "TodoPago/test"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "SDK para TodoPago",
+            "time": "2017-08-09T19:37:23+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
