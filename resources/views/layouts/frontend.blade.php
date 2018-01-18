@@ -48,7 +48,7 @@
   		@include('frontend_common.header')
 
       <div class="container">
-        <section id="notifications" style="margin:1.6em;">
+        <section id="notifications">
           <div class="col-md-12">
               @if(Session::has('error'))
                 <div class="alert alert-danger">

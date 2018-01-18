@@ -60,6 +60,34 @@ Route::group(['prefix' => 'backend'], function(){
 	'middleware' 	=> 'roles',
 	'roles'				=>['Superadmin']
 	]);
+
+	//Sliders
+	Route::get('/sliders', [
+	'uses' 				=> 'SlidersController@index',
+	'as' 					=> 'backend.sliders',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::get('/sliders/new', [
+	'uses' 				=> 'SlidersController@newSlider',
+	'as' 					=> 'backend.sliders.new',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::post('/sliders', [
+	'uses' 				=> 'SlidersController@create',
+	'as' 					=> 'backend.sliders.create',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+	Route::get('/sliders/destroy/{id}', [
+	'uses' 				=> 'SlidersController@destroy',
+	'as' 					=> 'backend.sliders.destroy',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+
+
 	//Categories
 	Route::get('/categories', [
 	'uses' 				=> 'CategoriesController@index',
