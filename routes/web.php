@@ -61,6 +61,43 @@ Route::group(['prefix' => 'backend'], function(){
 	'roles'				=>['Superadmin']
 	]);
 
+
+	//orders
+	Route::get('/orders', [
+	'uses' 				=> 'OrdersController@index',
+	'as' 					=> 'backend.orders',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+
+	Route::get('/orders_pending', [
+	'uses' 				=> 'OrdersController@pending',
+	'as' 					=> 'backend.orders_pending',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+
+	Route::get('/orders_declined', [
+	'uses' 				=> 'OrdersController@declined',
+	'as' 					=> 'backend.orders_declined',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+
+	Route::get('/orders_successfully', [
+	'uses' 				=> 'OrdersController@successfully',
+	'as' 					=> 'backend.orders_successfully',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+
+	Route::get('/orders/destroy/{id}', [
+	'uses' 				=> 'OrdersController@destroy',
+	'as' 					=> 'backend.orders.destroy',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
+
 	//Sliders
 	Route::get('/sliders', [
 	'uses' 				=> 'SlidersController@index',
