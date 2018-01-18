@@ -21,20 +21,20 @@ class OrdersController extends Controller
 
 	public function declined()
 	{
-		$orders = Order::where('payment_status', 2)->paginate(20)->get();
+		$orders = Order::where('payment_status', 2)->get();
 		return View('backend.orders.all', ['orders' => $orders, 'title_page' => 'All declined orders']);
 	}
 
 
-	public function pendings()
+	public function pending()
 	{
-		$orders = Order::where('payment_status', 0)->paginate(20)->get();
+		$orders = Order::where('payment_status', 0)->get();
 		return View('backend.orders.all', ['orders' => $orders, 'title_page' => 'All pending orders']);
 	}
 
 	public function successfully()
 	{
-		$orders = Order::where('payment_status', 1)->paginate(20)->get();
+		$orders = Order::where('payment_status', 1)->get();
 		return View('backend.orders.all', ['orders' => $orders, 'title_page' => 'All successfully orders']);
 	}
   

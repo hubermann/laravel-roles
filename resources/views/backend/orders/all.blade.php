@@ -5,19 +5,29 @@
 <!--row -->
 <div class="row">
 	<div class="col-sm-12">
+
+
 		<div class="white-box">
-			<h3 class="box-title">{{ $title_page }}
+			
+
+				<nav class="navbar navbar-light bg-faded">
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				  <div class="navbar-nav">
+				    <a class="nav-item nav-link btn " href="{{route('backend.orders')}}">All <span class="sr-only">(current)</span></a>
+				    <a class="nav-item nav-link btn" href="{{route('backend.orders_successfully')}}">Successfully</a>
+				    <a class="nav-item nav-link btn" href="{{route('backend.orders_declined')}}">Declined</a>
+				    <a class="nav-item nav-link btn" href="{{route('backend.orders_pending')}}">Pending</a>
+				  </div>
+				</div>
+				</nav>
+				<h3 class="box-title">{{ $title_page }}</h3>
+
 				<div class="col-md-2 col-sm-4 col-xs-12 pull-right text-right">
-					<!-- <select class="form-control pull-right row b-none">
-						<option>March 2016</option>
-						<option>April 2016</option>
-						<option>May 2016</option>
-						<option>June 2016</option>
-						<option>July 2016</option>
-					</select> -->
+					
+					<!-- btn -->
 					
 				</div>
-			</h3>
+			
 			<div class="table-responsive">
 				<table class="table ">
 
@@ -37,7 +47,15 @@
 									<tr>
 										<td>{{ $order->email }}</td>
 										<td>{{ $order->name}}{{ $order->surname}}</td>
-										<td>{{ $order->payment_status }}</td>
+										<td>
+											@if ( $order->payment_status == 0)
+												Pending
+											@elseif ( $order->payment_status == 1)
+											 Successfully
+											@elseif ( $order->payment_status == 2)
+												Declined
+											@endif
+										</td>
 										<td>
 											<div class="btn-group pull-right">
 											
