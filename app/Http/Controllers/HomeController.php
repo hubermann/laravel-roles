@@ -234,6 +234,11 @@ class HomeController extends Controller
     {
         return redirect('/checkout')->withErrors($validator)->withInput();
     }
+            $items = [];
+            foreach(Cart::content() as $row)
+            {
+                array_push($items, ["id" => $row->id, "title" => $row->name, "quantity" => $row->qty, "currency_id" => "ARS", "unit_price" => $row->price ]);
+            }
 
             $order                      = New Order();
             $order->name                = Input::get('name');
@@ -247,14 +252,10 @@ class HomeController extends Controller
             $order->zip_code            = Input::get('zip_code');
             $order->user_id             = Auth::user()->id;
             $order->email               = Auth::user()->email;
-            $order->order_description   = "descripcion de la compra";
-            $order->amount              =  120;
+            $order->order_description   = serialize($items);
+            $order->payment_status      = Order::PENDING;
+            $order->amount              = Cart::total();
 
-            $items = [];
-            foreach(Cart::content() as $row)
-            {
-                array_push($items, ["id" => $row->id, "title" => $row->name, "quantity" => $row->qty, "currency_id" => "ARS", "unit_price" => $row->price ]);
-            }
             $order->save();
 
 
@@ -305,7 +306,7 @@ class HomeController extends Controller
           return Redirect::to($TP->url_form_pago);
         } else
         { // como no pudimos crear el tiket debemos mostrar un mensaje, por ejemplo para sugerir reintentar
-
+          return view('frontend_common.checkout_result')->with('message','Please retry again in a moment, there was a connection failure.');
         }
     }
 
@@ -320,7 +321,9 @@ class HomeController extends Controller
 
         if ($TP->payment_success()) //comprobamos el estado del pago
         { // aca tenemos que hacer el procesamiento correspondiente a una orden pagada
-          echo 'operacion exitosa';
+          $order = Order::find($id_order)->payment_success();
+          Cart::destroy();
+          return view('frontend_common.checkout_result')->with('message','Congratulations!, we have already registered your purchase.');
         } else
         { // si llegamos aca es por que no se pudo comprobar el pago
           return redirect('/todo_pago/payment_error?operationid='.$id_order);
@@ -329,7 +332,12 @@ class HomeController extends Controller
 
     public function todo_pago_payment_error(Request $request)
     {
-        echo 'El pago no se pudo concretar';
+        $params   = $request::all();
+        $id_order = strip_tags($params['operationid']);
+
+        $order = Order::find($id_order)->payment_rejected();
+        return view('frontend_common.checkout_result')
+                  ->with('message','El pago no se pudo procesar, reintente nuevamente');
     }
 
 
