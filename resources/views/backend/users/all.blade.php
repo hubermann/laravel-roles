@@ -26,7 +26,7 @@
 
 				<div class="card">
 					<div class="card-block">
-						<h4 class="card-title">{{ $user->email }} | {{ $user->name }}</h4>
+						<a href="{{ route('backend.users.detail', ['id' => $user->id])}}"><h4 class="card-title">{{ $user->email }} | {{ $user->name }}</h4></a>
 						<h6 class="card-subtitle mb-2 text-muted"> Registrado: {{ $user->created_at }} </h6>
 						<!-- <p class="card-text"></p> -->
 						<hr>
