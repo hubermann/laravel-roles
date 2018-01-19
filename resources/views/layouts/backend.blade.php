@@ -117,6 +117,10 @@
 					<li>
 						<a href="{{ route('backend.sliders') }}" class="waves-effect"><i class="fa fa-camera fa-fw" aria-hidden="true"></i><span class="hide-menu">Sliders</span></a>
 					</li>
+
+					<li>
+						<a href="{{ route('backend.orders') }}" class="waves-effect"><i class="fa fa-money fa-fw" aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
+					</li>
 					
 				</ul>
 				<div class="center p-20">

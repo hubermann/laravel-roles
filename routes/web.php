@@ -35,6 +35,13 @@ Route::group(['prefix' => 'backend'], function(){
 	'middleware' 	=> 'roles',
 	'roles'				=>['Superadmin']
 	]);
+
+	Route::get('/users/detail/{id}', [
+	'uses' 				=> 'UsersController@user_detail',
+	'as' 					=> 'backend.users.detail',
+	'middleware' 	=> 'roles',
+	'roles'				=>['Superadmin']
+	]);
 	Route::post('/users/update', [
 	'uses' 				=> 'UsersController@updateUsers',
 	'as' 					=> 'backend.users.update',
