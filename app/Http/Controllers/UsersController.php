@@ -37,14 +37,20 @@ class UsersController extends Controller
 
 	public function viewUsers()
 	{
-		return View('backend/users/all', [ 'users' => User::all() ]);	
+		$users = \DB::table('users')
+            ->join('user_role', 'users.id', '=', 'user_role.user_id')
+            ->select('users.*')->where('user_role.role_id', 2)
+            ->get();
+		return View('backend/users/all', [ 'users' => $users ]);	
 	}
 
 	public function user_detail($id)
 	{
 		$user = User::findOrfail($id);
-		$orders = Order::where('user_id', $user->id);
+		$orders = Order::where('user_id', $user->id)->get();
 		return View('backend/users.detail', [ 'user' => $user, 'orders' =>$orders] );	
 	}
+
+
 
 }

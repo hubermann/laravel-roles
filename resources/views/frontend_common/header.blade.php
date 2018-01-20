@@ -80,6 +80,14 @@
               <ul id="account-dropdown-2" class="list-unstyled u-shadow-v29 g-pos-abs g-bg-white g-width-160 g-pb-5 g-mt-19 g-z-index-2"
                   aria-labelledby="account-dropdown-invoker-2">
                 @if( Auth::user() )
+
+                  @if (!Auth::user()->hasRole('Superadmin'))
+                  <li>
+                      <a class="d-block g-color-black g-color-primary--hover g-text-underline--none--hover g-font-weight-400 g-py-5 g-px-20" href="{{ route('frontend.user_orders') }}">
+                          Mis ordenes
+                      </a>
+                  </li>
+                  @endif
                   <li>
                    
                       <a class="d-block g-color-black g-color-primary--hover g-text-underline--none--hover g-font-weight-400 g-py-5 g-px-20" href="{{ route('logout') }}"

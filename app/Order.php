@@ -27,4 +27,20 @@ class Order extends Model
       $this->save();
     }
   }
+
+
+// "id" => "1"
+//     "title" => "Algun producto de prueba"
+//     "quantity" => 1
+//     "currency_id" => "ARS"
+//     "unit_price" => 120.0
+  //<p>'.$order['description'].'</p> <p> '.$order['price'].'
+
+
+
+  public function unserialize_detail($id)
+  { 
+    $orders = Order::find($id);
+    return unserialize($orders->order_description);
+  }
 }

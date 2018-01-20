@@ -25,7 +25,7 @@
 					    <p>No items.</p>
 					@else
 						<thead>
-							<thead>
+
 								<th>Nombre</th>
 								<th class="text-right">Opciones</th>
 							</thead>

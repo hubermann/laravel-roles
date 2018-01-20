@@ -20,21 +20,21 @@
 				</div>
 			</h3>
 			<div class="table-responsive">
+
 				<table class="table ">
 
 					@unless($products->count())
 					    <p>No items.</p>
 					@else
 						<thead>
-							<thead>
-								<th>nombre</th>
-								<th class="text-right">Opciones</th>
+								<th>nombre</th> <th>Description</th>
+								<th class="text-right" >Opciones</th>
 							</thead>
 							<tbody>
 								@foreach($products as $product)
 									<tr>
 										<td>{{ $product->title }}</td>
-										<td>{{ $product->description }}</td>
+										<td>{{ str_limit($product->description, 80) }}</td>
 										<td>
 											<div class="btn-group pull-right">
 											<a class="btn btn-small" href="{{ route('backend.products.edit', ['id' => $product->id])}}"><i class="fa fa-edit"></i></a>
@@ -44,6 +44,7 @@
 											</div>
 										</td>
 									</tr>
+
 
 									<!-- Modal -->
 									<div class="modal fade" id="modalProducto{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modalProducto{{$product->id}}Label">

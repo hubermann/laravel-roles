@@ -42,13 +42,13 @@
 				<div class="top-left-part">
 				<a class="logo" href="{{ route('backend.root') }}"><b><img src="{{ asset('pixeladmin-lite//plugins/images/pixeladmin-logo.png') }}" alt="home" />
 				</b><span class="hidden-xs"><img src="{{ asset('pixeladmin-lite/plugins/images/pixeladmin-text.png') }}" alt="home" /></span></a></div>
-				<ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
+				<!-- <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
 					<li class="in">
 						<form role="search" class="app-search hidden-xs">
 							<input type="text" placeholder="Search..." class="form-control"> <a href="" class="active"><i class="fa fa-search"></i></a>
 						</form>
 					</li>
-				</ul>
+				</ul> -->
 				<ul class="nav navbar-top-links navbar-right pull-right">
 
 					<!-- Authentication Links -->

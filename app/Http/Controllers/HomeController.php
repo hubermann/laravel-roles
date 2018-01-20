@@ -310,20 +310,82 @@ class HomeController extends Controller
         }
     }
 
+    //retry payment
+    public function retry_process_order($id)
+    {
+        $order = Order::find($id);
+
+        if($order->payment_status == 0 || $order->payment_status == 2)
+        {
+                
+            $TP = new TodoPagoWrap;
+
+            $order_items = unserialize($order->order_description);
+
+            $TP->client_user_id    = Auth::user()->id;
+            $TP->client_email      = Auth::user()->email;
+            $TP->client_name       = $order->name;
+            $TP->client_surname    = $order->surname;
+            $TP->client_telephone  = $order->area_code.$order->telephone;
+            $TP->client_ip         = Request::ip();
+
+            $TP->receiving_name      = $order->name;
+            $TP->receiving_surname   = $order->surname;
+            $TP->receiving_email     = Auth::user()->email;
+            $TP->receiving_telephone = $order->area_code.$order->telephone;
+
+            $TP->shipment_city     = $order->city;
+            $TP->shipment_state    = $order->state;
+            $TP->shipment_address  = [
+              'street_name'   => $order->street_name,
+              'street_number' => $order->street_number,
+            ];
+            $TP->shipment_zip_code = $order->zip_code;
+
+            $TP->billing_city      = $order->city;
+            $TP->billing_state     = $order->state;
+            $TP->billing_address   = [
+              'street_name'   => $order->street_name,
+              'street_number' => $order->street_number,
+            ];
+            $TP->billing_zip_code  = $order->zip_code;
+
+            $TP->items             = $order_items;
+            $TP->id_order          = $order->id;
+
+
+            if ($TP->checkout())
+            { // si pudimos hacer el ticket redirigimos
+              return Redirect::to($TP->url_form_pago);
+            } else
+            { // como no pudimos crear el tiket debemos mostrar un mensaje, por ejemplo para sugerir reintentar
+              return view('frontend_common.checkout_result', ['status' => 0, 'order_id' => $order->id]);
+            }
+            
+
+        }
+
+
+    }
+
+
 
     public function todo_pago_payment_success(Request $request)
     {
+
         $params   = $request::all();
         $id_order = strip_tags($params['operationid']);
 
         $TP             = new TodoPagoWrap;
-        $TP->answer_key = strip_tags($params['Answer']);
-
+        $feedback_key= strip_tags($params['Answer']);
+        $TP->answer_key = $feedback_key;
         if ($TP->payment_success()) //comprobamos el estado del pago
         { // aca tenemos que hacer el procesamiento correspondiente a una orden pagada
-          $order = Order::find($id_order)->payment_success();
+          $order = Order::find($id_order);
+          $order->feedback_mp = $feedback_key;
+          $order->payment_success();
           Cart::destroy();
-          return view('frontend_common.checkout_result')->with('message','Congratulations!, we have already registered your purchase.');
+          return view('frontend_common.checkout_result', ['status' => 1,'order_id' => $id_order]);
         } else
         { // si llegamos aca es por que no se pudo comprobar el pago
           return redirect('/todo_pago/payment_error?operationid='.$id_order);
@@ -336,8 +398,17 @@ class HomeController extends Controller
         $id_order = strip_tags($params['operationid']);
 
         $order = Order::find($id_order)->payment_rejected();
-        return view('frontend_common.checkout_result')
-                  ->with('message','El pago no se pudo procesar, reintente nuevamente');
+        return view('frontend_common.checkout_result', ['status' => 2, 'order_id' => $id_order]);
+    }
+
+
+    public function user_orders()
+    {
+        if( !Auth::user() ){ return redirect('login')->with('warning', 'Please login.');}
+        $data['categories'] = Category::all();
+        $data['orders'] = Order::where('user_id', Auth::user()->id)->get();
+
+        return view('frontend_common.user_orders', $data);
     }
 
 

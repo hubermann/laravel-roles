@@ -35,7 +35,7 @@
 					    <p>No items.</p>
 					@else
 						<thead>
-							<thead>
+
 								<th class="text-left">Email buyer</th>
 								<th class="text-left"> Name and lastname</th>
 								<th class="text-left"> Payment status</th>
@@ -62,7 +62,9 @@
 											<a href="{{ route('backend.orders.destroy', ['id' => $order->id])}}" class="delete btn btn-small" data-confirm="Confirma eliminar ésta order de manera definitiva."><i class="fa fa-trash-o"></i></a>
 											</div>
 										</td>
+
 									</tr>
+
 								@endforeach
 
 								<tr>

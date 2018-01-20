@@ -16,8 +16,8 @@ class TodoPagoWrap {
   const AUTHKEYTEST = 'TODOPAGO a414b821c9034137a566d6f1ec077578';
   const SECURITYTEST = 'a414b821c9034137a566d6f1ec077578';
 
-  const URL_OK  = 'http://192.168.2.125/laravel-roles/public/todo_pago/payment_success/?operationid=';
-  const URL_KO  = 'http://192.168.2.125/laravel-roles/public/todo_pago/payment_error/?operationid=';
+  const URL_OK  = 'http://localhost:8000/todo_pago/payment_success/?operationid=';
+  const URL_KO  = 'http://localhost:8000/todo_pago/payment_error/?operationid=';
 
   const COUNTRY = 'AR';
 

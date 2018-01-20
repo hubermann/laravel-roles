@@ -17,10 +17,8 @@
       <form action="{{ route('frontend.new_order') }}" method="post">
         {{ csrf_field() }}
         <div class="row">
-          <div class="col-md-12">
-            <h6>Basic information</h6>
-          </div>
           <div class="col-md-6 form-group g-mb-20">
+          <label for="area_code">Nombre</label>
             <input name="name" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-brd-primary--hover rounded g-py-13 g-px-15" type="text" placeholder="Name">
           @if ($errors->has('name'))
               <span class="help-block">
@@ -31,6 +29,7 @@
 
 
           <div class="col-md-6 form-group g-mb-20">
+          <label for="area_code">Apellido</label>
             <input name="surname" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-brd-primary--hover rounded g-py-13 g-px-15" type="text" placeholder="Surname">
           @if ($errors->has('surname'))
               <span class="help-block">
@@ -41,10 +40,9 @@
 
           </div>
           <div class="row">
-          <div class="col-md-12">
-            <h6>Telephone</h6>
-          </div>
+          <hr>
           <div class="col-md-4 form-group g-mb-20">
+          <label for="area_code">Codigo de area</label>
             <input name="area_code" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-brd-primary--hover rounded g-py-13 g-px-15" type="tel" placeholder="Area code">
           @if ($errors->has('area_code'))
               <span class="help-block">
@@ -54,6 +52,7 @@
           </div>
 
           <div class="col-md-8 form-group g-mb-20">
+          <label for="telephone">Telefono</label>
             <input name="telephone" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-brd-primary--hover rounded g-py-13 g-px-15" type="tel" placeholder="Telephone">
           @if ($errors->has('telephone'))
               <span class="help-block">
@@ -63,10 +62,9 @@
           </div>
 
           </div><div class="row">
-          <div class="col-md-12">
-            <h6>Address</h6>
-          </div>
+          <hr>
           <div class="col-md-8 form-group g-mb-20">
+          <label for="street_name">Calle</label>
             <input name="street_name" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-brd-primary--hover rounded g-py-13 g-px-15" type="tel" placeholder="Street">
           @if ($errors->has('street_name'))
               <span class="help-block">
@@ -76,6 +74,7 @@
           </div>
 
           <div class="col-md-4 form-group g-mb-20">
+          <label for="street_number">Numero</label>
             <input name="street_number" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-brd-primary--hover rounded g-py-13 g-px-15" type="tel" placeholder="Street number">
           @if ($errors->has('street_number'))
               <span class="help-block">
@@ -84,8 +83,9 @@
           @endif
           </div>
 
-          <div class="col-md-8 form-group g-mb-20">
-            <select name="state" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-brd-primary--hover rounded g-py-1 g-px-15" type="tel" placeholder="State">
+          <div class="col-md-4 form-group g-mb-20">
+          <label for="state">Provincia</label>
+            <select name="state" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-brd-primary--hover rounded g-py-1 g-px-15"  placeholder="State">
               @foreach($states as $k => $v)
                 <option value="{{ $k }}"> {{ $v }} </option>
               @endforeach
@@ -97,7 +97,8 @@
           @endif
           </div>
 
-          <div class="col-md-8 form-group g-mb-20">
+          <div class="col-md-4 form-group g-mb-20">
+          <label for="city">Ciudad</label>
             <input name="city" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-brd-primary--hover rounded g-py-13 g-px-15" type="tel" placeholder="City">
           @if ($errors->has('city'))
               <span class="help-block">
@@ -107,6 +108,7 @@
           </div>
 
           <div class="col-md-4 form-group g-mb-20">
+          <label for="zip_code">Codigo postal</label>
             <input name="zip_code" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-brd-primary--hover rounded g-py-13 g-px-15" type="tel" placeholder="Zip Code">
           @if ($errors->has('zip_code'))
               <span class="help-block">

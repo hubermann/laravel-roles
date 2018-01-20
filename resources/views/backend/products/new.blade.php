@@ -79,11 +79,18 @@
 
 					<div class="col-md-4">
 						<div class="form-group">
-							<label for="title">Producto destacado?</label>
-							<select name="outstanding">
-								<option value="0" >Sin destacar</option>
-								<option value="1">Destacado</option>
-							</select>
+							
+							<div class="row">
+								<label for="title">Producto destacado?</label>
+							</div>
+
+							<div class="row">
+								<select name="outstanding" class="form-control">
+									<option value="0" >Sin destacar</option>
+									<option value="1">Destacado</option>
+								</select>
+							</div>
+
 						</div>
 					</div>
 

@@ -16,9 +16,16 @@ class BackendController extends Controller
 
 	public function index()
 	{
+
+		$users = \DB::table('users')
+            ->join('user_role', 'users.id', '=', 'user_role.user_id')
+            ->select('users.*')->where('user_role.role_id', 2)
+            ->get();
+
 		$orders 										= Order::orderBy('id', 'desc')->take(10)->get();;
-		$users 											= User::all();
 		$categories 								= Category::all();
+		$subcategories 								= Subcategory::all();
+		$products 								= Product::all();
 		$categories_outstandings 		= Category::where('outstanding', 1);
 		$products_outstandings 			= Product::where('outstanding', 1)->get();
 
@@ -26,6 +33,8 @@ class BackendController extends Controller
 				'orders' 									=> $orders, 
 				'users' 									=> $users,
 				'categories' 							=> $categories,
+				'subcategories' 							=> $subcategories,
+				'products' 								=> $products,
 				'categories_outstandings' => $categories_outstandings,
 				'products_outstandings'  	=> $products_outstandings
 				]);

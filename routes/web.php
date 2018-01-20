@@ -294,10 +294,11 @@ Route::get('/subcategory/{id}', 'HomeController@by_subcategory')->name('frontend
 Route::get('/cart', 'HomeController@cart')->name('frontend.cart');
 Route::get('/contact', 'HomeController@contact')->name('frontend.contact');
 Route::post('/cart', 'HomeController@cart');
+
+Route::get('/user_orders', 'HomeController@user_orders')->name('frontend.user_orders');
+
 Route::get('/checkout', 'HomeController@checkout')->name('frontend.checkout');
-
 Route::post('/new_order', 'HomeController@process_new_order')->name('frontend.new_order');
-
+Route::get('/retry_payment/{id}', 'HomeController@retry_process_order')->name('frontend.retry_process_order');
 Route::get('/todo_pago/payment_success', 'HomeController@todo_pago_payment_success')->name('todo_pago_payment_success');
-
 Route::get('/todo_pago/payment_error', 'HomeController@todo_pago_payment_error')->name('todo_pago_payment_error');
