@@ -46,6 +46,16 @@
           @endif
 				</div>
 
+				<div class="form-group">
+					<label for="name">Title Button</label>
+					<input type="text" name="title_button" class="form-control" value="{{ old('title_button') }}">
+					@if ($errors->has('title_button'))
+              <span class="help-block">
+                  <strong>{{ $errors->first('title_button') }}</strong>
+              </span>
+          @endif
+				</div>
+
 
 				<div class="form-group">
 					<label for="title">Seleccione una imagen:</label>

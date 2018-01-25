@@ -9,17 +9,17 @@ use App\Subcategory;
 
 class Product extends Model
 {
-  public function categories() 
-  {   
+  public function categories()
+  {
   	return $this->belongsTo('Category');
   }
 
-	public function subcategories() 
+	public function subcategories()
 	{
 		return $this->belongsTo('Subcategory');
 	}
 
-	public function images() 
+	public function images()
 	{
 		return $this->hasMany(ImagesProduct::class, 'product_id');
 	}
@@ -35,4 +35,5 @@ class Product extends Model
 		$subcategory = Subcategory::findOrFail($id);
 		return $subcategory->name;
 	}
+
 }

@@ -187,10 +187,12 @@ class HomeController extends Controller
            array(
                'name' => Input::get('name'),
                'email' => Input::get('email'),
+               'subject' => Input::get('subject'),
+               'telephone' => Input::get('telephone'),
                'message' => Input::get('message')
            ), function($message)
            {
-               $message->from('hubermann@gmail.com');
+               $message->from('info@hubercart.tk');
                $message->to('hubermann@gmail.com', 'Admin')->subject('Website Feedback');
            });
 
@@ -326,7 +328,7 @@ class HomeController extends Controller
 
         if($order->payment_status == 0 || $order->payment_status == 2)
         {
-                
+
             $TP = new TodoPagoWrap;
 
             $order_items = unserialize($order->order_description);
@@ -370,7 +372,7 @@ class HomeController extends Controller
             { // como no pudimos crear el tiket debemos mostrar un mensaje, por ejemplo para sugerir reintentar
               return view('frontend_common.checkout_result', ['status' => 0, 'order_id' => $order->id]);
             }
-            
+
 
         }
 
@@ -393,6 +395,14 @@ class HomeController extends Controller
           $order = Order::find($id_order);
           $order->feedback_mp = $feedback_key;
           $order->payment_success();
+
+          //update stock
+          foreach (Cart::content() as $item) {
+            $product = Product::findOrfail($item->id);
+            $product->qty = $product->qty - $item->qty;
+            $product->save();
+          }
+
           Cart::destroy();
           return view('frontend_common.checkout_result', ['status' => 1,'order_id' => $id_order]);
         } else
