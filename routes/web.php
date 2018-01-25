@@ -285,6 +285,7 @@ Route::group(['prefix' => 'backend'], function(){
 #Route::get('/', function () { return view('home'); });
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/informacion-general', 'HomeController@informacion_general')->name('frontend.informacion_general');;
 
 Route::get('/products', 'HomeController@products_list')->name('frontend.products');
 Route::get('/product/{id}', 'HomeController@product_detail')->name('frontend.product_detail');
@@ -293,6 +294,7 @@ Route::get('/outstandings', 'HomeController@outstandings')->name('frontend.outst
 Route::get('/subcategory/{id}', 'HomeController@by_subcategory')->name('frontend.by_subcategory');
 Route::get('/cart', 'HomeController@cart')->name('frontend.cart');
 Route::get('/contact', 'HomeController@contact')->name('frontend.contact');
+Route::post('/process_contact', 'HomeController@process_contact')->name('frontend.process_contact');
 Route::post('/cart', 'HomeController@cart');
 
 Route::get('/user_orders', 'HomeController@user_orders')->name('frontend.user_orders');

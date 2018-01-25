@@ -161,7 +161,7 @@
                       <input type="hidden" name="product_id" value="{{$product->id}}">
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                       <button class="btn u-btn-primary g-font-size-12 text-uppercase g-py-10 g-px-20" type="submit">
-                        Add to Cart <i class="align-middle ml-2 icon-finance-100 u-line-icon-pro"></i>
+                        Agregar al carrito <i class="align-middle ml-2 icon-finance-100 u-line-icon-pro"></i>
                       </button>
                     </form>
                   </div>

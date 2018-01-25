@@ -113,8 +113,8 @@
 
 <section class="container g-py-100">
   <div class="text-center mx-auto g-max-width-600 g-mb-50">
-    <h2 class="g-color-black mb-4">New Arrivals</h2>
-    <p class="lead">We want to create a range of beautiful, practical and modern outerwear that doesn't cost the earth – but let's you still live life in style.</p>
+    <h2 class="g-color-black mb-4">Nuevos productos</h2>
+    <p class="lead">Últimos productos cargados. Aproveche las ofertas!</p>
   </div>
 
   <div class="row g-mx-minus-10 g-mb-50">
@@ -187,7 +187,7 @@
   </div>
 
   <div class="text-center">
-    <a class="btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" href="{{ route('frontend.products') }}">All Products</a>
+    <a class="btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" href="{{ route('frontend.products') }}">Ver todos los productos</a>
   </div>
 </section>
 

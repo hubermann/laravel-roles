@@ -8,24 +8,24 @@
           <h2 class="h5 g-color-gray-light-v3 mb-4">Products</h2>
 
           <div class="row">
-            
+
 
            @if( count( App\Http\Controllers\HomeController::get_categories() ))
             @foreach( App\Http\Controllers\HomeController::get_categories()->chunk(3) as $categories)
             <div class="col-4 g-mb-20">
               <ul class="list-unstyled g-font-size-13 mb-0">
                 @foreach($categories as $category)
-                    
+
                         <li class="g-my-10">
                           <a class="u-link-v5 g-color-gray-dark-v5 g-color-primary--hover" href="#">{{ $category->name }}</a>
                         </li>
-                    
+
                 @endforeach
                 </ul>
             </div>
             @endforeach
           @endif
-        
+
           </div>
         </div>
 
@@ -36,12 +36,12 @@
             <!-- Social Icons -->
           <ul class="list-inline mb-50">
             <li class="list-inline-item g-mr-2">
-              <a class="u-icon-v1 u-icon-slide-up--hover g-color-gray-dark-v4 g-color-white--hover g-bg-facebook--hover rounded" href="#">
+              <a class="u-icon-v1 u-icon-slide-up--hover g-color-gray-dark-v4 g-color-white--hover g-bg-facebook--hover rounded" href="https://www.facebook.com/Proctecno/">
                 <i class="g-font-size-18 g-line-height-1 u-icon__elem-regular fa fa-facebook"></i>
                 <i class="g-color-white g-font-size-18 g-line-height-0_8 u-icon__elem-hover fa fa-facebook"></i>
               </a>
             </li>
-            <li class="list-inline-item g-mx-2">
+           <!--  <li class="list-inline-item g-mx-2">
               <a class="u-icon-v1 u-icon-slide-up--hover g-color-gray-dark-v4 g-color-white--hover g-bg-twitter--hover rounded" href="#">
                 <i class="g-font-size-18 g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
                 <i class="g-color-white g-font-size-18 g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
@@ -64,7 +64,7 @@
                 <i class="g-font-size-18 g-line-height-1 u-icon__elem-regular fa fa-linkedin"></i>
                 <i class="g-color-white g-font-size-18 g-line-height-0_8 u-icon__elem-hover fa fa-linkedin"></i>
               </a>
-            </li>
+            </li> -->
           </ul>
           <!-- End Social Icons -->
           </div>
@@ -78,19 +78,19 @@
             <li class="media my-3">
               <i class="d-flex mt-1 mr-3 icon-hotel-restaurant-235 u-line-icon-pro"></i>
               <div class="media-body">
-                Unit 25 Suite 3, 925 Prospect<br>PI New York Avenue
+                Italia 1496,  San Fernando<br>(CP 1646)
               </div>
             </li>
             <li class="media my-3">
               <i class="d-flex mt-1 mr-3 icon-communication-062 u-line-icon-pro"></i>
               <div class="media-body">
-                htmlstream@support.com
+                info@proctecno.com
               </div>
             </li>
             <li class="media my-3">
               <i class="d-flex mt-1 mr-3 icon-communication-033 u-line-icon-pro"></i>
               <div class="media-body">
-                +32 333 444 555
+                011 6966-1866
               </div>
             </li>
           </ul>
@@ -98,7 +98,7 @@
         </div>
       </div>
 
-      
+
     </div>
   </div>
   <!-- End Content -->
@@ -107,7 +107,7 @@
   <div class="container g-pt-30 g-pb-10">
     <div class="row justify-content-between align-items-center">
       <div class="col-md-6 g-mb-20">
-        <p class="g-font-size-13 mb-0">2017 © Htmlstream. All Rights Reserved.</p>
+        <p class="g-font-size-13 mb-0">2017 © <a href="http://www.hubermann.com">Hubermann.com</a>. All Rights Reserved.</p>
       </div>
 
       <div class="col-md-6 text-md-right g-mb-20">
@@ -117,17 +117,17 @@
                data-toggle="tooltip"
                data-placement="top"></i>
           </li>
-          <li class="list-inline-item g-cursor-pointer mx-1">
+          <!-- <li class="list-inline-item g-cursor-pointer mx-1">
             <i class="fa fa-cc-paypal" title="Paypal"
                data-toggle="tooltip"
                data-placement="top"></i>
-          </li>
+          </li> -->
           <li class="list-inline-item g-cursor-pointer mx-1">
             <i class="fa fa-cc-mastercard" title="Master Card"
                data-toggle="tooltip"
                data-placement="top"></i>
           </li>
-          <li class="list-inline-item g-cursor-pointer ml-1">
+          <!-- <li class="list-inline-item g-cursor-pointer ml-1">
             <i class="fa fa-cc-stripe" title="Stripe"
                data-toggle="tooltip"
                data-placement="top"></i>
@@ -141,7 +141,7 @@
             <i class="fa fa-cc-jcb" title="JCB"
                data-toggle="tooltip"
                data-placement="top"></i>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>

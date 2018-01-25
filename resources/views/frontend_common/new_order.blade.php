@@ -7,7 +7,7 @@
 
   <div class="g-max-width-645 text-center mx-auto ">
     <h4 class="h1 mb-3">Checkout</h4>
-    <p class="g-font-size-17 mb-0">Fill up the form and hit the "Proceed with payment process".</p>
+    <p class="g-font-size-17 mb-0">Complete el siguiente formulario y haga click en "Proceder con el proceso de pago".</p>
     <br>
   </div>
 
@@ -121,7 +121,7 @@
         </div>
 
         <div class="text-center">
-          <button class="btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" type="submit">proceed with payment process</button>
+          <button class="btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" type="submit">Proceder con el proceso de pago</button>
         </div>
       </form>
     </div>

@@ -14,6 +14,7 @@ use App\ImagesProduct;
 use Cart;
 use Auth;
 use MP;
+use Mail;
 use App\TodoPagoWrap;
 
 class HomeController extends Controller
@@ -123,7 +124,7 @@ class HomeController extends Controller
             $product_id = Request::get('product_id');
             $product = Product::find($product_id);
             Cart::add(array('id' => $product_id, 'name' => $product->title, 'qty' => 1, 'price' => $product->price));
-            return \App::make('redirect')->back()->with('success', 'Product added to cart.');;
+            return \App::make('redirect')->back()->with('success', 'Producto agregado al carrito.');
         }
 
         //increment the quantity
@@ -163,29 +164,37 @@ class HomeController extends Controller
         return view('frontend_common.contact', $data );//return view('home');
     }
 
-    public function process_contact(Request $request)
+    public function process_contact()
     {
 
-        $this->validate($request, [
+        $rules = [
             'name' => 'required',
-            'email' => 'required|email',
-            'message' => 'required'
-        ]);
+            'email' => 'required',
+            'message' => 'required',
+        ];
 
-        ContactUS::create($request->all());
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails())
+        {
+            return redirect('/contact')->withErrors($validator)->withInput();
+        }
+
+
+        #ContactUS::create($request->all());
 
         Mail::send('email',
            array(
-               'name' => $request->get('name'),
-               'email' => $request->get('email'),
-               'user_message' => $request->get('message')
+               'name' => Input::get('name'),
+               'email' => Input::get('email'),
+               'message' => Input::get('message')
            ), function($message)
            {
                $message->from('hubermann@gmail.com');
                $message->to('hubermann@gmail.com', 'Admin')->subject('Website Feedback');
            });
 
-        return back()->with('success', 'Thanks for contacting us!');
+        return redirect('/contact')->with('success', 'Gracias por su mensaje');
 
     }
 
@@ -207,7 +216,7 @@ class HomeController extends Controller
 
     public function checkout()
     {
-        if( !Auth::user() ){ return redirect('login')->with('warning', 'Please login.');}
+        if( !Auth::user() ){ return redirect('login')->with('warning', 'Por favor identifiquese.');}
         if( Cart::total() == 0.00 ){ return redirect('/')->with('warning', 'No hay productos en su orden.');}
 
 
@@ -306,7 +315,7 @@ class HomeController extends Controller
           return Redirect::to($TP->url_form_pago);
         } else
         { // como no pudimos crear el tiket debemos mostrar un mensaje, por ejemplo para sugerir reintentar
-          return view('frontend_common.checkout_result')->with('message','Please retry again in a moment, there was a connection failure.');
+          return view('frontend_common.checkout_result')->with('message','Por favor intente nuevamente luego.');
         }
     }
 
@@ -404,11 +413,17 @@ class HomeController extends Controller
 
     public function user_orders()
     {
-        if( !Auth::user() ){ return redirect('login')->with('warning', 'Please login.');}
+        if( !Auth::user() ){ return redirect('login')->with('warning', 'Por favor identifiquese con su usuario y contraseña.');}
         $data['categories'] = Category::all();
-        $data['orders'] = Order::where('user_id', Auth::user()->id)->get();
+        $data['orders'] = Order::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
 
         return view('frontend_common.user_orders', $data);
+    }
+
+
+    public function informacion_general()
+    {
+        return view('frontend_common.informacion_general');
     }
 
 

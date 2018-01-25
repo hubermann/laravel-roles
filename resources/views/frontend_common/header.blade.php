@@ -9,9 +9,9 @@
           <!-- Social Icons -->
           <ul class="list-inline g-py-14 mb-0">
             <li class="list-inline-item">
-              <a class="g-color-white-opacity-0_8 g-color-primary--hover g-pa-3" href="#"><i class="fa fa-facebook"></i></a>
+              <a class="g-color-white-opacity-0_8 g-color-primary--hover g-pa-3" href="https://www.facebook.com/Proctecno/"><i class="fa fa-facebook"></i></a>
             </li>
-            <li class="list-inline-item">
+            <!-- <li class="list-inline-item">
               <a class="g-color-white-opacity-0_8 g-color-primary--hover g-pa-3" href="#"><i class="fa fa-twitter"></i></a>
             </li>
             <li class="list-inline-item">
@@ -22,14 +22,14 @@
             </li>
             <li class="list-inline-item">
               <a class="g-color-white-opacity-0_8 g-color-primary--hover g-pa-3" href="#"><i class="fa fa-google"></i></a>
-            </li>
+            </li> -->
           </ul>
           <!-- End Social Icons -->
         </div>
 
         <div class="col-auto g-hidden-xs-down g-color-white-opacity-0_6 g-font-weight-400 g-pl-15 g-pl-0--sm g-py-14">
           <i class="icon-communication-163 u-line-icon-pro g-font-size-18 g-valign-middle g-color-white-opacity-0_8 g-mr-10 g-mt-minus-2"></i>
-          8 800 1234 4321
+          011 6966-1866
         </div>
 
         <div class="col-auto g-pos-rel g-py-14">
@@ -53,12 +53,12 @@
 
             <!-- <li class="list-inline-item g-mx-4">
               <a class="g-color-white-opacity-0_6 g-color-primary--hover g-font-weight-400 g-text-underline--none--hover" href="page-our-stores-1.html">Our Stores</a>
-            </li> 
+            </li>
             <li class="list-inline-item g-color-white-opacity-0_3 g-mx-4">|</li> -->
 
-            <li class="list-inline-item g-mx-4">
+            <!-- <li class="list-inline-item g-mx-4">
               <a class="g-color-white-opacity-0_6 g-color-primary--hover g-font-weight-400 g-text-underline--none--hover" href="page-help-1.html">Ayuda</a>
-            </li>
+            </li> -->
 
             <li class="list-inline-item g-color-white-opacity-0_3 g-mx-4">|</li>
             <!-- Account -->
@@ -75,7 +75,7 @@
                  data-dropdown-animation-in="fadeIn"
                  data-dropdown-animation-out="fadeOut">
                 Mi cuenta
-      
+
               </a>
               <ul id="account-dropdown-2" class="list-unstyled u-shadow-v29 g-pos-abs g-bg-white g-width-160 g-pb-5 g-mt-19 g-z-index-2"
                   aria-labelledby="account-dropdown-invoker-2">
@@ -89,13 +89,13 @@
                   </li>
                   @endif
                   <li>
-                   
+
                       <a class="d-block g-color-black g-color-primary--hover g-text-underline--none--hover g-font-weight-400 g-py-5 g-px-20" href="{{ route('logout') }}"
                           onclick="event.preventDefault();
                                    document.getElementById('logout-form').submit();">
                           Salir
                       </a>
-                  
+
                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                           {{ csrf_field() }}
                       </form>
@@ -148,12 +148,12 @@
                  aria-labelledby="basket-bar-invoker">
               <?php if( count(Cart::content()) ) {?>
               <div class="g-brd-bottom g-brd-gray-light-v4 g-pa-15 g-mb-10">
-                <span class="d-block h6 text-center text-uppercase mb-0">Shopping Cart</span>
+                <span class="d-block h6 text-center text-uppercase mb-0">Carrito de compras</span>
               </div>
               <div class="js-scrollbar g-height-200">
 
 
-                
+
                   <?php foreach(Cart::content() as $row) :?>
 
                   <!-- Product -->
@@ -167,7 +167,7 @@
                             @else
                               <img class="img-fluid" src="{{ URL::to('/') }}/images/no-image-available.jpg" alt="{{$row->title}}">
                             @endif
-                          
+
                         </a>
                       </div>
 
@@ -184,8 +184,8 @@
 
                   <?php endforeach;?>
 
-                  
-                
+
+
               </div>
 
               <div class="clearfix g-px-15">
@@ -202,11 +202,11 @@
               <div class="g-pa-20">
                 <div class="text-center g-mb-15">
                   <a class="text-uppercase g-color-primary g-color-main--hover g-font-weight-400 g-font-size-13 g-text-underline--none--hover" href="{{url('cart')}}">
-                    View Cart
+                    Ver Carrito de compras
                     <i class="ml-2 icon-finance-100 u-line-icon-pro"></i>
                   </a>
                 </div>
-                <a class="btn btn-block u-btn-black g-brd-primary--hover g-bg-primary--hover g-font-size-12 text-uppercase rounded g-py-10" href="{{url('checkout')}}">Proceed to Checkout</a>
+                <a class="btn btn-block u-btn-black g-brd-primary--hover g-bg-primary--hover g-font-size-12 text-uppercase rounded g-py-10" href="{{url('checkout')}}">Proceder con el pago</a>
               </div>
               <?php }else{ ?>
                 <div class="text-center g-mb-15">
@@ -223,7 +223,8 @@
 
 
 
-
+<?php
+/*
           <!-- Search -->
           <div class="d-inline-block g-valign-middle">
             <div class="g-py-10 g-pl-15">
@@ -251,6 +252,8 @@
               </div>
             </form>
             <!-- End Search Form -->
+            */
+?>
           </div>
           <!-- End Search -->
         </div>
@@ -279,7 +282,7 @@
 
         <!-- Logo -->
         <a class="navbar-brand" href="/">
-          
+
         <img src="{{ URL::to('/') }}/images/logo.png" alt="logo">
         </a>
         <!-- End Logo -->
@@ -296,7 +299,7 @@
             </li>
             <!-- End Home - Submenu -->
 
-            
+
 
             @if( count( App\Http\Controllers\HomeController::get_categories_outstandings() ))
 
@@ -306,13 +309,13 @@
               </li>
               @endforeach
             @endif
-           
 
-         
+
+
 
 
             <li class="nav-item g-ml-10--lg">
-              <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.outstandings')}}">Destacados</a>
+              <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.outstandings')}}">Ofertas</a>
             </li>
             <li class="nav-item g-ml-10--lg">
               <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.contact')}}">Contacto</a>
@@ -326,5 +329,3 @@
   </div>
 </header>
 <!-- End Header -->
-
-
