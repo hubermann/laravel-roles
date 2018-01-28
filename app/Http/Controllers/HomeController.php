@@ -177,7 +177,7 @@ class HomeController extends Controller
 
         if ($validator->fails())
         {
-            return redirect('/contact')->withErrors($validator)->withInput();
+            return redirect('/contact'.'#contact')->withErrors($validator)->withInput();
         }
 
 

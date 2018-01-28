@@ -318,6 +318,9 @@
               <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.outstandings')}}">Ofertas</a>
             </li>
             <li class="nav-item g-ml-10--lg">
+              <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('garantias')}}">Garantias</a>
+            </li>
+            <li class="nav-item g-ml-10--lg">
               <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.contact')}}">Contacto</a>
             </li>
           </ul>

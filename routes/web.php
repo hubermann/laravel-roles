@@ -294,6 +294,7 @@ Route::get('/outstandings', 'HomeController@outstandings')->name('frontend.outst
 Route::get('/subcategory/{id}', 'HomeController@by_subcategory')->name('frontend.by_subcategory');
 Route::get('/cart', 'HomeController@cart')->name('frontend.cart');
 Route::get('/contact', 'HomeController@contact')->name('frontend.contact');
+Route::get('/garantias', 'HomeController@informacion_general')->name('garantias');
 Route::post('/process_contact', 'HomeController@process_contact')->name('frontend.process_contact');
 Route::post('/cart', 'HomeController@cart');
 
