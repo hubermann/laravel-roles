@@ -8,7 +8,7 @@
 
 
 		<div class="white-box">
-			
+
 
 				<nav class="navbar navbar-light bg-faded">
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -23,11 +23,11 @@
 				<h3 class="box-title">{{ $title_page }}</h3>
 
 				<div class="col-md-2 col-sm-4 col-xs-12 pull-right text-right">
-					
+
 					<!-- btn -->
-					
+
 				</div>
-			
+
 			<div class="table-responsive">
 				<table class="table ">
 
@@ -36,15 +36,17 @@
 					@else
 						<thead>
 
-								<th class="text-left">Email buyer</th>
-								<th class="text-left"> Name and lastname</th>
-								<th class="text-left"> Payment status</th>
-								<th class="text-right"> Options</th>
+								<th class="text-left">ID</th>
+								<th class="text-left">Email comprador</th>
+								<th class="text-left"> Nombre y apellido</th>
+								<th class="text-left"> Status</th>
+								<th class="text-right"> Opciones</th>
 
 							</thead>
 							<tbody>
 								@foreach($orders as $order)
 									<tr>
+										<td>{{ $order->id }}</td>
 										<td>{{ $order->email }}</td>
 										<td>{{ $order->name}}{{ $order->surname}}</td>
 										<td>
@@ -58,7 +60,7 @@
 										</td>
 										<td>
 											<div class="btn-group pull-right">
-											
+
 											<a href="{{ route('backend.orders.destroy', ['id' => $order->id])}}" class="delete btn btn-small" data-confirm="Confirma eliminar ésta order de manera definitiva."><i class="fa fa-trash-o"></i></a>
 											</div>
 										</td>
@@ -68,14 +70,14 @@
 								@endforeach
 
 								<tr>
-								
+
 								</tr>
 							</tbody>
 
 					@endunless
-				
 
-				</table> 
+
+				</table>
 
 				<div class="row">
 							{{ $orders->links() }}
@@ -84,7 +86,7 @@
 
 				<div class="table-responsive">
 					<ul class="pagination pagination-small pagination-centered">
-						
+
 					</ul>
 				</div>
 		</div>

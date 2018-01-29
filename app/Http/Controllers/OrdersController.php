@@ -46,7 +46,7 @@ class OrdersController extends Controller
       //destroy order
       $order->delete();
     	return Redirect::to('/backend/orders')->with('success', 'Order deleted. ');
- 
+
     }
-  
+
 }

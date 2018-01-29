@@ -97,7 +97,8 @@
                 <table class="table ">
                     <thead>
                         <tr>
-                            <th>NAME</th>
+                            <th>ID</th>
+														<th>NAME</th>
                             <th>STATUS</th>
                             <th>DATE</th>
                             <th>PRICE</th>
@@ -111,8 +112,9 @@
 
 					@foreach($orders as $order)
 						<tr>
+						<td class="txt-oflo" >{{ $order->id }}</td>
 						<td class="txt-oflo" title="{{ $order->name}}{{ $order->surname}}">{{ $order->email }}</td>
-						
+
 						<td>
 							@if ( $order->payment_status == 0)
 								Pending
@@ -124,7 +126,7 @@
 						</td>
 						<td class="txt-oflo">{{ $order->created_at }}</td>
 						<td><span class="text-success">${{$order->amount}}</span></td>
-						</tr>	
+						</tr>
 
 					@endforeach
 
