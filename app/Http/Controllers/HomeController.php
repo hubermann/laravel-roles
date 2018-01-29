@@ -396,6 +396,16 @@ class HomeController extends Controller
           $order->feedback_mp = $feedback_key;
           $order->payment_success();
 
+          //notificacion a customer
+          Mail::send('new_order_email',
+             array(
+                 'order_id' => $id_order,
+             ), function($message)
+             {
+                 $message->from('info@hubercart.tk');
+                 $message->to('hubermann@gmail.com', 'Admin')->subject('Nueva orden pagada.');
+             });
+
           //update stock
           foreach (Cart::content() as $item) {
             $product = Product::findOrfail($item->id);
