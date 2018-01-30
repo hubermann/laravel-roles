@@ -1,6 +1,3 @@
-
-<hr>
-
 <!-- Call to Action -->
 <div class="g-brd-bottom g-brd-gray-light-v4">
   <div class="container g-py-30">

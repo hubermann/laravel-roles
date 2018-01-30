@@ -216,6 +216,11 @@ class HomeController extends Controller
         return Category::All();
     }
 
+    public static function get_subcategories($id)
+    {
+        return Subcategory::where('category_id', $id)->get();
+    }
+
     public function checkout()
     {
         if( !Auth::user() ){ return redirect('login')->with('warning', 'Por favor identifiquese.');}

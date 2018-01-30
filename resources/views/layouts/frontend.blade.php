@@ -74,9 +74,7 @@
       </div>
 
       @yield('content')
-
-      @include('frontend_common.call_to_action')
-
+      
 			@include('frontend_common.footer')
 
       <a class="js-go-to u-go-to-v2" href="#"

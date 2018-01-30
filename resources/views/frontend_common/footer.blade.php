@@ -5,7 +5,7 @@
     <div class="container g-pt-100">
       <div class="row justify-content-start g-mb-30 g-mb-0--md">
         <div class="col-md-5 g-mb-30">
-          <h2 class="h5 g-color-gray-light-v3 mb-4">Products</h2>
+          <h2 class="h5 g-color-gray-light-v3 mb-4"> Productos </h2>
 
           <div class="row">
 
@@ -30,7 +30,7 @@
         </div>
 
         <div class="col-sm-6 col-md-3 g-mb-30 g-mb-0--sm">
-          <h2 class="h5 g-color-gray-light-v3 mb-4">Follow Us:</h2>
+          <h2 class="h5 g-color-gray-light-v3 mb-4">Seguinos:</h2>
 
           <div class="row">
             <!-- Social Icons -->
@@ -41,7 +41,7 @@
                 <i class="g-color-white g-font-size-18 g-line-height-0_8 u-icon__elem-hover fa fa-facebook"></i>
               </a>
             </li>
-           <!--  <li class="list-inline-item g-mx-2">
+            <li class="list-inline-item g-mx-2">
               <a class="u-icon-v1 u-icon-slide-up--hover g-color-gray-dark-v4 g-color-white--hover g-bg-twitter--hover rounded" href="#">
                 <i class="g-font-size-18 g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
                 <i class="g-color-white g-font-size-18 g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
@@ -64,14 +64,14 @@
                 <i class="g-font-size-18 g-line-height-1 u-icon__elem-regular fa fa-linkedin"></i>
                 <i class="g-color-white g-font-size-18 g-line-height-0_8 u-icon__elem-hover fa fa-linkedin"></i>
               </a>
-            </li> -->
+            </li>
           </ul>
           <!-- End Social Icons -->
           </div>
         </div>
 
         <div class="col-sm-5 col-md-3 ml-auto g-mb-30 g-mb-0--sm">
-          <h2 class="h5 g-color-gray-light-v3 mb-4">Contacts</h2>
+          <h2 class="h5 g-color-gray-light-v3 mb-4">Contacto</h2>
 
           <!-- Links -->
           <ul class="list-unstyled g-color-gray-dark-v5 g-font-size-13">

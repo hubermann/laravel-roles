@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 
-@section('content')       
+@section('content')
 
 
 <section>
@@ -47,7 +47,7 @@
                   <div class="g-overflow-x-scroll g-overflow-x-visible--lg">
 
 
-                  
+
 
                     <table class="text-center w-100">
                       <thead class="h6 g-brd-bottom g-brd-gray-light-v3 g-color-black text-uppercase">
@@ -88,7 +88,7 @@
                               <input class="js-result form-control text-center g-font-size-13 rounded-0 g-pa-0" type="text" value="{{$item->qty}}" readonly="">
 
                               <div class="input-group-addon d-flex align-items-center g-width-30 g-brd-gray-light-v2 g-bg-white g-font-size-18 rounded-0 g-px-5 g-py-6">
-                                
+
                                 <a class=" g-color-gray g-color-primary--hover " href="{{url("cart?product_id=$item->id&decrease=1")}}"> <i class="js-minus g-color-gray g-color-primary--hover fa fa-angle-down"></i> </a>
                                 &nbsp;
                                 <a class=" g-color-gray g-color-primary--hover" href="{{url("cart?product_id=$item->id&increment=1")}}"> <i class="js-plus g-color-gray g-color-primary--hover fa fa-angle-up"></i> </a>
@@ -98,7 +98,7 @@
                           <td class="text-right g-color-black">
                             <span class="g-color-gray-dark-v2 g-font-size-13 mr-4">${{$item->subtotal}}</span>
                             <span class="g-color-gray-dark-v4 g-color-black--hover g-cursor-pointer">
-                              
+
                               <a class="cart_quantity_delete" href="{{url("cart?product_id=$item->id&delete=1")}}" onclick="return confirm('Confirma quitar de la orden?')"><i class="mt-auto fa fa-trash"></i></a>
                             </span>
                           </td>
@@ -106,11 +106,11 @@
                         <!-- End Item-->
 
                         @endforeach
-                        
+
                       </tbody>
                     </table>
 
-                     
+
 
 
                   </div>
@@ -123,7 +123,7 @@
                     <h4 class="h6 text-uppercase mb-3">Detalle</h4>
 
                     <!-- Accordion -->
-                    <?php 
+                    <?php
                     // <div id="accordion-01" class="mb-4" role="tablist" aria-multiselectable="true">
                     //   <div id="accordion-01-heading-01" class="g-brd-y g-brd-gray-light-v2 py-3" role="tab">
                     //     <h5 class="g-font-weight-400 g-font-size-default mb-0">
@@ -163,7 +163,7 @@
                   <!-- <button class="btn btn-block u-btn-outline-black g-brd-gray-light-v1 g-bg-black--hover g-font-size-13 text-uppercase g-py-15 mb-4" type="button">Update Shopping Cart</button> -->
                   <a href="{{ url('checkout') }}" class="btn btn-block u-btn-primary g-font-size-13 text-uppercase g-py-15 mb-4" data-next-step="#step2">Proceder al pago</a>
 
-                  
+
 
                   <!-- Accordion -->
                   <div id="accordion-02" role="tablist" aria-multiselectable="true">
@@ -174,7 +174,7 @@
                       </h5>
                     </div>
                     <div id="accordion-02-body-02" class="collapse" role="tabpanel" aria-labelledby="accordion-02-heading-02">
-                      
+
                       <br>
                       <h6>información</h6>
                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati porro aperiam, similique iste hic sed atque incidunt rerum commodi, ad iusto, ullam omnis. Tempora quaerat libero quam pariatur reprehenderit tenetur!</p>
@@ -195,7 +195,7 @@
 
 
       @else
-              
+
               <!--  empty cart  -->
 
         <div class="container text-center">
@@ -213,6 +213,8 @@
 
 @endif
 
+
+@include('frontend_common.call_to_action')
 
 </section>
 

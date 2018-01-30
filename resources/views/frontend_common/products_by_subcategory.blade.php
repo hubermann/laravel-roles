@@ -99,9 +99,9 @@
               // </div>
               // <!-- End Filters -->
               ?>
-              
 
-     
+
+
               @unless($products->count())
                   <div class="text-center">
                   <br>
@@ -109,7 +109,7 @@
                   <p>Esta categoria no tiene productos aún.</p>
                   </div>
               @else
-                @foreach($products as $product)         
+                @foreach($products as $product)
               <!-- Products -->
               <div class="g-brd-bottom g-brd-gray-light-v4">
                 <div class="row g-pt-30">
@@ -133,7 +133,7 @@
                       </h4>
                       <p class="g-color-gray-dark-v5"><a class="d-inline-block g-color-gray-dark-v5 g-font-size-13 mb-2" href="{{ route('frontend.by_category', ['id' => $product->category_id]) }}">{{ $product->get_category_name($product->category_id) }}</a> / <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13 mb-2" href="{{ route('frontend.by_subcategory', ['id' => $product->subcategory_id]) }}"> {{$product->get_subcategory_name($product->subcategory_id) }}</a></p>
                       <div class="mb-4">
-                        <span class="g-color-black g-font-size-20 mr-2">{{ number_format($product->price, 2) }}</span> 
+                        <span class="g-color-black g-font-size-20 mr-2">{{ number_format($product->price, 2) }}</span>
                       </div>
                       <p>{{ str_limit($product->description, 140) }}</p>
                     </div>
@@ -174,9 +174,9 @@
 <div class="row" id="custom-pagination">
   {{ $products->links() }}
 </div>
-<!-- End custom_pagination -->          
+<!-- End custom_pagination -->
 
-             
+
             </div>
           </div>
           <!-- End Content -->
@@ -193,7 +193,7 @@
                       <li>No items.</li>
                   @else
                     @foreach($categories as $category)
-                        
+
                         <li class="my-3">
                           <a class="d-block u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="{{ route('frontend.by_category', ['id' => $category->id]) }}">{{ $category->name }}
                             <span class="float-right g-font-size-12">{{ $category->products_by_category->count() }}</span></a>
@@ -287,8 +287,8 @@
               </div> -->
               <!-- End Brand -->
 
-            
-             
+
+
 
 
             </div>
@@ -297,5 +297,7 @@
         </div>
       </div>
       <!-- End Products -->
+      <br>
+      <br>
+      @include('frontend_common.call_to_action')
 @endsection
-      

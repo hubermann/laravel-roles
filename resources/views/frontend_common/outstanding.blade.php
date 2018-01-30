@@ -8,8 +8,8 @@
   </div>
 
   <div class="row g-mx-minus-10">
-  
-    
+
+
     @foreach($outstandings as $outstanding)
       <div class="col-sm-6 col-md-4 g-px-10 g-mb-30">
       <!-- Blog Background Overlay Blocks -->
@@ -32,7 +32,7 @@
               <a class="g-color-white-opacity-0_7 text-uppercase" href="#">{{ $outstanding->get_category_name($outstanding->category_id) }}</a>
               -
               <a class="g-color-white-opacity-0_7 text-uppercase" href="#">{{$outstanding->get_subcategory_name($outstanding->subcategory_id) }}</a>
-              
+
             </h4>
             <div class="mb-4"></span>
           </div>
@@ -47,5 +47,6 @@
   </div>
 </div>
 
+@include('frontend_common.call_to_action')
 
 @endif

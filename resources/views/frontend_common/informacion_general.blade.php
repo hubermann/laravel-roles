@@ -346,7 +346,7 @@
 
 </section>
 
-
+@include('frontend_common.call_to_action')
 
 
 @endsection

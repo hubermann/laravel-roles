@@ -32,7 +32,7 @@
           <div class="col-md-9 order-md-2">
             <div class="g-pl-15--lg">
 
-            <?php 
+            <?php
               // <!-- Filters -->
               // <div class="d-flex justify-content-end align-items-center g-brd-bottom g-brd-gray-light-v4 g-pt-40 g-pb-20">
               //   <!-- Show -->
@@ -94,9 +94,9 @@
               // <!-- End Filters -->
 
               ?>
-              
 
-     
+
+
               @unless($products->count())
                   <div class="text-center">
                     <br>
@@ -104,7 +104,7 @@
                     <p>Esta categoria no tiene productos aún.</p>
                   </div>
               @else
-                @foreach($products as $product)         
+                @foreach($products as $product)
               <!-- Products -->
               <div class="g-brd-bottom g-brd-gray-light-v4">
                 <div class="row g-pt-30">
@@ -170,9 +170,9 @@
 <div class="row" id="custom-pagination">
   {{ $products->links() }}
 </div>
-<!-- End custom_pagination -->          
+<!-- End custom_pagination -->
 
-             
+
             </div>
           </div>
           <!-- End Content -->
@@ -189,7 +189,7 @@
                       <li>No items.</li>
                   @else
                     @foreach($categories as $category)
-                        
+
                         <li class="my-3">
                           <a class="d-block u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="{{ route('frontend.by_category', ['id' => $category->id]) }}">{{ $category->name }}
                             <span class="float-right g-font-size-12">{{ $category->products_by_category->count() }}</span></a>
@@ -283,8 +283,8 @@
               </div> -->
               <!-- End Brand -->
 
-            
-             
+
+
 
 
             </div>
@@ -293,5 +293,8 @@
         </div>
       </div>
       <!-- End Products -->
+
+      <br>
+      <br>
+      @include('frontend_common.call_to_action')
 @endsection
-      

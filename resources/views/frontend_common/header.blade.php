@@ -11,7 +11,7 @@
             <li class="list-inline-item">
               <a class="g-color-white-opacity-0_8 g-color-primary--hover g-pa-3" href="https://www.facebook.com/Proctecno/"><i class="fa fa-facebook"></i></a>
             </li>
-            <!-- <li class="list-inline-item">
+            <li class="list-inline-item">
               <a class="g-color-white-opacity-0_8 g-color-primary--hover g-pa-3" href="#"><i class="fa fa-twitter"></i></a>
             </li>
             <li class="list-inline-item">
@@ -22,7 +22,7 @@
             </li>
             <li class="list-inline-item">
               <a class="g-color-white-opacity-0_8 g-color-primary--hover g-pa-3" href="#"><i class="fa fa-google"></i></a>
-            </li> -->
+            </li>
           </ul>
           <!-- End Social Icons -->
         </div>
@@ -84,7 +84,7 @@
                   @if (!Auth::user()->hasRole('Superadmin'))
                   <li>
                       <a class="d-block g-color-black g-color-primary--hover g-text-underline--none--hover g-font-weight-400 g-py-5 g-px-20" href="{{ route('frontend.user_orders') }}">
-                          Mis ordenes
+                          Mis pedidos
                       </a>
                   </li>
                   @endif
@@ -93,7 +93,7 @@
                       <a class="d-block g-color-black g-color-primary--hover g-text-underline--none--hover g-font-weight-400 g-py-5 g-px-20" href="{{ route('logout') }}"
                           onclick="event.preventDefault();
                                    document.getElementById('logout-form').submit();">
-                          Salir
+                          Cerrar sesión
                       </a>
 
                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -291,12 +291,63 @@
         <div id="navBar" class="collapse navbar-collapse align-items-center flex-sm-row g-pt-15 g-pt-0--lg">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item g-ml-10--lg">
-              <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="/">Inicio</a>
+              <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="/">&nbsp;Inicio&nbsp;</a>
             </li>
 
-            <li class="nav-item g-ml-10--lg">
-              <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.products') }}">Productos</a>
+            <!-- <li class="nav-item g-ml-10--lg">
+              <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.products') }}"> &ensp; Productos &ensp; </a>
+            </li> -->
+
+
+
+
+
+
+            <li class="nav-item hs-has-sub-menu g-mx-10--lg g-mx-15--xl">
+              <a id="nav-link--pages" class="nav-link text-uppercase g-color-primary--hover g-px-5 g-py-20" href="#!" aria-haspopup="true" aria-expanded="false" aria-controls="nav-submenu--pages">
+                Productos
+              </a>
+
+              @if( count( App\Http\Controllers\HomeController::get_categories() ))
+              <!-- Submenu -->
+              <ul class="hs-sub-menu list-unstyled u-shadow-v11 g-min-width-220 g-brd-top g-brd-primary g-brd-top-2 g-mt-17 animated" id="nav-submenu--pages" aria-labelledby="nav-link--pages" style="display: none;">
+                 @foreach( App\Http\Controllers\HomeController::get_categories() as $category)
+                 <li class="dropdown-item hs-has-sub-menu">
+                   <a id="nav-link--pages--grid-filter" class="nav-link g-color-gray-dark-v4" href="{{ route('frontend.by_category', ['id' => $category->id ])}}" aria-haspopup="true" aria-expanded="false" aria-controls="nav-submenu--pages--grid-filter">
+                     {{ $category->name }}
+                   </a>
+                   <!-- if sub -->
+                    @if( count( App\Http\Controllers\HomeController::get_subcategories($category->id) ))
+                      <ul id="nav-submenu--pages--grid-filter" class="hs-sub-menu list-unstyled u-shadow-v11 g-min-width-220 g-brd-top g-brd-primary g-brd-top-2 g-mt-minus-2 animated" aria-labelledby="nav-link--pages--grid-filter">
+                        @foreach( App\Http\Controllers\HomeController::get_subcategories($category->id) as $subcategory)
+                        <li class="dropdown-item">
+                          <a class="nav-link g-color-gray-dark-v4" href="{{ route('frontend.by_subcategory', ['id' => $subcategory->id ])}}"> {{$subcategory->name}}
+                            <!-- <span class="u-label g-rounded-3 g-font-size-10 g-bg-lightred g-py-3 g-pos-rel g-top-minus-1 g-ml-5">New</span> -->
+                          </a>
+                        </li>
+                        @endforeach
+                      </ul>
+                    @endif
+                 </li>
+                  @endforeach
+              </ul>
+              @endif
+
+
+
             </li>
+
+
+
+
+
+
+
+
+
+
+
+
             <!-- End Home - Submenu -->
 
 
@@ -305,7 +356,7 @@
 
               @foreach( App\Http\Controllers\HomeController::get_categories_outstandings() as $outstanding_category )
               <li class="nav-item g-ml-10--lg">
-                <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.by_category', ['id' => $outstanding_category->id ])}}">{{ $outstanding_category->name }}</a>
+                <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.by_category', ['id' => $outstanding_category->id ])}}"> &ensp; {{ $outstanding_category->name }} &ensp; </a>
               </li>
               @endforeach
             @endif
@@ -315,13 +366,13 @@
 
 
             <li class="nav-item g-ml-10--lg">
-              <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.outstandings')}}">Ofertas</a>
+              <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.outstandings')}}">&ensp; Ofertas &ensp; </a>
             </li>
             <li class="nav-item g-ml-10--lg">
-              <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('garantias')}}">Garantias</a>
+              <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('garantias')}}"> &ensp; Garantias &ensp; </a>
             </li>
             <li class="nav-item g-ml-10--lg">
-              <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.contact')}}">Contacto</a>
+              <a class="nav-link text-uppercase g-color-primary--hover g-pl-5 g-pr-0 g-py-20" href="{{ route('frontend.contact')}}"> &ensp; Contacto &ensp;</a>
             </li>
           </ul>
 
