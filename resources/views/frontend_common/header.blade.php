@@ -89,6 +89,9 @@
                   </li>
                   @endif
                   <li>
+                    <a href="{{ route('frontend.user_orders') }}" class="d-block g-color-black g-color-primary--hover g-text-underline--none--hover g-font-weight-400 g-py-5 g-px-20">Mis ordenes</a>
+                  </li>
+                  <li>
 
                       <a class="d-block g-color-black g-color-primary--hover g-text-underline--none--hover g-font-weight-400 g-py-5 g-px-20" href="{{ route('logout') }}"
                           onclick="event.preventDefault();
@@ -178,7 +181,7 @@
                         <small class="g-color-primary g-font-size-12"><?php echo $row->qty; ?> x ${{ number_format($row->price, 2) }}  =  ${{ number_format($row->subtotal, 2) }}</small>
                       </div>
                     </div>
-                    <a class="u-basket__product-remove" href="{{url("cart?product_id=$row->id&delete=1")}}" onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+                    <a class="u-basket__product-remove" href="{{url("cart?product_id=$row->id&delete=1")}}" onclick="return confirm('Confirma quitar el producto del pedido?')"><i class="fa fa-times"></i></a>
                   </div>
                   <!-- End Product -->
 

@@ -89,14 +89,14 @@
       <!-- Form -->
       <form class="g-py-15"  method="POST" action="{{ route('register') }}">
         {{ csrf_field() }}
-        
+
         <div class="mb-4">
           <div class="input-group g-rounded-left-3">
             <span class="input-group-addon g-width-45 g-brd-gray-light-v3 g-color-gray-dark-v5">
               <i class="icon-finance-067 u-line-icon-pro"></i>
             </span>
             <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-rounded-left-0 g-rounded-right-3 g-py-15 g-px-15" name="name" value="{{ old('name') }}" type="name" placeholder="Nombre" required autofocus>
-                
+
           </div>
             <p class="form-error">
                 @if ($errors->has('name'))
@@ -113,7 +113,7 @@
               <i class="icon-finance-067 u-line-icon-pro"></i>
             </span>
             <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-rounded-left-0 g-rounded-right-3 g-py-15 g-px-15" name="email" type="email" placeholder="Email Adress" required>
-                
+
           </div>
             <p class="form-error">
                 @if ($errors->has('email'))
@@ -130,7 +130,7 @@
               <i class="icon-media-094 u-line-icon-pro"></i>
             </span>
             <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-rounded-left-0 g-rounded-right-3 g-py-15 g-px-15" name="password" type="password" placeholder="Password" required>
-                
+
           </div>
             <p class="form-error">
                 @if ($errors->has('password'))
@@ -147,7 +147,7 @@
               <i class="icon-media-094 u-line-icon-pro"></i>
             </span>
             <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-rounded-left-0 g-rounded-right-3 g-py-15 g-px-15" name="password_confirmation" type="password" placeholder="Confirmacion Password" required>
-                
+
           </div>
             <p class="form-error">
                 @if ($errors->has('password'))
@@ -184,16 +184,16 @@
         </div>
 
         <div class="text-center">
-          <p class="g-color-gray-dark-v5 mb-0">Tiene cuenta? 
+          <p class="g-color-gray-dark-v5 mb-0">Tiene cuenta?
             <a class="g-font-weight-600" href="{{ route('login')}}"> Ingresar</a></p>
         </div>
 
-        
+
       </form>
       <!-- End Form -->
     </div>
 
-    
+
   </div>
 
   <div class="col-md-6 order-lg-1 g-mb-80">

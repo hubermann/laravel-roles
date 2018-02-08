@@ -2,6 +2,10 @@
 
 @section('content')
 
+
+<style media="screen">
+  .black-text{color: black}
+</style>
 <section>
 
 
@@ -71,7 +75,7 @@
           </div>
 
           <div class="col-lg-5">
-            <div class="g-px-40--lg g-pt-70">
+            <div class="g-px-40--lg ">
               <!-- Product Info -->
               <div class="g-mb-30">
                 <h1 class="g-font-weight-300 mb-4">{{ $product->title }}</h1>
@@ -86,15 +90,24 @@
               </div>
               <!-- End Price -->
 
-               <hr>
+              <div class="row ">
+                <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 g-color-gray-dark-v5 ">Medios de pago:</div>
+                <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 text-right black-text">{{ $product->qty }}</div>
+              </div>
+              <hr>
 
-              @foreach(json_decode($product->dinamic_fields, true) as $key => $value)
-                <div class="row ">
-                  <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 g-color-gray-dark-v5 ">{{ $value['propiedad'] }}</div>
-                  <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 g-color-gray-dark-v5 text-right">{{ $value['valor'] }}</div>
+              <div class="row ">
+                <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 g-color-gray-dark-v5 ">Stock:</div>
+                <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 text-right black-text">
+                  <i class="fab fa-cc-visa"></i>
+                  <i class="fab fa-cc-mastercard"></i>
+                  <i class="fab fa-usd-square"></i>
+
                 </div>
-                <hr>
-              @endforeach
+              </div>
+              <hr>
+
+
 
               <!-- Accordion -->
 
@@ -121,12 +134,35 @@
             </div>
           </div>
         </div>
+
+
+        <div class="row">
+          <h5>Descripción:</h5>
+          <hr>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            @foreach(json_decode($product->dinamic_fields, true) as $key => $value)
+
+            @if( round(count(json_decode($product->dinamic_fields, true)) / 2) ==  $loop->iteration)
+              </div><div class="col-md-6">
+            @endif
+              <div class="row ">
+                <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 g-color-gray-dark-v5 ">{{ $value['propiedad'] }}{{ $loop->iteration }}</div>
+                <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 text-right black-text">{{ $value['valor'] }}</div>
+              </div>
+              <hr>
+            @endforeach
+          </div>
+        </div>
+
+
       </div>
       <!-- End Product Description -->
       <br>
       <br>
-      
-      @include('frontend_common.call_to_action')
-</section>
 
+
+</section>
+@include('frontend_common.call_to_action')
 @endsection

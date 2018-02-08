@@ -9,7 +9,7 @@
 <div class="g-pl-15--lg">
 
 
-<?php  
+<?php
 // <!-- Filters -->
 // <div class="d-flex justify-content-end align-items-center g-brd-bottom g-brd-gray-light-v4 g-pt-40 g-pb-20">
 //   <!-- Show -->
@@ -75,10 +75,10 @@
 
 
 
- 
+
 
 @unless($products->count())
-    <li>No products.</li>
+    <li><br>No products.</li>
 @else
   @foreach($products as $product)
       <div class="col-6 col-lg-4 g-mb-30">
@@ -96,7 +96,7 @@
           <div class="d-flex flex-column">
             <h4 class="h6 g-color-black mb-1">
               <a class="u-link-v5 g-color-black g-color-primary--hover" href="{{ route('frontend.product_detail', ['id' => $product->id]) }}">
-                {{$product->title}} 
+                {{$product->title}}
               </a>
             </h4>
             <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13" href="#">{{$product->category}} / {{$product->subcategory}}</a>
@@ -168,10 +168,10 @@
 
     <!-- Filters -->
     <div class="col-md-3 order-md-1 g-brd-right--lg g-brd-gray-light-v4 g-pt-40">
-      <div class="g-pr-15--lg g-pt-60">
+      <div class="g-pr-15--lg">
         <!-- Categories -->
         <div class="g-mb-30">
-          <h3 class="h5 mb-3">Categories</h3>
+          <h3 class="h5 mb-3">Categorias</h3>
 
           <ul class="list-unstyled">
 
@@ -442,4 +442,3 @@
 </div>
 <!-- End Products -->
 @endsection
-      
