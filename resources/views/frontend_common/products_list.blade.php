@@ -192,7 +192,7 @@
 
                         <li class="my-3">
                           <a class="d-block u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="{{ route('frontend.by_category', ['id' => $category->id]) }}">{{ $category->name }}
-                            <span class="float-right g-font-size-12">{{ $category->products_by_category->count() }}</span></a>
+                            <span class="float-right g-font-size-12">{{ App\Http\Controllers\HomeController::products_by_category($category->id) }}</span></a>
                         </li>
                     @endforeach
                   @endunless

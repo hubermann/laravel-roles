@@ -9,7 +9,7 @@
       <!-- Media -->
       <div class="media g-brd-around g-brd-gray-light-v4 rounded g-pa-40">
         <div class="d-flex g-mr-30">
-          <i class="d-inline-block g-color-primary g-font-size-40 g-pos-rel g-top-3 icon-communication-062 u-line-icon-pro"></i>
+          <i class="d-inline-block g-color-primary g-font-size-40 g-pos-rel g-top-3 icon-communication-004 u-line-icon-pro"></i>
         </div>
         <div class="media-body">
           <span class="d-block g-font-weight-500 g-font-size-default text-uppercase mb-2">Teléfono</span>
@@ -26,11 +26,11 @@
       <!-- Media -->
       <div class="media g-brd-around g-brd-gray-light-v4 rounded g-pa-40">
         <div class="d-flex g-mr-30">
-          <i class="d-inline-block g-color-primary g-font-size-40 g-pos-rel g-top-3 icon-real-estate-027 u-line-icon-pro"></i>
+          <i class="d-inline-block g-color-primary g-font-size-40 g-pos-rel g-top-3 icon-communication-062 u-line-icon-pro"></i>
         </div>
         <div class="media-body">
-          <span class="d-block g-font-weight-500 g-font-size-default text-uppercase mb-2">Direccíon</span>
-          <span class="d-block g-color-gray-dark-v4">Italia 1496, (CP 1646) San Fernando</span>
+          <span class="d-block g-font-weight-500 g-font-size-default text-uppercase mb-2">Emails</span>
+          <span class="d-block g-color-gray-dark-v4">ventas@proctecno.com <br> soporte@proctecno.com</span>
         </div>
       </div>
       <!-- End Media -->

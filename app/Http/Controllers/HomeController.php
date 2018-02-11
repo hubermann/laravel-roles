@@ -16,6 +16,7 @@ use Auth;
 use MP;
 use Mail;
 use App\TodoPagoWrap;
+use DB;
 
 class HomeController extends Controller
 {
@@ -37,7 +38,7 @@ class HomeController extends Controller
     public function index()
     {
         $data['sliders'] = Slider::all();
-        $data['categories'] = Category::all();
+        $data['categories'] = DB::table('categories')->orderBy('name', 'ASC')->get();
         $data['outstandings'] = Product::where('outstanding', 1)->get();
         $data['products'] = Product::where('outstanding', 0)->take(9)->get();
 
@@ -52,7 +53,7 @@ class HomeController extends Controller
      */
     public function product_detail($id)
     {
-        $data['categories'] = Category::all();
+        $data['categories'] = DB::table('categories')->orderBy('name', 'ASC')->get();
         $data['product'] = Product::findOrfail($id);
         $data['outstandings'] = Product::where('outstanding', 1)->get();
         return view('frontend_common.product_detail', $data);
@@ -65,7 +66,7 @@ class HomeController extends Controller
      */
     public function products_list()
     {
-        $data['categories'] = Category::all();
+        $data['categories'] = DB::table('categories')->orderBy('name', 'ASC')->get();
         $data['products'] = Product::paginate(3);
         $data['outstandings'] = Product::where('outstanding', 1)->get();
         return view('frontend_common.products_list', $data);
@@ -78,7 +79,7 @@ class HomeController extends Controller
      */
     public function outstandings()
     {
-        $data['categories'] = Category::all();
+        $data['categories'] = DB::table('categories')->orderBy('name', 'ASC')->get();
         $data['products'] = Product::where('outstanding', 1)->paginate(10);
 
         return view('frontend_common.products_outstandings', $data);
@@ -93,11 +94,12 @@ class HomeController extends Controller
      */
     public function by_category($id)
     {
-        $data['categories'] = Category::all();
-        $data['category'] = Category::find($id);
-        $data['products'] = Product::where('category_id', $id)->paginate(3);
-        $data['outstandings'] = Product::where('outstanding', 1)->get();
-        return view('frontend_common.products_by_category', $data);
+      $data['categories'] = DB::table('categories')->orderBy('name', 'ASC')->get();
+      $data['category'] = Category::find($id);
+      $data['products'] = Product::where('category_id', $id)->paginate(3);
+      $data['outstandings'] = Product::where('outstanding', 1)->get();
+      return view('frontend_common.products_by_category', $data);
+
     }
 
     /**
@@ -107,7 +109,7 @@ class HomeController extends Controller
      */
     public function by_subcategory($id)
     {
-        $data['categories'] = Category::all();
+        $data['categories'] = DB::table('categories')->orderBy('name', 'ASC')->get();
         $subcategory = Subcategory::find($id);
         $data['category'] = Category::find($subcategory->category_id);
         $data['subcategory'] = $subcategory;
@@ -118,7 +120,7 @@ class HomeController extends Controller
 
     public function cart() {
 
-        $categories = Category::all();
+        $categories = DB::table('categories')->orderBy('name', 'ASC')->get();
         //update/ add new item to cart
         if (Request::isMethod('post')) {
             $product_id = Request::get('product_id');
@@ -157,7 +159,7 @@ class HomeController extends Controller
 
     public function contact()
     {
-        $data['categories'] = Category::all();
+        $data['categories'] = DB::table('categories')->orderBy('name', 'ASC')->get();
         $data['outstandings'] = Product::where('outstanding', 1)->get();
         $data['products'] = Product::where('outstanding', 0)->take(9)->get();
 
@@ -208,17 +210,23 @@ class HomeController extends Controller
 
     public static function get_categories_outstandings()
     {
-        return Category::where('outstanding', 1)->get();
+        return Category::where('outstanding', 1)->orderBy('name', 'ASC')->get();
     }
 
     public static function get_categories()
     {
-        return Category::All();
+        return DB::table('categories')->orderBy('name', 'ASC')->get();
     }
 
     public static function get_subcategories($id)
     {
         return Subcategory::where('category_id', $id)->get();
+    }
+
+    public static function products_by_category($id)
+    {
+        return Product::where('category_id', $id)->count();
+
     }
 
     public function checkout()

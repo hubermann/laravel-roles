@@ -76,9 +76,15 @@
           <!-- Links -->
           <ul class="list-unstyled g-color-gray-dark-v5 g-font-size-13">
             <li class="media my-3">
-              <i class="d-flex mt-1 mr-3 icon-hotel-restaurant-235 u-line-icon-pro"></i>
+              <i class="d-flex mt-1 mr-3 icon-communication-062 u-line-icon-pro"></i>
               <div class="media-body">
-                Italia 1496,  San Fernando<br>(CP 1646)
+                soporte@proctecno.com
+              </div>
+            </li>
+            <li class="media my-3">
+              <i class="d-flex mt-1 mr-3 icon-communication-062 u-line-icon-pro"></i>
+              <div class="media-body">
+                ventas@proctecno.com
               </div>
             </li>
             <li class="media my-3">

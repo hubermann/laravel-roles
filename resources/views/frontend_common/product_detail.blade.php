@@ -91,18 +91,17 @@
               <!-- End Price -->
 
               <div class="row ">
-                <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 g-color-gray-dark-v5 ">Medios de pago:</div>
+                <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 g-color-gray-dark-v5 ">Stock:</div>
                 <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 text-right black-text">{{ $product->qty }}</div>
               </div>
               <hr>
 
               <div class="row ">
-                <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 g-color-gray-dark-v5 ">Stock:</div>
+                <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 g-color-gray-dark-v5 ">Medios de pago:</div>
                 <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 text-right black-text">
-                  <i class="fab fa-cc-visa"></i>
-                  <i class="fab fa-cc-mastercard"></i>
-                  <i class="fab fa-usd-square"></i>
-
+                  <i class="fa fa-lg fa-cc-visa"></i>
+                  <i class="fa fa-lg fa-cc-mastercard"></i>
+                  <i class="fa fa-lg fa-usd"></i>
                 </div>
               </div>
               <hr>
@@ -137,14 +136,17 @@
 
 
         <div class="row">
-          <h5>Descripción:</h5>
-          <hr>
+
+          <div class="col-md-12">
+            <h5><br>Descripción:</h5>
+          </div>
+
         </div>
         <div class="row">
           <div class="col-md-6">
             @foreach(json_decode($product->dinamic_fields, true) as $key => $value)
 
-            @if( round(count(json_decode($product->dinamic_fields, true)) / 2) ==  $loop->iteration)
+            @if( round(count(json_decode($product->dinamic_fields, true)) / 2) ==  $loop->index)
               </div><div class="col-md-6">
             @endif
               <div class="row ">
