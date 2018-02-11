@@ -203,10 +203,10 @@
           <span class="d-block g-color-gray-light-v1 g-font-size-70 g-font-size-90--md mb-4">
             <i class="icon-hotel-restaurant-105 u-line-icon-pro"></i>
           </span>
-          <h2 class="g-mb-30">Your Cart is Currently Empty</h2>
-          <p>Before proceed to checkout you must add some products to your shopping cart.<br>You will find a lot of interesting products on our "Shop" page.</p>
+          <h2 class="g-mb-30">Su carrito se encuentra vacio</h2>
+          <p>Antes de generar su orden agregue algunos productos a su carro de compras. <br> Encontrara varios productos interesantes en el enlace "Productos".</p>
         </div>
-        <a class="btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" href="{{ url('products') }}">Start Shopping</a>
+        <a class="btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" href="{{ url('products') }}">Ver productos</a>
         </div>
 
 
