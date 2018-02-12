@@ -150,7 +150,7 @@
               </div><div class="col-md-6">
             @endif
               <div class="row ">
-                <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 g-color-gray-dark-v5 ">{{ $value['propiedad'] }}{{ $loop->iteration }}</div>
+                <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 g-color-gray-dark-v5 ">{{ $value['propiedad'] }}</div>
                 <div class="col-md-6 g-font-weight-400 g-font-size-default mb-0 text-right black-text">{{ $value['valor'] }}</div>
               </div>
               <hr>

@@ -19,7 +19,7 @@
               <i class="icon-finance-067 u-line-icon-pro"></i>
             </span>
             <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-rounded-left-0 g-rounded-right-3 g-py-15 g-px-15" name="email" type="email" placeholder="Email Adress">
-                
+
           </div>
             <p class="form-error">
                 @if ($errors->has('email'))
@@ -36,7 +36,7 @@
               <i class="icon-media-094 u-line-icon-pro"></i>
             </span>
             <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-rounded-left-0 g-rounded-right-3 g-py-15 g-px-15" name="password" type="password" placeholder="Password">
-                
+
           </div>
             <p class="form-error">
                 @if ($errors->has('password'))
@@ -77,12 +77,12 @@
             <a class="g-font-weight-600" href="{{ route('register') }}">Crear mi cuenta</a></p>
         </div>
 
-        
+
       </form>
       <!-- End Form -->
     </div>
 
-    
+
   </div>
 
   <div class="col-md-6 order-lg-1 g-mb-80">

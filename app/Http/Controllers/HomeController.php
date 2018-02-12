@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -42,7 +43,7 @@ class HomeController extends Controller
         $data['outstandings'] = Product::where('outstanding', 1)->get();
         $data['products'] = Product::where('outstanding', 0)->take(9)->get();
 
-        return view('frontend_common.home', $data );//return view('home');
+        return view('frontend_common.home', $data);//return view('home');
     }
 
 
@@ -94,12 +95,11 @@ class HomeController extends Controller
      */
     public function by_category($id)
     {
-      $data['categories'] = DB::table('categories')->orderBy('name', 'ASC')->get();
-      $data['category'] = Category::find($id);
-      $data['products'] = Product::where('category_id', $id)->paginate(3);
-      $data['outstandings'] = Product::where('outstanding', 1)->get();
-      return view('frontend_common.products_by_category', $data);
-
+        $data['categories'] = DB::table('categories')->orderBy('name', 'ASC')->get();
+        $data['category'] = Category::find($id);
+        $data['products'] = Product::where('category_id', $id)->paginate(3);
+        $data['outstandings'] = Product::where('outstanding', 1)->get();
+        return view('frontend_common.products_by_category', $data);
     }
 
     /**
@@ -118,8 +118,8 @@ class HomeController extends Controller
         return view('frontend_common.products_by_subcategory', $data);
     }
 
-    public function cart() {
-
+    public function cart()
+    {
         $categories = DB::table('categories')->orderBy('name', 'ASC')->get();
         //update/ add new item to cart
         if (Request::isMethod('post')) {
@@ -131,7 +131,9 @@ class HomeController extends Controller
 
         //increment the quantity
         if (Request::get('product_id') && (Request::get('increment')) == 1) {
-            $rowId = Cart::search(function($key, $value) { return $key->id == Request::get('product_id'); });
+            $rowId = Cart::search(function ($key, $value) {
+                return $key->id == Request::get('product_id');
+            });
             $new_quantity = $rowId->first()->qty + 1;
             Cart::update($rowId->first()->rowId, ['qty' => $new_quantity]);
             return \App::make('redirect')->back();
@@ -139,7 +141,9 @@ class HomeController extends Controller
 
         //decrease the quantity
         if (Request::get('product_id') && (Request::get('decrease')) == 1) {
-            $rowId = Cart::search(function($key, $value) { return $key->id == Request::get('product_id'); });
+            $rowId = Cart::search(function ($key, $value) {
+                return $key->id == Request::get('product_id');
+            });
             $new_quantity = $rowId->first()->qty - 1;
             Cart::update($rowId->first()->rowId, ['qty' => $new_quantity]);
             return \App::make('redirect')->back();
@@ -147,7 +151,9 @@ class HomeController extends Controller
 
         //Remove item
         if (Request::get('product_id') && (Request::get('delete')) == 1) {
-            $rowId = Cart::search(function($key, $value) { return $key->id == Request::get('product_id'); });
+            $rowId = Cart::search(function ($key, $value) {
+                return $key->id == Request::get('product_id');
+            });
             Cart::remove($rowId->first()->rowId);
             return \App::make('redirect')->back();
         }
@@ -163,12 +169,11 @@ class HomeController extends Controller
         $data['outstandings'] = Product::where('outstanding', 1)->get();
         $data['products'] = Product::where('outstanding', 0)->take(9)->get();
 
-        return view('frontend_common.contact', $data );//return view('home');
+        return view('frontend_common.contact', $data);//return view('home');
     }
 
     public function process_contact()
     {
-
         $rules = [
             'name' => 'required',
             'email' => 'required',
@@ -177,29 +182,37 @@ class HomeController extends Controller
 
         $validator = Validator::make(Input::all(), $rules);
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return redirect('/contact'.'#contact')->withErrors($validator)->withInput();
         }
 
 
         #ContactUS::create($request->all());
+        $name       = Input::get('name');
+        $email      = Input::get('email');
+        $subject    = Input::get('subject');
+        $telephone  = Input::get('telephone');
+        $user_message    = Input::get('message');
 
-        Mail::send('email',
-           array(
-               'name' => Input::get('name'),
-               'email' => Input::get('email'),
-               'subject' => Input::get('subject'),
-               'telephone' => Input::get('telephone'),
-               'message' => Input::get('message')
-           ), function($message)
-           {
-               $message->from('info@hubercart.tk');
-               $message->to('hubermann@gmail.com', 'Admin')->subject('Website Feedback');
-           });
+        Mail::send(
+
+            'email',
+             array(
+                 'name'       => $name,
+                 'email'      => $email,
+                 'subject'    => $subject,
+                 'telephone'  => $telephone,
+                 'user_message'    => $user_message
+             ),
+
+            function ($message) {
+                $message->from('info@hubercart.tk');
+                $message->to('hubermann@gmail.com', 'Admin')->subject('Website Feedback');
+            }
+
+        );
 
         return redirect('/contact')->with('success', 'Gracias por su mensaje');
-
     }
 
 
@@ -226,16 +239,19 @@ class HomeController extends Controller
     public static function products_by_category($id)
     {
         return Product::where('category_id', $id)->count();
-
     }
 
     public function checkout()
     {
-        if( !Auth::user() ){ return redirect('login')->with('warning', 'Por favor identifiquese.');}
-        if( Cart::total() == 0.00 ){ return redirect('/')->with('warning', 'No hay productos en su orden.');}
+        if (!Auth::user()) {
+            return redirect('login')->with('warning', 'Por favor identifiquese.');
+        }
+        if (Cart::total() == 0.00) {
+            return redirect('/')->with('warning', 'No hay productos en su orden.');
+        }
 
 
-        return view('frontend_common.new_order')->with('states',TodoPagoWrap::get_all_state_code());
+        return view('frontend_common.new_order')->with('states', TodoPagoWrap::get_all_state_code());
     }
 
 
@@ -252,35 +268,33 @@ class HomeController extends Controller
             'zip_code' => 'required|max:20',
         ];
 
-    $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $rules);
 
-    if ($validator->fails())
-    {
-        return redirect('/checkout')->withErrors($validator)->withInput();
-    }
-            $items = [];
-            foreach(Cart::content() as $row)
-            {
-                array_push($items, ["id" => $row->id, "title" => $row->name, "quantity" => $row->qty, "currency_id" => "ARS", "unit_price" => $row->price ]);
-            }
+        if ($validator->fails()) {
+            return redirect('/checkout')->withErrors($validator)->withInput();
+        }
+        $items = [];
+        foreach (Cart::content() as $row) {
+            array_push($items, ["id" => $row->id, "title" => $row->name, "quantity" => $row->qty, "currency_id" => "ARS", "unit_price" => $row->price ]);
+        }
 
-            $order                      = New Order();
-            $order->name                = Input::get('name');
-            $order->surname             = Input::get('surname');
-            $order->area_code           = Input::get('area_code');
-            $order->telephone           = Input::get('telephone');
-            $order->street_name         = Input::get('street_name');
-            $order->street_number       = Input::get('street_number');
-            $order->city                = Input::get('city');
-            $order->state               = Input::get('state');
-            $order->zip_code            = Input::get('zip_code');
-            $order->user_id             = Auth::user()->id;
-            $order->email               = Auth::user()->email;
-            $order->order_description   = serialize($items);
-            $order->payment_status      = Order::PENDING;
-            $order->amount              = Cart::total();
+        $order                      = new Order();
+        $order->name                = Input::get('name');
+        $order->surname             = Input::get('surname');
+        $order->area_code           = Input::get('area_code');
+        $order->telephone           = Input::get('telephone');
+        $order->street_name         = Input::get('street_name');
+        $order->street_number       = Input::get('street_number');
+        $order->city                = Input::get('city');
+        $order->state               = Input::get('state');
+        $order->zip_code            = Input::get('zip_code');
+        $order->user_id             = Auth::user()->id;
+        $order->email               = Auth::user()->email;
+        $order->order_description   = serialize($items);
+        $order->payment_status      = Order::PENDING;
+        $order->amount              = Cart::total();
 
-            $order->save();
+        $order->save();
 
 
 
@@ -314,7 +328,8 @@ class HomeController extends Controller
         $TP->shipment_zip_code = Input::get('zip_code');
 
         $TP->billing_city      = Input::get('city');
-        $TP->billing_state     = Input::get('state');;
+        $TP->billing_state     = Input::get('state');
+        ;
         $TP->billing_address   = [
           'street_name'   => Input::get('street_name'),
           'street_number' => Input::get('street_number'),
@@ -325,12 +340,10 @@ class HomeController extends Controller
         $TP->id_order          = $order->id;
 
 
-        if ($TP->checkout())
-        { // si pudimos hacer el ticket redirigimos
-          return Redirect::to($TP->url_form_pago);
-        } else
-        { // como no pudimos crear el tiket debemos mostrar un mensaje, por ejemplo para sugerir reintentar
-          return view('frontend_common.checkout_result')->with('message','Por favor intente nuevamente luego.');
+        if ($TP->checkout()) { // si pudimos hacer el ticket redirigimos
+            return Redirect::to($TP->url_form_pago);
+        } else { // como no pudimos crear el tiket debemos mostrar un mensaje, por ejemplo para sugerir reintentar
+            return view('frontend_common.checkout_result')->with('message', 'Por favor intente nuevamente luego.');
         }
     }
 
@@ -339,9 +352,7 @@ class HomeController extends Controller
     {
         $order = Order::find($id);
 
-        if($order->payment_status == 0 || $order->payment_status == 2)
-        {
-
+        if ($order->payment_status == 0 || $order->payment_status == 2) {
             $TP = new TodoPagoWrap;
 
             $order_items = unserialize($order->order_description);
@@ -378,59 +389,53 @@ class HomeController extends Controller
             $TP->id_order          = $order->id;
 
 
-            if ($TP->checkout())
-            { // si pudimos hacer el ticket redirigimos
-              return Redirect::to($TP->url_form_pago);
-            } else
-            { // como no pudimos crear el tiket debemos mostrar un mensaje, por ejemplo para sugerir reintentar
-              return view('frontend_common.checkout_result', ['status' => 0, 'order_id' => $order->id]);
+            if ($TP->checkout()) { // si pudimos hacer el ticket redirigimos
+                return Redirect::to($TP->url_form_pago);
+            } else { // como no pudimos crear el tiket debemos mostrar un mensaje, por ejemplo para sugerir reintentar
+                return view('frontend_common.checkout_result', ['status' => 0, 'order_id' => $order->id]);
             }
-
-
         }
-
-
     }
 
 
 
     public function todo_pago_payment_success(Request $request)
     {
-
         $params   = $request::all();
         $id_order = strip_tags($params['operationid']);
 
         $TP             = new TodoPagoWrap;
         $feedback_key= strip_tags($params['Answer']);
         $TP->answer_key = $feedback_key;
-        if ($TP->payment_success()) //comprobamos el estado del pago
-        { // aca tenemos que hacer el procesamiento correspondiente a una orden pagada
-          $order = Order::find($id_order);
-          $order->feedback_mp = $feedback_key;
-          $order->payment_success();
+        if ($TP->payment_success()) { //comprobamos el estado del pago
+         // aca tenemos que hacer el procesamiento correspondiente a una orden pagada
+            $order = Order::find($id_order);
+            $order->feedback_mp = $feedback_key;
+            $order->payment_success();
 
-          //notificacion a customer
-          Mail::send('new_order_email',
+            //notificacion a customer
+            Mail::send(
+              'new_order_email',
              array(
                  'order_id' => $id_order,
-             ), function($message)
-             {
-                 $message->from('info@hubercart.tk');
-                 $message->to('hubermann@gmail.com', 'Admin')->subject('Nueva orden pagada.');
-             });
+             ),
+              function ($message) {
+                  $message->from('info@hubercart.tk');
+                  $message->to('hubermann@gmail.com', 'Admin')->subject('Nueva orden pagada.');
+              }
+          );
 
-          //update stock
-          foreach (Cart::content() as $item) {
-            $product = Product::findOrfail($item->id);
-            $product->qty = $product->qty - $item->qty;
-            $product->save();
-          }
+            //update stock
+            foreach (Cart::content() as $item) {
+                $product = Product::findOrfail($item->id);
+                $product->qty = $product->qty - $item->qty;
+                $product->save();
+            }
 
-          Cart::destroy();
-          return view('frontend_common.checkout_result', ['status' => 1,'order_id' => $id_order]);
-        } else
-        { // si llegamos aca es por que no se pudo comprobar el pago
-          return redirect('/todo_pago/payment_error?operationid='.$id_order);
+            Cart::destroy();
+            return view('frontend_common.checkout_result', ['status' => 1,'order_id' => $id_order]);
+        } else { // si llegamos aca es por que no se pudo comprobar el pago
+            return redirect('/todo_pago/payment_error?operationid='.$id_order);
         }
     }
 
@@ -446,7 +451,9 @@ class HomeController extends Controller
 
     public function user_orders()
     {
-        if( !Auth::user() ){ return redirect('login')->with('warning', 'Por favor identifiquese con su usuario y contraseña.');}
+        if (!Auth::user()) {
+            return redirect('login')->with('warning', 'Por favor identifiquese con su usuario y contraseña.');
+        }
         $data['categories'] = Category::all();
         $data['orders'] = Order::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
 
@@ -458,8 +465,4 @@ class HomeController extends Controller
     {
         return view('frontend_common.informacion_general');
     }
-
-
-
-
 }
