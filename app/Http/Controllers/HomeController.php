@@ -41,7 +41,7 @@ class HomeController extends Controller
         $data['sliders'] = Slider::all();
         $data['categories'] = DB::table('categories')->orderBy('name', 'ASC')->get();
         $data['outstandings'] = Product::where('outstanding', 1)->get();
-        $data['products'] = Product::where('outstanding', 0)->take(9)->get();
+        $data['lasts_products'] = Product::where('outstanding', 0)->orderBy('id', 'DESC')->take(9)->get();
 
         return view('frontend_common.home', $data);//return view('home');
     }
@@ -80,7 +80,7 @@ class HomeController extends Controller
      */
     public function outstandings()
     {
-        $data['categories'] = DB::table('categories')->orderBy('name', 'ASC')->get();
+        $data['categories'] = DB::table('categories')->where('outstanding', 0)->orderBy('name', 'ASC')->get();
         $data['products'] = Product::where('outstanding', 1)->paginate(10);
 
         return view('frontend_common.products_outstandings', $data);
@@ -95,7 +95,7 @@ class HomeController extends Controller
      */
     public function by_category($id)
     {
-        $data['categories'] = DB::table('categories')->orderBy('name', 'ASC')->get();
+        $data['categories'] = DB::table('categories')->where('outstanding', 0)->orderBy('name', 'ASC')->get();
         $data['category'] = Category::find($id);
         $data['products'] = Product::where('category_id', $id)->paginate(3);
         $data['outstandings'] = Product::where('outstanding', 1)->get();
@@ -109,7 +109,7 @@ class HomeController extends Controller
      */
     public function by_subcategory($id)
     {
-        $data['categories'] = DB::table('categories')->orderBy('name', 'ASC')->get();
+        $data['categories'] = DB::table('categories')->where('outstanding', 0)->orderBy('name', 'ASC')->get();
         $subcategory = Subcategory::find($id);
         $data['category'] = Category::find($subcategory->category_id);
         $data['subcategory'] = $subcategory;
@@ -228,7 +228,7 @@ class HomeController extends Controller
 
     public static function get_categories()
     {
-        return DB::table('categories')->orderBy('name', 'ASC')->get();
+        return DB::table('categories')->where('outstanding', 0)->orderBy('name', 'ASC')->get();
     }
 
     public static function get_subcategories($id)

@@ -62,10 +62,7 @@
 <!--  PRODUCTOS BOXES  -->
 
 <section class="container g-py-100">
-  <div class="text-center mx-auto g-max-width-600 g-mb-50">
-    <h2 class="g-color-black mb-4">Nuevos productos</h2>
-    <p class="lead">Últimos productos cargados. Aproveche las ofertas!</p>
-  </div>
+ 
 
   <div class="row g-mx-minus-10 g-mb-50">
 
@@ -129,11 +126,90 @@
 
   </div>
 
-  <div class="text-center">
-    <a class="btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" href="{{ route('frontend.products') }}">Ver todos los productos</a>
-  </div>
+ 
 </section>
 
+<style>
+  .border-none{border:0; background: #fff;}
+</style>
+
+
+
+<!-- ultimos -->
+@if(count($lasts_products))
+<section class="container">
+ <div class="text-center mx-auto g-max-width-600 g-mb-50">
+    <h2 class="g-color-black mb-4">Nuevos productos</h2>
+    <p class="lead">Últimos productos cargados. Aproveche las ofertas!</p>
+  </div>
+
+<div class="row g-mx-minus-10 g-mb-50">
+
+
+@foreach($lasts_products as $lasts_product)
+
+<div class="col-md-6 col-lg-4 g-px-10 ">
+
+<!-- Article -->
+<article class="media g-brd-around g-brd-gray-light-v4 g-bg-white rounded g-pa-10 g-mb-20">
+  <!-- Article Image -->
+  <div class="g-max-width-100 g-mr-15">
+  
+  @if ( count($lasts_product->images))
+      <img class="d-flex w-100" src="{{'/images-products/'.$lasts_product->images[0]->filename }}" alt="{{ $lasts_product->title }}">
+  @else
+      <img class="d-flex w-100" src="{{ URL::to('/') }}/images/no-image-available.jpg" alt="{{ $lasts_product->title }}">
+  @endif
+
+  </div>
+  <!-- End Article Image -->
+
+  <!-- Article Info -->
+  <div class="media-body align-self-center">
+    <h4 class="h5 g-mb-7">
+      <a class="g-color-black g-color-primary--hover g-text-underline--none--hover" href="{{ route('frontend.product_detail', ['id' => $lasts_product->id]) }}">{{ $lasts_product->title }}</a>
+    </h4>
+    <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13 g-mb-10" href="{{ route('frontend.by_category', ['id' => $lasts_product->category_id]) }}">{{ $lasts_product->get_category_name($lasts_product->category_id) }}</a>
+    <!-- End Article Info -->
+
+    <!-- Article Footer -->
+    <footer class="d-flex justify-content-between g-font-size-16">
+      <span class="g-color-black g-line-height-1">{{ number_format($lasts_product->price, 2) }}</span>
+      <ul class="list-inline g-color-gray-light-v2 g-font-size-14 g-line-height-1">
+       
+          <form method="POST" action="{{url('cart')}}">
+          <input type="hidden" name="product_id" value="{{$lasts_product->id}}">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <button class=" border-none" type="submit">
+            <i class="icon-finance-100 u-line-icon-pro"></i> 
+          </button>
+        </form>
+
+      </ul>
+    </footer>
+    <!-- End Article Footer -->
+  </div>
+</article>
+<!-- End Article -->
+</div>
+
+@endforeach
+
+
+</div>
+
+ <div class="text-center">
+    <a class="btn u-btn-primary g-font-size-12 text-uppercase g-py-12 g-px-25" href="{{ route('frontend.products') }}">Ver todos los productos</a>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+</section>
+
+@endif    
+<!-- end ultimos -->
 
 
 @endsection

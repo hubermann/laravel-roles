@@ -5,19 +5,19 @@ use TodoPago\Sdk;
 
 class TodoPagoWrap {
   private $TP;
-  const MODE = 'test';
+  const MODE = 'produccion';
 
   //credenciales
-  const MERCHANTPROD = '2323'; //produccion
-  const AUTHKEYPROD = 'TODOPAGO a414b821c9034137a566d6f1ec077578';
+  const MERCHANTPROD = '532419'; //produccion
+  const AUTHKEYPROD = 'TODOPAGO CF7866378E217C1984114DB4567CA0A5';
   const SECURITYPROD = 'a414b821c9034137a566d6f1ec077578';
 
   const MERCHANTTEST = '2323'; //test
   const AUTHKEYTEST = 'TODOPAGO a414b821c9034137a566d6f1ec077578';
   const SECURITYTEST = 'a414b821c9034137a566d6f1ec077578';
 
-  const URL_OK  = 'http://localhost:8000/todo_pago/payment_success/?operationid=';
-  const URL_KO  = 'http://localhost:8000/todo_pago/payment_error/?operationid=';
+  const URL_OK  = 'http://www.proctecno.com/todo_pago/payment_success/?operationid=';
+  const URL_KO  = 'http://www.proctecno.com/todo_pago/payment_error/?operationid=';
 
   const COUNTRY = 'AR';
 
